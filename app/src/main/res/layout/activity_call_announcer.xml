@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="@dimen/dp_12"
+        tools:context=".callSettingsModule.CallAnnouncerActivity">
+
+        <LinearLayout
+            android:id="@+id/callAnnouncerLt"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_my_location_36"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Call Announcer"
+                android:layout_marginStart="@dimen/dp_12"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="@dimen/dp_1"/>
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/btSwitchCallAnnouncer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/callAnnouncerLt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:id="@+id/iconFlashFrequency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_my_location_36"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Repeat Times"
+                android:layout_marginStart="@dimen/dp_12"
+                app:layout_constraintStart_toEndOf="@id/iconFlashFrequency"
+                app:layout_constraintTop_toTopOf="@id/iconFlashFrequency"
+                app:layout_constraintBottom_toBottomOf="@id/iconFlashFrequency"/>
+
+            <TextView
+                android:id="@+id/tvRepeatTimes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/iconFlashFrequency"
+                app:layout_constraintBottom_toBottomOf="@id/iconFlashFrequency"/>
+
+            <androidx.appcompat.widget.AppCompatSeekBar
+                android:id="@+id/repeatFrequencyBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_12"
+                android:max="6"
+                android:min="1"
+                android:progress="1"
+                android:tickMark="@null"
+                app:layout_constraintStart_toStartOf="@id/iconFlashFrequency"
+                app:layout_constraintTop_toBottomOf="@id/iconFlashFrequency"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btPreview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Preview the announcement"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/repeatFrequencyBar"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

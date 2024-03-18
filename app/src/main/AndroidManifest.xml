@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="realapps.live.callerlocator">
+
+    <uses-permission android:name="android.permission.ANSWER_PHONE_CALLS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> -->
+    <!-- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> -->
+    <!-- <uses-permission android:name="android.permission.CAMERA" /> -->
+    <!-- <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" /> -->
+    <!-- Location Permission -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+    <uses-permission android:name="android.permission.ANSWER_PHONE_CALLS" />
+    <uses-permission android:name="android.permission.MODIFY_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <uses-feature
+        android:name="android.hardware.sensor.accelerometer"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission
+        android:name="android.permission.POST_NOTIFICATIONS"
+        tools:node="remove" />
+
+    <application
+        android:name=".FbTest"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@drawable/call"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/call"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Realapps"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="34">
+        <activity
+            android:name=".callLocatorModule.FriendRequestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".callSettingsModule.CallAnnouncerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".callSettingsModule.CallFlashActivity"
+            android:exported="true">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+
+        </activity>
+        <activity
+            android:name=".setThemeModule.SelectContactsActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Realapps" />
+        <activity
+            android:name=".setThemeModule.SetThemeActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Realapps" />
+        <activity
+            android:name=".callThemesModule.IncomingCallActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Realapps" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@mipmap/ic_gunda_new" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_small_icon"
+            android:resource="@mipmap/ic_gunda_new" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_large_icon"
+            android:resource="@mipmap/ic_gunda_new" />
+        <meta-data
+            android:name="com.google.firebase.messaging"
+            android:resource="@mipmap/ic_gunda_new" />
+
+        <activity
+            android:name=".homeModule.HomeActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Realapps">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".loginModule.LoginActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Realapps">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Realapps">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+
+        </activity>
+        <activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="portrait"
+            tools:replace="screenOrientation" />
+
+        <service
+            android:name=".MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyBbjh-tqqnt6bChHRv8ZI9wY0R9w5Z_MSI" />
+
+        <service
+            android:name=".callThemesModule.supportFunctions.BackgroundCallService"
+            android:enabled="true"
+            android:exported="false" />
+    </application>
+
+</manifest>

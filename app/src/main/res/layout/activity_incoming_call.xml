@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".callThemesModule.IncomingCallActivity">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/callerTheme"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true" />
+
+        <TextView
+            android:id="@+id/incomingNumberTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:text="Incoming Number" />
+
+        <Button
+            android:id="@+id/acceptButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/incomingNumberTextView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:text="Accept" />
+
+        <Button
+            android:id="@+id/rejectButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/acceptButton"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="Reject" />
+
+        <TextView
+            android:id="@+id/incomingNumberTextView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rejectButton"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:text="Testing" />
+
+    </RelativeLayout>
+
+</layout>

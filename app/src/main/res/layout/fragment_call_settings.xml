@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".callSettingsModule.CallSettingsFragment">
+
+
+    <TextView
+        android:id="@+id/btCallFlashLight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Call FlashLight"
+        android:layout_marginTop="@dimen/dp_300"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/btCallAnnouncment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Call Announcer"
+        android:layout_marginTop="@dimen/dp_100"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btCallFlashLight"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

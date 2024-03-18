@@ -1,0 +1,44 @@
+package realapps.live.callerlocator.zAPIEndPoints
+
+import realapps.live.callerlocator.callLocatorModule.modalClass.GetFriendRequestsResponse
+import realapps.live.callerlocator.callLocatorModule.modalClass.SendFriendRequestResponse
+import realapps.live.callerlocator.loginModule.modalClass.GetUserInfoResponse
+import realapps.live.callerlocator.loginModule.modalClass.RegisterUserResponse
+import realapps.live.callerlocator.loginModule.modalClass.UserInfoData
+import javax.inject.Inject
+
+
+class ApiHelperImplementation @Inject constructor(private val apiService: ApiInterface) :
+    ApiHelper {
+    override suspend fun getUserInfo(phoneNumber: String): GetUserInfoResponse {
+        return apiService.getUserInfo(phoneNumber)
+    }
+
+    override suspend fun postNewUser(userInfoData: UserInfoData): RegisterUserResponse {
+        return apiService.postNewUser(
+            userInfoData.phoneNumber!!,
+            userInfoData.password!!,
+            userInfoData.fCMToken!!,
+            userInfoData.longitude!!,
+            userInfoData.latitude!!
+        )
+    }
+
+    override suspend fun sendFriendRequest(
+        fromNumber: String,
+        toNumber: String
+    ): SendFriendRequestResponse {
+        return apiService.sendFriendRequest(fromNumber, toNumber)
+    }
+
+    override suspend fun getFriendRequests(
+        phoneNumber: String,
+        requestType: String
+    ): GetFriendRequestsResponse {
+        return apiService.getFriendRequests(
+            phoneNumber, requestType
+        )
+    }
+
+
+}
