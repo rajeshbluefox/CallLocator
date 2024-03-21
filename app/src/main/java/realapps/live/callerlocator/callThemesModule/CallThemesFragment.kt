@@ -112,7 +112,7 @@ class CallThemesFragment : Fragment() {
 
     }
 
-    private fun onThemeSelected(contact: Contact) {
+    private fun onThemeSelected() {
         CallIntent.goToSetThemeActivity(requireContext(), false, requireActivity())
     }
 

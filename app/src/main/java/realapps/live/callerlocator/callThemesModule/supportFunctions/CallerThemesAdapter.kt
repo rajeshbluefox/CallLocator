@@ -12,7 +12,7 @@ class CallerThemesAdapter(
     private var context: Context,
     private var contactList: ArrayList<Contact>,
     private var themes: ArrayList<Int>,
-    private val onContactClicked: (contact: Contact) -> Unit,
+    private val onContactClicked: () -> Unit,
 ) :
     RecyclerView.Adapter<CallerThemesAdapter.CallerThemesAdapterViewHolder>() {
 
@@ -35,7 +35,7 @@ class CallerThemesAdapter(
 
     override fun onBindViewHolder(holder: CallerThemesAdapterViewHolder, position: Int) {
 
-        val contact = contactList[position]
+//        val contact = contactList[position]
 
         var theme = 0
 
@@ -56,7 +56,7 @@ class CallerThemesAdapter(
 
         holder.binding.themeLt.setOnClickListener {
             SelectedTheme.selectedThemeCount = position+1
-            onContactClicked.invoke(contact)
+            onContactClicked.invoke()
         }
 
 
