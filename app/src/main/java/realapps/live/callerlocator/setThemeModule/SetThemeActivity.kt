@@ -12,7 +12,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import dagger.hilt.android.AndroidEntryPoint
+import realapps.live.callerlocator.R
 import realapps.live.callerlocator.callThemesModule.supportFunctions.BackgroundCallService
+import realapps.live.callerlocator.callThemesModule.supportFunctions.SelectedTheme
 import realapps.live.callerlocator.databinding.ActivitySetThemeBinding
 import realapps.live.callerlocator.zCommonFuntions.CallIntent
 import realapps.live.callerlocator.zCommonFuntions.StatusBarUtils
@@ -31,7 +33,21 @@ class SetThemeActivity : AppCompatActivity() {
         StatusBarUtils.transparentStatusBar(this)
 
 
+        setTheme()
         onClickListeners()
+    }
+
+    private fun setTheme()
+    {
+        val selectedTheme =SelectedTheme.selectedThemeCount
+
+        when(selectedTheme)
+        {
+            1 -> binding.selectedTheme.setAnimation(R.raw.call_theme_1)
+            2 -> binding.selectedTheme.setAnimation(R.raw.call_theme_2)
+            3 -> binding.selectedTheme.setAnimation(R.raw.call_theme_3)
+            4 -> binding.selectedTheme.setAnimation(R.raw.call_theme_4)
+        }
     }
 
     private fun onClickListeners() {

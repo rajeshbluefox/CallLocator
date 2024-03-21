@@ -63,7 +63,7 @@ class CallerThemesAdapter(
     }
 
     override fun getItemCount(): Int {
-        return contactList.size
+        return themes.size
     }
 
 }
