@@ -1,6 +1,7 @@
 package realapps.live.callerlocator.callLocatorModule
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -31,6 +32,15 @@ class FriendRequestActivity : AppCompatActivity() {
 
         initViews()
         initTabs()
+
+        onClickListeners()
+        getFriendRequests(0)
+    }
+
+    private fun onClickListeners() {
+        binding.btBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun initViews() {
@@ -41,7 +51,9 @@ class FriendRequestActivity : AppCompatActivity() {
             this,
             callLocatorViewModel,
             sendFriendRequestObserverCB = {},
-            ::getFriendRequestsResponse
+            ::getFriendRequestsResponse,
+            ::acceptFRResponse,
+            getMyFriendsResponse = { _,_ ->}
         )
     }
 
@@ -72,49 +84,94 @@ class FriendRequestActivity : AppCompatActivity() {
     }
 
     fun getFriendRequests(position: Int) {
+        Log.e(
+            "Test",
+            "$position rec: ${receivedFriendReqList.size} , sent: ${sentFriendReqList.size}"
+        )
+//        receivedFriendReqList.clear()
+//        sentFriendReqList.clear()
+
         if (position == 0) {
-            if (receivedFriendReqList.size == 0)
-                callLocatorApiFunctions.getFriendRequests(
-                    LoginData.getUserPhone(this),
-                    "0"
-                )
-            else {
-                initRv()
-            }
+
+            callLocatorApiFunctions.getFriendRequests(
+                LoginData.getUserPhone(this),
+                "0"
+            )
+
+//            if (receivedFriendReqList.size == 0)
+//                callLocatorApiFunctions.getFriendRequests(
+//                    LoginData.getUserPhone(this),
+//                    "0"
+//                )
+//            else {
+//                initRv()
+//            }
+
         } else {
-            if (sentFriendReqList.size == 0)
-                callLocatorApiFunctions.getFriendRequests(
-                    LoginData.getUserPhone(this),
-                    position.toString()
-                )
-            else {
-                initRv()
-            }
+            Log.e("Test", "92")
+
+            callLocatorApiFunctions.getFriendRequests(
+                LoginData.getUserPhone(this),
+                "1"
+            )
+
+//            if (sentFriendReqList.size == 0) {
+//                Log.e("Test", "95")
+//                callLocatorApiFunctions.getFriendRequests(
+//                    LoginData.getUserPhone(this),
+//                    "1"
+//                )
+//            } else {
+//                initRv()
+//            }
         }
     }
 
-    fun initRv()
-    {
+    fun initRv() {
 
-        val requestList: ArrayList<GetFriendRequestDataItem> = if(SelectedTab.selectedTab==0)
+        var requestList: ArrayList<GetFriendRequestDataItem> = if (SelectedTab.selectedTab == 0)
             receivedFriendReqList
         else
             sentFriendReqList
 
-        if(requestList.size!=0)
-        {
+        if (requestList.size != 0) {
 
-        val friendRequestAdapter = FriendRequestAdapter(this, requestList, onItemClicked = {})
-        binding.friendRequestsRv.apply {
-            layoutManager = LinearLayoutManager(
-                context,
-                LinearLayoutManager.VERTICAL, false
-            )
-            adapter = friendRequestAdapter
+            requestList = ArrayList(requestList.reversed())
+
+            val friendRequestAdapter = FriendRequestAdapter(this, requestList, ::onAgreeClicked)
+            binding.friendRequestsRv.apply {
+                layoutManager = LinearLayoutManager(
+                    context,
+                    LinearLayoutManager.VERTICAL, false
+                )
+                adapter = friendRequestAdapter
+            }
+        } else {
+            binding.friendRequestsRv.visibility = View.GONE
+            UtilFunctions.showToast(this, "No Items Found")
         }
-        }else{
-            binding.friendRequestsRv.visibility=View.GONE
-            UtilFunctions.showToast(this,"No Items Found")
+    }
+
+    private fun onAgreeClicked(getFriendRequestDataItem: GetFriendRequestDataItem) {
+        if (getFriendRequestDataItem.requestStatus == "0") {
+            val fromNumber = getFriendRequestDataItem.fromNumber!!
+            val toNumber = LoginData.getUserPhone(this)
+
+            callLocatorApiFunctions.respondToFriendRequest(fromNumber, toNumber, "1")
+        } else {
+            val fromNumber = LoginData.getUserPhone(this)
+            val toNumber = getFriendRequestDataItem.toNumber!!
+
+            callLocatorApiFunctions.respondToFriendRequest(fromNumber, toNumber, "1")
+        }
+    }
+
+    fun acceptFRResponse(status: Boolean) {
+        if (status) {
+            UtilFunctions.showToast(this, "Request accepted")
+            getFriendRequests(SelectedTab.selectedTab)
+        } else {
+            UtilFunctions.showToast(this, "Request Failed")
         }
     }
 
@@ -122,10 +179,12 @@ class FriendRequestActivity : AppCompatActivity() {
     private var receivedFriendReqList = ArrayList<GetFriendRequestDataItem>()
 
     private fun getFriendRequestsResponse(requestList: List<GetFriendRequestDataItem?>?) {
-        if (SelectedTab.selectedTab == 0)
+        if (SelectedTab.selectedTab == 1)
             sentFriendReqList = requestList as ArrayList<GetFriendRequestDataItem>
         else
             receivedFriendReqList = requestList as ArrayList<GetFriendRequestDataItem>
+
+        initRv()
     }
 
     object SelectedTab {

@@ -55,12 +55,11 @@ class CallThemesFragment : Fragment() {
     private fun initViews()
     {
         callerThemesUI = CallerThemesUI(requireContext(),binding)
-        callerThemesUI.setTopPadding(resources)
+//        callerThemesUI.setTopPadding(resources)
     }
 
     private fun onClickListeners() {
-        binding.tvHello.setOnClickListener {
-        }
+
     }
 
     private var allContacts: ArrayList<Contact> = ArrayList()

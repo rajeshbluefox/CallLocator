@@ -1,6 +1,8 @@
 package realapps.live.callerlocator.zAPIEndPoints
 
 import realapps.live.callerlocator.callLocatorModule.modalClass.GetFriendRequestsResponse
+import realapps.live.callerlocator.callLocatorModule.modalClass.GetMyFriendsResponse
+import realapps.live.callerlocator.callLocatorModule.modalClass.RespondFriendRequestResponse
 import realapps.live.callerlocator.callLocatorModule.modalClass.SendFriendRequestResponse
 import realapps.live.callerlocator.loginModule.modalClass.GetUserInfoResponse
 import realapps.live.callerlocator.loginModule.modalClass.RegisterUserResponse
@@ -40,4 +42,18 @@ interface ApiInterface {
         @Field("PhoneNumber") phoneNumber: String,
         @Field("RequestType") requestType: String
     ): GetFriendRequestsResponse
+
+    @FormUrlEncoded
+    @POST("Requests_status.php")
+    suspend fun acceptFriendRequest(
+        @Field("FromNumber") fromNumber: String,
+        @Field("ToNumber") toNumber: String,
+        @Field("RequestStatus") requestStatus: String
+    ): RespondFriendRequestResponse
+
+    @FormUrlEncoded
+    @POST("friend_get.php")
+    suspend fun getMyFriends(
+        @Field("FromNumber") fromNumber: String
+    ): GetMyFriendsResponse
 }

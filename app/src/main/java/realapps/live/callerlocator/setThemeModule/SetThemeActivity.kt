@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -14,6 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import realapps.live.callerlocator.callThemesModule.supportFunctions.BackgroundCallService
 import realapps.live.callerlocator.databinding.ActivitySetThemeBinding
 import realapps.live.callerlocator.zCommonFuntions.CallIntent
+import realapps.live.callerlocator.zCommonFuntions.StatusBarUtils
 import realapps.live.callerlocator.zCommonFuntions.UtilFunctions
 
 @AndroidEntryPoint
@@ -26,6 +28,8 @@ class SetThemeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySetThemeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        StatusBarUtils.transparentStatusBar(this)
+
 
         onClickListeners()
     }
@@ -37,7 +41,7 @@ class SetThemeActivity : AppCompatActivity() {
         }
 
         binding.btSelectContact.setOnClickListener {
-            CallIntent.goToSelectContactsActivity(this,false,this)
+            CallIntent.goToSelectContactsActivity(this, false, this)
         }
     }
 
@@ -68,10 +72,14 @@ class SetThemeActivity : AppCompatActivity() {
     }
 
     private fun checkAndRequestOverlayPermission() {
-        if (!arePermissionsGranted(overlayPermissions)) {
+        Log.e("Test", "72")
+//        !arePermissionsGranted(overlayPermissions)
+        if (!Settings.canDrawOverlays(this)) {
+            Log.e("Test", "74")
             requestOverlayPermission()
 //            requestPermissions(overlayPermissions, REQUEST_OVERLAY_PERMISSION)
         } else {
+            Log.e("Test", "78")
             checkAndRequestPhoneStatePermission()
 
             // Permission already granted or not needed
@@ -80,6 +88,7 @@ class SetThemeActivity : AppCompatActivity() {
     }
 
     private fun requestOverlayPermission() {
+        Log.e("Test", "ROP")
         val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
         intent.data = Uri.parse("package:realapps.live.callerlocator")
         startActivityForResult(intent, REQUEST_OVERLAY_PERMISSION)
@@ -99,7 +108,7 @@ class SetThemeActivity : AppCompatActivity() {
             requestPermissions(callLogPermissions, REQUEST_CALL_LOG_PERMISSION)
         } else {
             checkAndRequestAnswerPhoneCallsPermission()
-            UtilFunctions.showToast(this, "Call Logs Permitted")
+//            UtilFunctions.showToast(this, "Call Logs Permitted")
         }
     }
 
@@ -182,7 +191,7 @@ class SetThemeActivity : AppCompatActivity() {
     private fun handleCallLogPermissionResult(grantResults: IntArray) {
         if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             checkAndRequestAnswerPhoneCallsPermission()
-            UtilFunctions.showToast(this, "Call Logs Permitted")
+//            UtilFunctions.showToast(this, "Call Logs Permitted")
         } else {
             // Permission denied, explain to user and handle accordingly
             Toast.makeText(this, "Call log permission denied", Toast.LENGTH_SHORT).show()
@@ -191,7 +200,7 @@ class SetThemeActivity : AppCompatActivity() {
 
     private fun startBackgroundService() {
         // Implement your logic for starting the background service
-        UtilFunctions.showToast(this,"Starting BGS")
+        UtilFunctions.showToast(this, "Call Theme Enabled")
 
         val serviceIntent = Intent(this, BackgroundCallService::class.java)
         startService(serviceIntent)

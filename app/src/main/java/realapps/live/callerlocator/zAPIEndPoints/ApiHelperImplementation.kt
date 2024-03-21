@@ -1,6 +1,8 @@
 package realapps.live.callerlocator.zAPIEndPoints
 
 import realapps.live.callerlocator.callLocatorModule.modalClass.GetFriendRequestsResponse
+import realapps.live.callerlocator.callLocatorModule.modalClass.GetMyFriendsResponse
+import realapps.live.callerlocator.callLocatorModule.modalClass.RespondFriendRequestResponse
 import realapps.live.callerlocator.callLocatorModule.modalClass.SendFriendRequestResponse
 import realapps.live.callerlocator.loginModule.modalClass.GetUserInfoResponse
 import realapps.live.callerlocator.loginModule.modalClass.RegisterUserResponse
@@ -40,5 +42,16 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
         )
     }
 
+    override suspend fun acceptFriendRequest(
+        fromNumber: String,
+        toNumber: String,
+        requestStatus: String
+    ): RespondFriendRequestResponse {
+        return apiService.acceptFriendRequest(fromNumber, toNumber, requestStatus)
+    }
+
+    override suspend fun getMyFriends(fromNumber: String): GetMyFriendsResponse {
+        return apiService.getMyFriends(fromNumber)
+    }
 
 }

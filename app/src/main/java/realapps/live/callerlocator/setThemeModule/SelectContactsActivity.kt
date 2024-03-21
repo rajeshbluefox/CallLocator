@@ -2,9 +2,13 @@ package realapps.live.callerlocator.setThemeModule
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import realapps.live.callerlocator.callThemesModule.supportFunctions.SelectedTheme
 import realapps.live.callerlocator.databinding.ActivitySelectContactsBinding
 import realapps.live.callerlocator.setThemeModule.supportFunctions.ContactDatabaseHelper
@@ -12,6 +16,7 @@ import realapps.live.callerlocator.setThemeModule.supportFunctions.OtherContacts
 import realapps.live.callerlocator.setThemeModule.supportFunctions.SelectContactsAdapter
 import realapps.live.callerlocator.zCommonFuntions.Contact
 import realapps.live.callerlocator.zCommonFuntions.ContactManager
+import realapps.live.callerlocator.zCommonFuntions.StatusBarUtils
 import realapps.live.callerlocator.zCommonFuntions.UtilFunctions
 
 @AndroidEntryPoint
@@ -21,6 +26,9 @@ class SelectContactsActivity : AppCompatActivity() {
 
     private var dbHelper = ContactDatabaseHelper(this)
 
+    private val coroutineScope =
+        CoroutineScope(Dispatchers.Main) // Dispatchers.Main represents the main (UI) thread
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,9 +36,14 @@ class SelectContactsActivity : AppCompatActivity() {
         binding = ActivitySelectContactsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        onClickListeners()
-        getContacts()
+        StatusBarUtils.transparentStatusBar(this)
+        StatusBarUtils.setTopPadding(resources,binding.titleBarLayout)
 
+        onClickListeners()
+        coroutineScope.launch {
+            showPB()
+            getContacts()
+        }
     }
 
     private fun onClickListeners() {
@@ -38,12 +51,29 @@ class SelectContactsActivity : AppCompatActivity() {
         binding.btSet.setOnClickListener {
             UpdateThemeSelected()
         }
+
+        binding.btBack.setOnClickListener {
+            finish()
+        }
+    }
+
+    fun showPB()
+    {
+        binding.pb.visibility= View.VISIBLE
+        binding.contentLL.visibility=View.GONE
+    }
+
+    fun hidePB()
+    {
+        binding.pb.visibility=View.GONE
+        binding.contentLL.visibility=View.VISIBLE
     }
 
 
     private var allContacts: ArrayList<Contact> = ArrayList()
 
     private fun getContacts() {
+
         Log.e("Test", "Reading contacts")
 
         val contactManager = ContactManager(this)
@@ -131,6 +161,7 @@ class SelectContactsActivity : AppCompatActivity() {
             adapter = selectedContactsAdapter
         }
 
+        hidePB()
     }
 
 
@@ -182,6 +213,7 @@ class SelectContactsActivity : AppCompatActivity() {
         }
 
         getContactFromDB()
+        finish()
     }
 
 }

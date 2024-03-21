@@ -33,11 +33,11 @@ class HomeActivity : AppCompatActivity() {
             gotoCallLocatorFragment()
         }
 
-        binding.btSettings.setOnClickListener {
+        binding.btCallThemes.setOnClickListener {
             gotoCallSettingsFragment()
         }
 
-        binding.btCallThemes.setOnClickListener {
+        binding.btSettings.setOnClickListener {
             gotoCallThemesFragment()
         }
     }

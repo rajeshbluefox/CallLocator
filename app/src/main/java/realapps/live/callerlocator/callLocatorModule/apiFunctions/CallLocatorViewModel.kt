@@ -7,6 +7,8 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import realapps.live.callerlocator.callLocatorModule.modalClass.GetFriendRequestsResponse
+import realapps.live.callerlocator.callLocatorModule.modalClass.GetMyFriendsResponse
+import realapps.live.callerlocator.callLocatorModule.modalClass.RespondFriendRequestResponse
 import realapps.live.callerlocator.callLocatorModule.modalClass.SendFriendRequestResponse
 import javax.inject.Inject
 
@@ -56,5 +58,45 @@ class CallLocatorViewModel @Inject constructor(
 
     fun getFriendRequestsResponse(): LiveData<GetFriendRequestsResponse> {
         return getFriendRequestsResponse
+    }
+
+    private var respondFriendRequestResponse = MutableLiveData<RespondFriendRequestResponse>()
+
+    fun acceptFriendRequest(fromNumber: String,toNumber: String,requestStatus: String) {
+        viewModelScope.launch {
+            respondFriendRequestResponse.postValue(
+                callLocatorRepository.acceptFriendRequest(
+                    fromNumber, toNumber, requestStatus
+                )
+            )
+        }
+    }
+
+    fun resetAcceptFriendRequest() {
+        respondFriendRequestResponse = MutableLiveData<RespondFriendRequestResponse>()
+    }
+
+    fun getAcceptFriendRequestResponse(): LiveData<RespondFriendRequestResponse> {
+        return respondFriendRequestResponse
+    }
+
+    private var getMyFriendsResponse = MutableLiveData<GetMyFriendsResponse>()
+
+    fun getMyFriends(fromNumber: String) {
+        viewModelScope.launch {
+            getMyFriendsResponse.postValue(
+                callLocatorRepository.getMyFriends(
+                    fromNumber
+                )
+            )
+        }
+    }
+
+    fun resetGetMyFriendsResponse() {
+        getMyFriendsResponse = MutableLiveData<GetMyFriendsResponse>()
+    }
+
+    fun getMyFriendsResponse(): LiveData<GetMyFriendsResponse> {
+        return getMyFriendsResponse
     }
 }

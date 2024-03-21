@@ -19,6 +19,7 @@ import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -35,9 +36,12 @@ import realapps.live.callerlocator.R
 import realapps.live.callerlocator.callLocatorModule.apiFunctions.CallLocatorApiFunctions
 import realapps.live.callerlocator.callLocatorModule.apiFunctions.CallLocatorViewModel
 import realapps.live.callerlocator.callLocatorModule.modalClass.LocationData
+import realapps.live.callerlocator.callLocatorModule.modalClass.MyFriendsDataItem
 import realapps.live.callerlocator.callLocatorModule.supportFunctions.CallLocatorFragmentUI
 import realapps.live.callerlocator.callLocatorModule.supportFunctions.EnteredNumber
+import realapps.live.callerlocator.callLocatorModule.supportFunctions.FriendRequestAdapter
 import realapps.live.callerlocator.callLocatorModule.supportFunctions.InviteUserDialog
+import realapps.live.callerlocator.callLocatorModule.supportFunctions.MyFriendsAdapter
 import realapps.live.callerlocator.callLocatorModule.supportFunctions.PermissionResultListener
 import realapps.live.callerlocator.callLocatorModule.supportFunctions.SendRequestDialog
 import realapps.live.callerlocator.databinding.FragmentCallLocatorBinding
@@ -90,6 +94,7 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
 
     }
 
+
     private fun initViews() {
         loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
         callLocatorViewModel = ViewModelProvider(this)[CallLocatorViewModel::class.java]
@@ -114,7 +119,9 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
             viewLifecycleOwner,
             callLocatorViewModel,
             ::sendFriendRequestResponse,
-           getFriendRequestObserverCB = {}
+            getFriendRequestObserverCB = {},
+            respondToFriendRequestObserver = {},
+            ::myFriendsResponse
         )
 
 
@@ -211,12 +218,22 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
         }
 
         binding.btSearch.setOnClickListener {
+
+            val mPhoneNumber = binding.etSearch.text.toString()
+
+            if (mPhoneNumber.isEmpty())
+                return@setOnClickListener
+
             callLocatorFragmentUI.setContactNumber(binding.etSearch.text.toString())
             UtilFunctions.hideKeyboard(binding.etSearch)
 
-            val mPhoneNumber = binding.etSearch.text.toString()
+
             if (mPhoneNumber.length == 10) {
-                loginAPIFunctions.findUserExistence(phoneNumber = mPhoneNumber)
+                if (findFriend(mPhoneNumber)) {
+                    if (findInAllFriendRequests(mPhoneNumber))
+                        loginAPIFunctions.findUserExistence(phoneNumber = mPhoneNumber)
+                }
+
             }
         }
 
@@ -228,8 +245,14 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
             callLocatorFragmentUI.clearSearch()
         }
 
-        binding.icSearch.setOnClickListener {
-            CallIntent.goToFriendRequestActivity(requireContext(),false,requireActivity())
+        binding.btFriendRequest.setOnClickListener {
+            CallIntent.goToFriendRequestActivity(requireContext(), false, requireActivity())
+        }
+
+        binding.btReload.setOnClickListener {
+//            callLocatorFragmentUI.startRotateAnimation()
+            getMyFriends()
+
         }
     }
 
@@ -335,7 +358,9 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
         val locationLatLng = LatLng(
             location.latitude,
             location.longitude
-        ) // San Francisco coordinates
+        )
+
+        mMap.clear()
 
         mMap.addMarker(
             MarkerOptions().position(locationLatLng)
@@ -504,6 +529,8 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
 
     override fun onResume() {
         super.onResume()
+
+        getMyFriends()
     }
 
     override fun onDestroy() {
@@ -511,5 +538,77 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
 
     }
 
+    //////////////////GET My Friends Code
 
+    fun getMyFriends() {
+        callLocatorApiFunctions.getMyFriends(LoginData.getUserPhone(requireContext()))
+    }
+
+    private var myFriendsList = ArrayList<MyFriendsDataItem?>()
+    private var allFriendRequests = ArrayList<MyFriendsDataItem?>()
+
+    private fun findFriend(phoneNumber: String): Boolean {
+        for (friend in myFriendsList) {
+            if (friend!!.friendNumber.equals(phoneNumber)) {
+                onFriendSelected(friend)
+                return false
+            }
+        }
+        return true
+    }
+
+    private fun findInAllFriendRequests(phoneNumber: String): Boolean {
+        for (friend in allFriendRequests) {
+            if (friend!!.friendNumber.equals(phoneNumber)) {
+                return false
+            }
+        }
+        return true
+    }
+
+
+    private fun myFriendsResponse(data: List<MyFriendsDataItem?>?,allFriendRequestList: List<MyFriendsDataItem?>?) {
+//        callLocatorFragmentUI.stopRotateAnimation()
+
+
+        myFriendsList = ArrayList(data!!)
+        allFriendRequests = ArrayList(allFriendRequestList!!)
+
+        val myFriendsAdapter = MyFriendsAdapter(requireContext(), myFriendsList, ::onFriendSelected)
+        binding.rvFriend.apply {
+            layoutManager = LinearLayoutManager(
+                context,
+                LinearLayoutManager.HORIZONTAL, false
+            )
+            adapter = myFriendsAdapter
+        }
+    }
+
+    private fun onFriendSelected(myFriendsDataItem: MyFriendsDataItem) {
+        if (!myFriendsDataItem.latitude.equals("EMPTY"))
+            moveCameraToLocation(
+                myFriendsDataItem.latitude!!.toDouble(),
+                myFriendsDataItem.longitude!!.toDouble()
+            )
+        else
+            Log.e("Test", "EMPTY ${myFriendsDataItem.friendNumber}")
+    }
+
+    private fun moveCameraToLocation(lat: Double, lng: Double) {
+        Log.e("Test", "$lat $lng")
+
+        val locationLatLng = LatLng(
+            lat,
+            lng
+        )
+
+        mMap.clear()
+
+        mMap.addMarker(
+            MarkerOptions().position(locationLatLng)
+                .title("Location")
+        )
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locationLatLng, 18f))
+
+    }
 }

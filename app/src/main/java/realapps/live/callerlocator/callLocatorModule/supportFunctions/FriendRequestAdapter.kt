@@ -40,6 +40,7 @@ class FriendRequestAdapter(
 
         if (FriendRequestActivity.SelectedTab.selectedTab == 0) {
             holder.binding.title1.text = "Request From :"
+            holder.binding.content.text = "You have received request"
             holder.binding.numberValue.text = request.fromNumber
 
             if (request.requestStatus == "0") {
@@ -56,6 +57,7 @@ class FriendRequestAdapter(
             }
         } else {
             holder.binding.title1.text = "Sent to :"
+            holder.binding.content.text = "You have sent request"
             holder.binding.numberValue.text = request.toNumber
 
             if (request.requestStatus == "0") {
@@ -71,6 +73,10 @@ class FriendRequestAdapter(
                 holder.binding.requestStatus.visibility = View.VISIBLE
                 holder.binding.requestStatus.text = "Rejected"
             }
+        }
+
+        holder.binding.btAgree.setOnClickListener {
+            onItemClicked.invoke(request)
         }
 
     }

@@ -26,4 +26,15 @@ object StatusBarUtils {
         }
         return result
     }
+
+    fun setTopPadding(resources: Resources,view: View) {
+        val topPadding = StatusBarUtils.getStatusBarHeight(resources) + 12
+
+        view.setPadding(
+            view.paddingLeft,
+            topPadding,
+            view.paddingRight,
+            view.paddingBottom
+        )
+    }
 }

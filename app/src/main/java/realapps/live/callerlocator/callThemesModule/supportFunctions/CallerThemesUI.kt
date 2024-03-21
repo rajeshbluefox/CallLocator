@@ -2,6 +2,7 @@ package realapps.live.callerlocator.callThemesModule.supportFunctions
 
 import android.content.Context
 import android.content.res.Resources
+import android.view.View
 import realapps.live.callerlocator.databinding.FragmentCallThemesBinding
 import realapps.live.callerlocator.zCommonFuntions.StatusBarUtils
 
@@ -10,14 +11,14 @@ class CallerThemesUI(
     private val binding: FragmentCallThemesBinding
 ) {
 
-    fun setTopPadding(resources: Resources) {
+    fun setTopPadding(resources: Resources,view: View) {
         val topPadding = StatusBarUtils.getStatusBarHeight(resources) + 12
 
-        binding.mainLayout.setPadding(
-            binding.mainLayout.paddingLeft,
+        view.setPadding(
+            view.paddingLeft,
             topPadding,
-            binding.mainLayout.paddingRight,
-            binding.mainLayout.paddingBottom
+            view.paddingRight,
+            view.paddingBottom
         )
     }
 }

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import androidx.lifecycle.LifecycleOwner
 import realapps.live.callerlocator.callLocatorModule.modalClass.GetFriendRequestDataItem
+import realapps.live.callerlocator.callLocatorModule.modalClass.MyFriendsDataItem
 
 class CallLocatorApiFunctions(
     val context: Context,
@@ -11,8 +12,11 @@ class CallLocatorApiFunctions(
     private val lifeCycleOwner: LifecycleOwner,
     private var callLocatorViewModel: CallLocatorViewModel,
     private val sendFriendRequestObserverCB: (status: Boolean) -> Unit,
-    private val getFriendRequestObserverCB:(requestList: List<GetFriendRequestDataItem?>?) -> Unit
-) {
+    private val getFriendRequestObserverCB: (requestList: List<GetFriendRequestDataItem?>?) -> Unit,
+    private val respondToFriendRequestObserver: (status: Boolean) -> Unit,
+    private val getMyFriendsResponse:(data: List<MyFriendsDataItem?>?,allRequests: List<MyFriendsDataItem?>?) -> Unit
+
+    ) {
 
     fun sendFriendRequest(fromNumber: String, toNumber: String) {
         callLocatorViewModel.resetFriendRequest()
@@ -32,20 +36,53 @@ class CallLocatorApiFunctions(
         }
     }
 
-    fun getFriendRequests(phoneNumber: String,requestType: String)
-    {
+    fun getFriendRequests(phoneNumber: String, requestType: String) {
         callLocatorViewModel.resetGetFriendRequest()
-        callLocatorViewModel.getFriendRequests(phoneNumber,requestType)
+        callLocatorViewModel.getFriendRequests(phoneNumber, requestType)
         getFriendRequestObserver()
     }
 
-    private fun getFriendRequestObserver()
-    {
+    private fun getFriendRequestObserver() {
         callLocatorViewModel.getFriendRequestsResponse().observe(lifeCycleOwner) {
             if (it.status != null) {
                 if (it.status == 200) {
                     getFriendRequestObserverCB.invoke(it.data)
                 }
+            }
+        }
+    }
+
+    fun respondToFriendRequest(fromNumber: String, toNumber: String, requestStatus: String) {
+        callLocatorViewModel.resetAcceptFriendRequest()
+        callLocatorViewModel.acceptFriendRequest(fromNumber, toNumber, requestStatus)
+        respondToFriendRequestObserver()
+    }
+
+    private fun respondToFriendRequestObserver() {
+        callLocatorViewModel.getAcceptFriendRequestResponse().observe(lifeCycleOwner) {
+            if (it.code != null) {
+                if (it.code == 200) {
+                    respondToFriendRequestObserver.invoke(true)
+                } else {
+                    respondToFriendRequestObserver.invoke(false)
+                }
+            }
+        }
+    }
+
+    fun getMyFriends(fromNumber: String)
+    {
+        callLocatorViewModel.resetGetMyFriendsResponse()
+        callLocatorViewModel.getMyFriends(fromNumber)
+        getMyFriendsResponse()
+    }
+
+    private fun getMyFriendsResponse()
+    {
+        callLocatorViewModel.getMyFriendsResponse().observe(lifeCycleOwner){
+            if(it.status==200)
+            {
+                getMyFriendsResponse.invoke(it.data,it.allFriend_Requests)
             }
         }
     }
