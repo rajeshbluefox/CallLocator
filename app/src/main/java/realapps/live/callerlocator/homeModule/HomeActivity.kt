@@ -10,6 +10,7 @@ import realapps.live.callerlocator.callSettingsModule.CallSettingsFragment
 import realapps.live.callerlocator.callThemesModule.CallThemesFragment
 import realapps.live.callerlocator.databinding.ActivityHomeBinding
 import realapps.live.callerlocator.zCommonFuntions.StatusBarUtils
+import realapps.live.callerlocator.zSharedPreference.LoginData
 
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
@@ -22,6 +23,9 @@ class HomeActivity : AppCompatActivity() {
 //        homeActivityViewModel = ViewModelProvider(this)[HomeActivityViewModel::class.java]
         setContentView(binding.root)
         StatusBarUtils.transparentStatusBar(this)
+
+        LoginData.saveUserPhone(this, "9123456789")
+
 
 
         onClickListeners()
