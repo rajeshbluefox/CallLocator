@@ -25,7 +25,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/gradient1"
+        android:background="@color/white"
         android:paddingHorizontal="@dimen/dp_12"
         android:paddingBottom="@dimen/dp_6"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +35,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/searchBarMainLt"
-            android:background="@drawable/gradient1"
+            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp">
