@@ -77,7 +77,7 @@ class IncomingCallActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     }
 
     private fun onClickListeners() {
-        binding.acceptButton.setOnClickListener {
+        binding.btAccept.setOnClickListener {
 
             val tm = this
                 .getSystemService(TELECOM_SERVICE) as TelecomManager
@@ -86,7 +86,7 @@ class IncomingCallActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             finish()
         }
 
-        binding.rejectButton.setOnClickListener {
+        binding.btDecline.setOnClickListener {
 
             val telecomManager = getSystemService(TelecomManager::class.java)
             telecomManager?.endCall()

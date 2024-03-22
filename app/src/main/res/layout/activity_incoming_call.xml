@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".callThemesModule.IncomingCallActivity">
@@ -16,15 +17,18 @@
             app:lottie_autoPlay="true"
             app:lottie_loop="true" />
 
+
         <TextView
             android:id="@+id/incomingNumberTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="100dp"
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/guideLine2"
             tools:text="Incoming Number" />
 
         <Button
@@ -34,7 +38,9 @@
             android:layout_below="@id/incomingNumberTextView"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
-            android:text="Accept" />
+            android:text="Accept"
+            android:visibility="gone" />
+
 
         <Button
             android:id="@+id/rejectButton"
@@ -43,10 +49,10 @@
             android:layout_below="@id/acceptButton"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
-            android:text="Reject" />
+            android:text="Reject"
+            android:visibility="gone" />
 
         <TextView
-            android:visibility="gone"
             android:id="@+id/incomingNumberTextView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -56,8 +62,47 @@
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold"
+            android:visibility="gone"
             tools:text="Testing" />
 
-    </RelativeLayout>
+        <ImageButton
+            android:id="@+id/btAccept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/call_answer"
+            app:layout_constraintBottom_toBottomOf="@id/guideLine1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btDecline"
+            tools:layout_editor_absoluteY="600dp" />
+
+        <ImageButton
+            android:id="@+id/btDecline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/call_decline"
+            app:layout_constraintBottom_toBottomOf="@id/guideLine1"
+            app:layout_constraintEnd_toStartOf="@+id/btAccept"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="600dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideLine1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.85" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideLine2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.25" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
