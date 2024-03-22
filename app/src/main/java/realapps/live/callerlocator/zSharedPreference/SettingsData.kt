@@ -7,6 +7,17 @@ object SettingsData {
 
     private const val PREFS_NAME = "CallerSettings"
 
+    fun saveCallThemeStatus(context: Context, value: Boolean) {
+        val sharedPref = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val editor = sharedPref.edit()
+        editor.putBoolean(Constants.CALL_THEME, value).apply()
+    }
+
+    fun getCallThemeStatus(context: Context): Boolean {
+        val sharedPref = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        return sharedPref.getBoolean(Constants.CALL_THEME, false)
+    }
+
     fun saveCallFlashLightStatus(context: Context, value: Boolean,frequency: Int) {
         val sharedPref = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val editor = sharedPref.edit()

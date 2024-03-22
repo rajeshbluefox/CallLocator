@@ -220,6 +220,7 @@ class SetThemeActivity : AppCompatActivity() {
 
         val serviceIntent = Intent(this, BackgroundCallService::class.java)
         startService(serviceIntent)
+
     }
 
     private fun openYourActivity() {

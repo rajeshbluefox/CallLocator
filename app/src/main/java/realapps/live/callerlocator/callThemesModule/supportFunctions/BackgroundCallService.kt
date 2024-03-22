@@ -23,6 +23,7 @@ class BackgroundCallService : Service() {
 
     override fun onCreate() {
         super.onCreate()
+
         registerCallReceiver()
         startForegroundService()
     }
@@ -60,8 +61,8 @@ class BackgroundCallService : Service() {
         }
 
         return NotificationCompat.Builder(this, channelId)
-            .setContentTitle("Background Call Service")
-            .setContentText("Listening for incoming calls")
+            .setContentTitle("Call Screen Theme Enabled")
+            .setContentText("Now you will screen the customised call screen")
             .setSmallIcon(R.drawable.baseline_my_location_36)
             .build()
     }
@@ -103,7 +104,7 @@ class BackgroundCallService : Service() {
     }
 
     private fun showIncomingCallScreen(incomingNumber: String) {
-        UtilFunctions.showToast(this, "Call Coming")
+//        UtilFunctions.showToast(this, "Call Coming")
 
         try {
             val incomingCallIntent = Intent(this, IncomingCallActivity::class.java)
