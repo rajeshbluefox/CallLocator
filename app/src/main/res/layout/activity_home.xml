@@ -55,7 +55,7 @@
                 android:id="@+id/btSettings"
                 android:layout_width="@dimen/dp_36"
                 android:layout_height="@dimen/dp_36"
-                android:src="@drawable/call_themes_unselect"
+                android:src="@drawable/call_theme_unselect"
                 android:padding="@dimen/dp_6"
                 app:layout_constraintEnd_toStartOf="@+id/btCallThemes"
                 app:layout_constraintHorizontal_bias="0.5"
