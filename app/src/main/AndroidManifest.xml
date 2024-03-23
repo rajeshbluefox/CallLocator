@@ -22,6 +22,9 @@
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_PHONE_CALL" />
+    <uses-permission android:name="android.permission.MANAGE_OWN_CALLS" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <uses-feature
         android:name="android.hardware.sensor.accelerometer"
@@ -44,6 +47,12 @@
         android:theme="@style/Theme.Realapps"
         android:usesCleartextTraffic="true"
         tools:targetApi="34">
+        <activity
+            android:name=".callSettingsModule.BlockedNumbersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".profileModule.ProfileActivity"
+            android:exported="false" />
         <activity
             android:name=".callLocatorModule.FriendRequestActivity"
             android:exported="false" />
@@ -72,6 +81,7 @@
             android:theme="@style/Theme.Realapps" />
         <activity
             android:name=".callThemesModule.IncomingCallActivity"
+            android:excludeFromRecents="true"
             android:exported="true"
             android:theme="@style/Theme.Realapps" />
 
@@ -92,22 +102,25 @@
             android:name=".homeModule.HomeActivity"
             android:exported="true"
             android:theme="@style/Theme.Realapps">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".loginModule.LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.Realapps">
 
-<!--             <intent-filter>-->
-<!--             <action android:name="android.intent.action.MAIN" />-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
 
-<!--             <category android:name="android.intent.category.LAUNCHER" />-->
-<!--             </intent-filter>-->
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".MainActivity"
@@ -117,13 +130,11 @@
                 android:name="android.app.lib_name"
                 android:value="" />
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
@@ -148,7 +159,17 @@
         <service
             android:name=".callThemesModule.supportFunctions.BackgroundCallService"
             android:enabled="true"
-            android:exported="false" />
+            android:exported="false"
+            android:foregroundServiceType="phoneCall" />
+
+        <receiver
+            android:name=".callThemesModule.supportFunctions.CallEndedReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="ACTION_CALL_ENDED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

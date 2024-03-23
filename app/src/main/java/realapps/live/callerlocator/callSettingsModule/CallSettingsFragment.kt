@@ -44,6 +44,14 @@ class CallSettingsFragment : Fragment() {
         binding.btCallAnnouncment.setOnClickListener {
             CallIntent.goToCallAnnouncmentActivity(requireContext(),false,requireActivity())
         }
+
+        binding.btProfile.setOnClickListener {
+            CallIntent.goToProfileActivity(requireContext(),false,requireActivity())
+        }
+
+        binding.btCallBlocking.setOnClickListener {
+            CallIntent.goToCallBlockingActivity(requireContext(),false,requireActivity())
+        }
     }
 
 }

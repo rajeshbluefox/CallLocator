@@ -39,12 +39,18 @@ class MyFriendsAdapter(
         val request = requestsList[position]
 
         if (request != null) {
-            holder.binding.tvPhoneNumber.text=request.friendNumber
 
-            holder.binding.tvTimeStamp.text=convertTime(request.locationTimeStamp!!)
+            if (request.friendName != null)
+                holder.binding.tvContactName.text = request.friendName
+            else
+                holder.binding.tvContactName.text = "UnKnown"
+
+            holder.binding.tvPhoneNumber.text = request.friendNumber
+
+            holder.binding.tvTimeStamp.text = convertTime(request.locationTimeStamp!!)
         }
 
-        holder.binding.itemFriend.setOnClickListener{
+        holder.binding.itemFriend.setOnClickListener {
             onItemClicked.invoke(request!!)
         }
 

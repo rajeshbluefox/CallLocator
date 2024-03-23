@@ -2,12 +2,14 @@ package realapps.live.callerlocator.callLocatorModule
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
@@ -29,6 +31,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,7 +42,6 @@ import realapps.live.callerlocator.callLocatorModule.modalClass.LocationData
 import realapps.live.callerlocator.callLocatorModule.modalClass.MyFriendsDataItem
 import realapps.live.callerlocator.callLocatorModule.supportFunctions.CallLocatorFragmentUI
 import realapps.live.callerlocator.callLocatorModule.supportFunctions.EnteredNumber
-import realapps.live.callerlocator.callLocatorModule.supportFunctions.FriendRequestAdapter
 import realapps.live.callerlocator.callLocatorModule.supportFunctions.InviteUserDialog
 import realapps.live.callerlocator.callLocatorModule.supportFunctions.MyFriendsAdapter
 import realapps.live.callerlocator.callLocatorModule.supportFunctions.PermissionResultListener
@@ -51,7 +53,9 @@ import realapps.live.callerlocator.zCommonFuntions.CallIntent
 import realapps.live.callerlocator.zCommonFuntions.Contact
 import realapps.live.callerlocator.zCommonFuntions.ContactManager
 import realapps.live.callerlocator.zCommonFuntions.UtilFunctions
+import realapps.live.callerlocator.zDatabase.BlockedContactsDBHelper
 import realapps.live.callerlocator.zSharedPreference.LoginData
+
 
 @AndroidEntryPoint
 class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultListener {
@@ -72,6 +76,7 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
     private lateinit var inviteUserDialog: InviteUserDialog
     private lateinit var sendRequestDialog: SendRequestDialog
 
+    private lateinit var dbHelper: BlockedContactsDBHelper
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -79,6 +84,9 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
 
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_call_locator, container, false)
+
+        // Initialize your dbHelper here
+        dbHelper = BlockedContactsDBHelper(requireContext())
         return binding.root
     }
 
@@ -119,7 +127,7 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
             viewLifecycleOwner,
             callLocatorViewModel,
             ::sendFriendRequestResponse,
-            getFriendRequestObserverCB = {},
+            getFriendRequestObserverCB = { _, _ -> },
             respondToFriendRequestObserver = {},
             ::myFriendsResponse
         )
@@ -217,6 +225,22 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
             getLocation()
         }
 
+        binding.btAddContact.setOnClickListener {
+            val mPhoneNumber = binding.etSearch.text.toString()
+
+            openAddToContactsScreen(mPhoneNumber)
+        }
+
+        binding.btBlock.setOnClickListener {
+            val mPhoneNumber = binding.etSearch.text.toString()
+
+            if (binding.tvBlock.text.toString() == "Block") {
+                openBlockNumberSettings(mPhoneNumber)
+            } else {
+                unBlockNumber(mPhoneNumber)
+            }
+        }
+
         binding.btSearch.setOnClickListener {
 
             val mPhoneNumber = binding.etSearch.text.toString()
@@ -226,6 +250,11 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
 
             callLocatorFragmentUI.setContactNumber(binding.etSearch.text.toString())
             UtilFunctions.hideKeyboard(binding.etSearch)
+
+            val myNumber = LoginData.getUserPhone(requireContext())
+
+            if (mPhoneNumber == myNumber)
+                return@setOnClickListener
 
 
             if (mPhoneNumber.length == 10) {
@@ -349,6 +378,13 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
 
     private fun onLocationFetched(location: Location) {
         // Handle the fetched location, for example, show a toast
+
+        val phoneNumber = LoginData.getUserPhone(requireContext())
+        callLocatorViewModel.updateLocation(
+            phoneNumber,
+            "${location.latitude}",
+            "${location.longitude}"
+        )
 
         isLocationFetched = true
 
@@ -538,7 +574,7 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
 
     }
 
-    //////////////////GET My Friends Code
+    ////////////////// GET My Friends Code
 
     fun getMyFriends() {
         callLocatorApiFunctions.getMyFriends(LoginData.getUserPhone(requireContext()))
@@ -567,20 +603,48 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
     }
 
 
-    private fun myFriendsResponse(data: List<MyFriendsDataItem?>?,allFriendRequestList: List<MyFriendsDataItem?>?) {
+    private fun myFriendsResponse(
+        data: List<MyFriendsDataItem?>?,
+        allFriendRequestList: List<MyFriendsDataItem?>?
+    ) {
 //        callLocatorFragmentUI.stopRotateAnimation()
-
 
         myFriendsList = ArrayList(data!!)
         allFriendRequests = ArrayList(allFriendRequestList!!)
 
-        val myFriendsAdapter = MyFriendsAdapter(requireContext(), myFriendsList, ::onFriendSelected)
-        binding.rvFriend.apply {
-            layoutManager = LinearLayoutManager(
-                context,
-                LinearLayoutManager.HORIZONTAL, false
-            )
-            adapter = myFriendsAdapter
+        if (myFriendsList.isNotEmpty()) {
+            findNames()
+            binding.noFriendsLt.visibility = View.GONE
+            binding.rvFriend.visibility = View.VISIBLE
+
+            val myFriendsAdapter =
+                MyFriendsAdapter(requireContext(), myFriendsList, ::onFriendSelected)
+            binding.rvFriend.apply {
+                layoutManager = LinearLayoutManager(
+                    context,
+                    LinearLayoutManager.HORIZONTAL, false
+                )
+                adapter = myFriendsAdapter
+            }
+        } else {
+            binding.noFriendsLt.visibility = View.VISIBLE
+            binding.rvFriend.visibility = View.GONE
+        }
+    }
+
+    private fun findNames() {
+        for ((position, friendNumber) in myFriendsList.withIndex()) {
+            for (contact in allContacts) {
+                val dbNumber = UtilFunctions.makePhoneNumber10(friendNumber!!.friendNumber!!)
+                val phoneNumber = UtilFunctions.makePhoneNumber10(contact.number)
+
+                if (dbNumber == phoneNumber) {
+                    Log.e("Test", contact.name)
+                    myFriendsList[position]?.friendName = contact.name
+                    break
+                }
+
+            }
         }
     }
 
@@ -595,12 +659,9 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
     }
 
     private fun moveCameraToLocation(lat: Double, lng: Double) {
-        Log.e("Test", "$lat $lng")
+        Log.e("Test", "$lng $lat")
 
-        val locationLatLng = LatLng(
-            lat,
-            lng
-        )
+        val locationLatLng = LatLng(lng, lat)
 
         mMap.clear()
 
@@ -608,7 +669,69 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
             MarkerOptions().position(locationLatLng)
                 .title("Location")
         )
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locationLatLng, 18f))
 
+        // Zoom level for the animation
+        val zoomLevel = 18f
+
+        // Create CameraPosition with target location and zoom level
+        val cameraPosition = CameraPosition.Builder()
+            .target(locationLatLng)
+            .zoom(zoomLevel)
+            .build()
+
+        // Use animateCamera with CameraUpdateFactory.newCameraPosition() to animate the camera movement
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+    }
+
+
+    //////ADD CONTACT CODE
+
+    private val REQUEST_ADD_CONTACT = 1
+
+    // Function to open the Add to Contacts screen
+    private fun openAddToContactsScreen(phoneNumber: String) {
+        val intent = Intent(Intent.ACTION_INSERT)
+        intent.type = ContactsContract.Contacts.CONTENT_TYPE
+
+        intent.putExtra(ContactsContract.Intents.Insert.PHONE, phoneNumber)
+
+        startActivityForResult(intent, REQUEST_ADD_CONTACT)
+    }
+
+    // Handle result of the Add to Contacts screen
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_ADD_CONTACT) {
+            if (resultCode == Activity.RESULT_OK) {
+                UtilFunctions.showToast(requireContext(), "Contact Added Successfully")
+                // Contact added successfully
+                // Handle further operations here if needed
+            } else {
+                UtilFunctions.showToast(requireContext(), "Failed to add contact")
+
+                // Contact addition canceled or failed
+                // Handle accordingly
+            }
+        }
+    }
+
+//    private var dbHelper = BlockedContactsDBHelper(requireContext())
+
+    private fun openBlockNumberSettings(phoneNumber: String) {
+        val res = dbHelper.insertNumber(phoneNumber)
+        if (res) {
+            UtilFunctions.showToast(requireContext(), "Number Blocked Successfully")
+            binding.tvBlock.text = "UnBlock"
+        }
+//        Log.e("Test", "AI $res")
+    }
+
+    private fun unBlockNumber(phoneNumber: String) {
+        val res = dbHelper.deleteNumber(phoneNumber)
+
+        if (res) {
+            UtilFunctions.showToast(requireContext(), "Number UnBlocked Successfully")
+            binding.tvBlock.text = "Block"
+        }
     }
 }

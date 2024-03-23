@@ -4,6 +4,7 @@ import realapps.live.callerlocator.callLocatorModule.modalClass.GetFriendRequest
 import realapps.live.callerlocator.callLocatorModule.modalClass.GetMyFriendsResponse
 import realapps.live.callerlocator.callLocatorModule.modalClass.RespondFriendRequestResponse
 import realapps.live.callerlocator.callLocatorModule.modalClass.SendFriendRequestResponse
+import realapps.live.callerlocator.callLocatorModule.modalClass.UpdateLocationResponse
 import realapps.live.callerlocator.loginModule.modalClass.GetUserInfoResponse
 import realapps.live.callerlocator.loginModule.modalClass.RegisterUserResponse
 import retrofit2.http.Field
@@ -28,6 +29,14 @@ interface ApiInterface {
         @Field("Latitude") latitude: String,
         @Field("Longitude") longitude: String
     ): RegisterUserResponse
+
+    @FormUrlEncoded
+    @POST("Update_LocationCoordinates.php")
+    suspend fun updateLocation(
+        @Field("PhoneNumber") phoneNumber: String,
+        @Field("Longitude") longitude: String,
+        @Field("Latitude") latitude: String
+    ): UpdateLocationResponse
 
     @FormUrlEncoded
     @POST("FriendRequests_insert.php")

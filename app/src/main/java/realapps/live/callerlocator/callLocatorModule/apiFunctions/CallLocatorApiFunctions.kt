@@ -12,7 +12,7 @@ class CallLocatorApiFunctions(
     private val lifeCycleOwner: LifecycleOwner,
     private var callLocatorViewModel: CallLocatorViewModel,
     private val sendFriendRequestObserverCB: (status: Boolean) -> Unit,
-    private val getFriendRequestObserverCB: (requestList: List<GetFriendRequestDataItem?>?) -> Unit,
+    private val getFriendRequestObserverCB: (requestList: List<GetFriendRequestDataItem?>?,isListPresent: Boolean) -> Unit,
     private val respondToFriendRequestObserver: (status: Boolean) -> Unit,
     private val getMyFriendsResponse:(data: List<MyFriendsDataItem?>?,allRequests: List<MyFriendsDataItem?>?) -> Unit
 
@@ -46,7 +46,10 @@ class CallLocatorApiFunctions(
         callLocatorViewModel.getFriendRequestsResponse().observe(lifeCycleOwner) {
             if (it.status != null) {
                 if (it.status == 200) {
-                    getFriendRequestObserverCB.invoke(it.data)
+                        getFriendRequestObserverCB.invoke(it.data,true)
+                }else{
+                    getFriendRequestObserverCB.invoke(emptyList(),false)
+
                 }
             }
         }

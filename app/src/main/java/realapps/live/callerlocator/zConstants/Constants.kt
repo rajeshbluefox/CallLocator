@@ -5,6 +5,7 @@ class Constants {
         const val LOGIN_STATUS="loginStatus"
 
         const val CALL_THEME="calltheme"
+        const val CALL_DEFAULT_THEME="calldefaulttheme"
 
         const val CALL_FLASH_LIGHT="callflashlight"
         const val CALL_FLASH_LIGHT_FREQUENCY="callflashlightfrequency"

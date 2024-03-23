@@ -15,8 +15,9 @@ object StatusBarUtils {
 
 //        activity.window().getDecorView().getWindowInsetsController().setSystemBarsAppearance(APPEARANCE_LIGHT_STATUS_BARS, APPEARANCE_LIGHT_STATUS_BARS);
 
-//        activity.window?.decorView?.windowInsetsController.setSystemBarsAppearance(APPEARANCE_LIGHT_STATUS_BARS, APPEARANCE_LIGHT_STATUS_BARS)
     }
+
+
 
     fun getStatusBarHeight(resources : Resources): Int {
         var result = 0

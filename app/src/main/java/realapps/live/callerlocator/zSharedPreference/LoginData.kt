@@ -6,7 +6,7 @@ import realapps.live.callerlocator.zConstants.Constants
 object LoginData {
     private const val PREFS_NAME = "ParishLoginData"
 
-    fun putUserLoginStatus(context: Context, value: Boolean) {
+    fun saveUserLoginStatus(context: Context, value: Boolean) {
         val sharedPref = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val editor = sharedPref.edit()
         editor.putBoolean(Constants.LOGIN_STATUS, value).apply()

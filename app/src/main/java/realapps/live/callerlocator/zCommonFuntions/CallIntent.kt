@@ -4,11 +4,13 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import realapps.live.callerlocator.callLocatorModule.FriendRequestActivity
+import realapps.live.callerlocator.callSettingsModule.BlockedNumbersActivity
 import realapps.live.callerlocator.callSettingsModule.CallAnnouncerActivity
 import realapps.live.callerlocator.callSettingsModule.CallFlashActivity
 import realapps.live.callerlocator.setThemeModule.SetThemeActivity
 import realapps.live.callerlocator.homeModule.HomeActivity
 import realapps.live.callerlocator.loginModule.LoginActivity
+import realapps.live.callerlocator.profileModule.ProfileActivity
 import realapps.live.callerlocator.setThemeModule.SelectContactsActivity
 
 object CallIntent {
@@ -22,8 +24,13 @@ object CallIntent {
 
     fun goToLoginActivity(context: Context, killMe: Boolean, activity: Activity) {
         val intent = Intent(context, LoginActivity::class.java)
+        if (killMe) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
         context.startActivity(intent)
-        if (killMe) activity.finish()
+
     }
 
     fun goToSetThemeActivity(context: Context, killMe: Boolean, activity: Activity) {
@@ -52,6 +59,18 @@ object CallIntent {
 
     fun goToFriendRequestActivity(context: Context, killMe: Boolean, activity: Activity) {
         val intent = Intent(context, FriendRequestActivity::class.java)
+        context.startActivity(intent)
+        if (killMe) activity.finish()
+    }
+
+    fun goToProfileActivity(context: Context, killMe: Boolean, activity: Activity) {
+        val intent = Intent(context, ProfileActivity::class.java)
+        context.startActivity(intent)
+        if (killMe) activity.finish()
+    }
+
+    fun goToCallBlockingActivity(context: Context, killMe: Boolean, activity: Activity) {
+        val intent = Intent(context, BlockedNumbersActivity::class.java)
         context.startActivity(intent)
         if (killMe) activity.finish()
     }

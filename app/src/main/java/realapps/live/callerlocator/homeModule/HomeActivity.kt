@@ -24,10 +24,10 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
         StatusBarUtils.transparentStatusBar(this)
 
-        LoginData.saveUserPhone(this, "9123456789")
+//        LoginData.saveUserPhone(this, "9123456789")
 
 
-
+        setIcon(1)
         onClickListeners()
         gotoCallLocatorFragment()
     }
@@ -35,14 +35,40 @@ class HomeActivity : AppCompatActivity() {
     private fun onClickListeners() {
         binding.btCallLocator.setOnClickListener {
             gotoCallLocatorFragment()
+
+            setIcon(1)
         }
 
         binding.btCallThemes.setOnClickListener {
             gotoCallSettingsFragment()
+
+            setIcon(2)
         }
 
         binding.btSettings.setOnClickListener {
             gotoCallThemesFragment()
+
+            setIcon(3)
+        }
+    }
+
+    fun setIcon(selectedItem: Int) {
+        when (selectedItem) {
+            1 -> {
+                binding.btCallLocator.setImageResource(R.drawable.call_locator_select)
+                binding.btCallThemes.setImageResource(R.drawable.call_setting_unselect)
+                binding.btSettings . setImageResource (R.drawable.call_theme_unselect)
+            }
+            2 -> {
+                binding.btCallLocator.setImageResource(R.drawable.call_locator_unselect)
+                binding.btCallThemes.setImageResource(R.drawable.call_setting_select)
+                binding.btSettings.setImageResource(R.drawable.call_theme_unselect)
+            }
+            3 -> {
+                binding.btCallLocator.setImageResource(R.drawable.call_locator_unselect)
+                binding.btCallThemes.setImageResource(R.drawable.call_setting_unselect)
+                binding.btSettings.setImageResource(R.drawable.call_theme_select)
+            }
         }
     }
 

@@ -21,9 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         checkLoginStatusandNavigate()
 
-//        homeViewModel.getDoctors()
 
-//        observer()
 
     }
 
@@ -32,9 +30,9 @@ class MainActivity : AppCompatActivity() {
 
             if (LoginData.getUserLoginStatus(this)) {
 
-                val userType = LoginData.getUserType(this)
+//                val userType = LoginData.getUserType(this)
 
-                if (userType == 0)
+//                if (userType == 0)
                     CallIntent.goToHomeActivity(this, true, this)
 //                else
 //                    CallIntent.goToWareHouseHomeActivity(this, true, this)

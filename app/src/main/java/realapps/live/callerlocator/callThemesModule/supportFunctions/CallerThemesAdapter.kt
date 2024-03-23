@@ -42,7 +42,7 @@ class CallerThemesAdapter(
         if (position <= 3)
             theme = themes[position]
 
-        holder.binding.tvCount.text = position.toString()
+//        holder.binding.tvCount.text = position.toString()
 
 
         if (position <= 3) {

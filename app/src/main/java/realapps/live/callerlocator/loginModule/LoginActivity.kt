@@ -89,6 +89,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun gotoHomeScreen() {
+        LoginData.saveUserLoginStatus(this,true)
         CallIntent.goToHomeActivity(this, true, this)
     }
 

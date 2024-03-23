@@ -10,6 +10,7 @@ import realapps.live.callerlocator.callLocatorModule.modalClass.GetFriendRequest
 import realapps.live.callerlocator.callLocatorModule.modalClass.GetMyFriendsResponse
 import realapps.live.callerlocator.callLocatorModule.modalClass.RespondFriendRequestResponse
 import realapps.live.callerlocator.callLocatorModule.modalClass.SendFriendRequestResponse
+import realapps.live.callerlocator.callLocatorModule.modalClass.UpdateLocationResponse
 import javax.inject.Inject
 
 
@@ -98,5 +99,25 @@ class CallLocatorViewModel @Inject constructor(
 
     fun getMyFriendsResponse(): LiveData<GetMyFriendsResponse> {
         return getMyFriendsResponse
+    }
+
+    private var updateLocationResponse = MutableLiveData<UpdateLocationResponse>()
+
+    fun updateLocation(phoneNumber: String,lat: String,lng: String) {
+        viewModelScope.launch {
+            updateLocationResponse.postValue(
+                callLocatorRepository.updateLocation(
+                    phoneNumber, lat, lng
+                )
+            )
+        }
+    }
+
+    fun resetUpdateLocationResponse() {
+        updateLocationResponse = MutableLiveData<UpdateLocationResponse>()
+    }
+
+    fun getUpdateLocationResponse(): LiveData<UpdateLocationResponse> {
+        return updateLocationResponse
     }
 }

@@ -20,8 +20,11 @@ data class GetMyFriendsResponse(
 
 data class MyFriendsDataItem(
 
+	@field:SerializedName("friend_name")
+	var friendName: String? = null,
+
 	@field:SerializedName("friend_number")
-	val friendNumber: String? = null,
+	var friendNumber: String? = null,
 
 	@field:SerializedName("latitude")
 	val latitude: String? = null,

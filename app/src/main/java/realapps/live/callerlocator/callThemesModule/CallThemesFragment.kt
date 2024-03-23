@@ -67,10 +67,12 @@ class CallThemesFragment : Fragment() {
     private fun initViews() {
         callerThemesUI = CallerThemesUI(requireContext(), binding)
 //        callerThemesUI.setTopPadding(resources)
-        StatusBarUtils.setTopPadding(resources,binding.mainLayout)
+        StatusBarUtils.setTopPadding(resources,binding.callThemeLt)
         val callThemeStatus = SettingsData.getCallThemeStatus(requireContext())
 
         binding.btSwitchCallTheme.isChecked = callThemeStatus
+        if(callThemeStatus)
+            startBackgroundService()
 
     }
 
@@ -81,6 +83,7 @@ class CallThemesFragment : Fragment() {
                 checkAndRequestPermissions()
                 SettingsData.saveCallThemeStatus(requireContext(), true)
             } else {
+                stopBackgroundService()
                 SettingsData.saveCallThemeStatus(requireContext(), false)
             }
         }
@@ -146,6 +149,8 @@ class CallThemesFragment : Fragment() {
     private val ANSWER_PHONE_CALLS_REQUEST_CODE = 124
     private val REQUEST_OVERLAY_PERMISSION = 125
     private val REQUEST_CALL_LOG_PERMISSION = 126
+    private val FOREGROUND_SERVICE_CONNECTED_DEVICE_PERMISSION_REQUEST_CODE = 1001
+
 
     private val phoneStatePermissions = arrayOf(android.Manifest.permission.READ_PHONE_STATE)
     private val overlayPermissions = arrayOf(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
@@ -164,13 +169,16 @@ class CallThemesFragment : Fragment() {
             requestPermissions(phoneStatePermissions, CALL_PERMISSION_REQUEST_CODE)
         } else {
             // Permission already granted, proceed with your logic
-            startBackgroundService()
+            checkForeGroundServicePermission()
+//            startBackgroundService()
         }
     }
 
     private fun checkAndRequestOverlayPermission() {
         Log.e("Test", "72")
-//        !arePermissionsGranted(overlayPermissions)
+//        !Settings.canDrawOverlays(requireContext())
+
+        Log.e("Test","OverLays ${Settings.canDrawOverlays(requireContext())}")
         if (!Settings.canDrawOverlays(requireContext())) {
             Log.e("Test", "74")
             requestOverlayPermission()
@@ -209,6 +217,20 @@ class CallThemesFragment : Fragment() {
         }
     }
 
+
+    fun checkForeGroundServicePermission()
+    {
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.FOREGROUND_SERVICE_PHONE_CALL) != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted, request it from the user
+            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.FOREGROUND_SERVICE_PHONE_CALL), FOREGROUND_SERVICE_CONNECTED_DEVICE_PERMISSION_REQUEST_CODE)
+        } else {
+            // Permission is already granted, proceed with starting the foreground service
+            startBackgroundService()
+//            startForegroundService()
+        }
+    }
+
+
     private fun arePermissionsGranted(permissions: Array<String>): Boolean {
         return permissions.all {
             ContextCompat.checkSelfPermission(requireContext(), it) == PackageManager.PERMISSION_GRANTED
@@ -233,6 +255,7 @@ class CallThemesFragment : Fragment() {
             CALL_PERMISSION_REQUEST_CODE -> handlePhoneStatePermissionResult(grantResults)
             ANSWER_PHONE_CALLS_REQUEST_CODE -> handleAnswerPhoneCallsPermissionResult(grantResults)
             REQUEST_CALL_LOG_PERMISSION -> handleCallLogPermissionResult(grantResults)
+            FOREGROUND_SERVICE_CONNECTED_DEVICE_PERMISSION_REQUEST_CODE -> handleForeGroundServicePermissionResult(grantResults)
         }
     }
 
@@ -250,12 +273,27 @@ class CallThemesFragment : Fragment() {
     private fun handlePhoneStatePermissionResult(grantResults: IntArray) {
         if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             // Permission granted, proceed with your logic
-            startBackgroundService()
+//            startBackgroundService()
+            checkForeGroundServicePermission()
         } else {
             // Permission denied. Inform the user.
             Toast.makeText(
                 requireContext(),
                 "Permission denied. Not able to get Phone State.",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+    private fun handleForeGroundServicePermissionResult(grantResults: IntArray) {
+        if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            // Permission granted, proceed with your logic
+            startBackgroundService()
+        } else {
+            // Permission denied. Inform the user.
+            Toast.makeText(
+                requireContext(),
+                "Permission denied. ForeGroundPermission.",
                 Toast.LENGTH_SHORT
             ).show()
         }
@@ -297,11 +335,19 @@ class CallThemesFragment : Fragment() {
 
     private fun startBackgroundService() {
         // Implement your logic for starting the background service
-        UtilFunctions.showToast(requireContext(), "Call Theme Enabled")
+//        UtilFunctions.showToast(requireContext(), "Call Theme Enabled")
 
         val serviceIntent = Intent(requireContext(), BackgroundCallService::class.java)
         requireContext().startService(serviceIntent)
 
+    }
+
+    private fun stopBackgroundService()
+    {
+        UtilFunctions.showToast(requireContext(), "Call Theme Disabled")
+
+        val serviceIntent = Intent(requireContext(), BackgroundCallService::class.java)
+        requireContext().stopService(serviceIntent)
     }
 
     private fun openYourActivity() {

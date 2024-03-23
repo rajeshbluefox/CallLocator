@@ -57,4 +57,16 @@ object UtilFunctions {
         val imm = view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
+
+    fun makePhoneNumber10(phoneNumber: String): String {
+        var normalizedNumber = phoneNumber
+        // Remove any non-numeric characters
+        normalizedNumber = normalizedNumber.replace("[^0-9]".toRegex(), "")
+
+        // If the length is greater than 10, remove leading characters to make it 10
+        if (normalizedNumber.length > 10) {
+            normalizedNumber = normalizedNumber.substring(normalizedNumber.length - 10)
+        }
+        return normalizedNumber
+    }
 }

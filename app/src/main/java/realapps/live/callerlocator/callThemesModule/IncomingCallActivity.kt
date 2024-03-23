@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import realapps.live.callerlocator.R
 import realapps.live.callerlocator.callSettingsModule.supportFunctions.FlashlightManager
+import realapps.live.callerlocator.callThemesModule.supportFunctions.CallEndedReceiver
 import realapps.live.callerlocator.databinding.ActivityIncomingCallBinding
 import realapps.live.callerlocator.setThemeModule.supportFunctions.ContactDatabaseHelper
 import realapps.live.callerlocator.zCommonFuntions.Contact
@@ -39,7 +40,7 @@ class IncomingCallActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private var dbHelper = ContactDatabaseHelper(this)
 
 
-    private val callEndedReceiver = object : BroadcastReceiver() {
+    private val callEndedReceiver1 = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             if (intent?.action == "ACTION_CALL_ENDED") {
                 // Call ended, finish the activity
@@ -50,19 +51,32 @@ class IncomingCallActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         }
     }
 
+    private lateinit var callEndedReceiver: CallEndedReceiver
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityIncomingCallBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+//        UtilFunctions.showToast(this,"Call Coming")
         // Register the BroadcastReceiver
+//        val filter = IntentFilter("ACTION_CALL_ENDED")
+//        registerReceiver(callEndedReceiver, filter)
+
+        callEndedReceiver = CallEndedReceiver()
+        callEndedReceiver.initCallBack(::onCallEnded)
         val filter = IntentFilter("ACTION_CALL_ENDED")
-        registerReceiver(callEndedReceiver, filter)
+        registerReceiver(callEndedReceiver, filter, RECEIVER_EXPORTED)
 
         tts = TextToSpeech(this, this)
 
         setDetails()
         onClickListeners()
+    }
+
+    fun onCallEnded() {
+        finish()
+        stopFlashLight()
     }
 
     override fun onDestroy() {
@@ -83,7 +97,8 @@ class IncomingCallActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                 .getSystemService(TELECOM_SERVICE) as TelecomManager
             tm.acceptRingingCall()
             UtilFunctions.showToast(this, "Accepting")
-            finish()
+//            finish()
+            closeApplication()
         }
 
         binding.btDecline.setOnClickListener {
@@ -91,20 +106,31 @@ class IncomingCallActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             val telecomManager = getSystemService(TelecomManager::class.java)
             telecomManager?.endCall()
             UtilFunctions.showToast(this, "Rejected")
-            finish()
+            closeApplication()
         }
+    }
+
+    fun closeApplication() {
+        stopFlashLight()
+        finish()
     }
 
     private fun setDetails() {
 
         incomingNumber = intent.getStringExtra("incoming_number") ?: ""
 
-        binding.incomingNumberTextView2.text = incomingNumber
+        binding.incomingNumberTextView.text = incomingNumber
 
+        findName(incomingNumber)
         findThemeandSet(incomingNumber)
         checkCallAnnouncment(incomingNumber)
         checkCallFlashLight()
         initSensor()
+    }
+
+    private fun findName(incomingNumber: String) {
+        val callerName = getCallerName(incomingNumber)
+        binding.userName.text = callerName
     }
 
     private fun checkCallAnnouncment(incomingNumber: String) {
@@ -140,11 +166,23 @@ class IncomingCallActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     }
 
     private fun findThemeandSet(incomingNumber: String) {
-        val theme = dbHelper.getThemeForPhoneNumber(incomingNumber)
+
+        var theme = dbHelper.getThemeForPhoneNumber(incomingNumber)
+
+        if (theme == 0) {
+            val trimmedNumber =
+                if (incomingNumber.startsWith("+91")) incomingNumber.substring(3) else incomingNumber
+            theme = dbHelper.getThemeForPhoneNumber(trimmedNumber)
+        }
+
 
         Log.e("Test", "Found Theme $theme")
 
+        val defaultThemeId = SettingsData.getDefaultTheme(this)
+
         when (theme) {
+            -1 -> binding.callerTheme.setAnimation(defaultThemeId)
+            0 -> binding.callerTheme.setAnimation(defaultThemeId)
             1 -> binding.callerTheme.setAnimation(R.raw.call_theme_1)
             2 -> binding.callerTheme.setAnimation(R.raw.call_theme_2)
             3 -> binding.callerTheme.setAnimation(R.raw.call_theme_3)

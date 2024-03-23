@@ -18,6 +18,17 @@ object SettingsData {
         return sharedPref.getBoolean(Constants.CALL_THEME, false)
     }
 
+    fun saveDefaultTheme(context: Context, value: Int) {
+        val sharedPref = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val editor = sharedPref.edit()
+        editor.putInt(Constants.CALL_DEFAULT_THEME, value).apply()
+    }
+
+    fun getDefaultTheme(context: Context): Int {
+        val sharedPref = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        return sharedPref.getInt(Constants.CALL_DEFAULT_THEME, -1)
+    }
+
     fun saveCallFlashLightStatus(context: Context, value: Boolean,frequency: Int) {
         val sharedPref = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val editor = sharedPref.edit()
@@ -50,6 +61,14 @@ object SettingsData {
         val sharedPref = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val editor = sharedPref.edit()
         editor.putBoolean(Constants.CALL_ANNOUNCMENT, value).apply()
+        editor.putInt(Constants.CALL_ANNOUNCMENT_FREQUENCY,repeatTime).apply()
+
+    }
+
+    fun saveCallAnnFrequency(context: Context,repeatTime: Int)
+    {
+        val sharedPref = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val editor = sharedPref.edit()
         editor.putInt(Constants.CALL_ANNOUNCMENT_FREQUENCY,repeatTime).apply()
 
     }

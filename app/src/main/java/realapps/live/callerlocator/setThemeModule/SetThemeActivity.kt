@@ -19,6 +19,7 @@ import realapps.live.callerlocator.databinding.ActivitySetThemeBinding
 import realapps.live.callerlocator.zCommonFuntions.CallIntent
 import realapps.live.callerlocator.zCommonFuntions.StatusBarUtils
 import realapps.live.callerlocator.zCommonFuntions.UtilFunctions
+import realapps.live.callerlocator.zSharedPreference.SettingsData
 
 @AndroidEntryPoint
 class SetThemeActivity : AppCompatActivity() {
@@ -52,8 +53,20 @@ class SetThemeActivity : AppCompatActivity() {
 
     private fun onClickListeners() {
         binding.btSetTheme.setOnClickListener {
+//            checkAndRequestPermissions()
 
-            checkAndRequestPermissions()
+
+            val selectedTheme =SelectedTheme.selectedThemeCount
+
+            when(selectedTheme)
+            {
+                1 -> SettingsData.saveDefaultTheme(this,R.raw.call_theme_1)
+                2 -> SettingsData.saveDefaultTheme(this,R.raw.call_theme_2)
+                3 -> SettingsData.saveDefaultTheme(this,R.raw.call_theme_3)
+                4 -> SettingsData.saveDefaultTheme(this,R.raw.call_theme_4)
+            }
+
+            UtilFunctions.showToast(this,"Set as Default theme")
         }
 
         binding.btSelectContact.setOnClickListener {

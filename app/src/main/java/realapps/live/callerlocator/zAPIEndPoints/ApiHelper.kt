@@ -4,6 +4,7 @@ import realapps.live.callerlocator.callLocatorModule.modalClass.GetFriendRequest
 import realapps.live.callerlocator.callLocatorModule.modalClass.GetMyFriendsResponse
 import realapps.live.callerlocator.callLocatorModule.modalClass.RespondFriendRequestResponse
 import realapps.live.callerlocator.callLocatorModule.modalClass.SendFriendRequestResponse
+import realapps.live.callerlocator.callLocatorModule.modalClass.UpdateLocationResponse
 import realapps.live.callerlocator.loginModule.modalClass.GetUserInfoResponse
 import realapps.live.callerlocator.loginModule.modalClass.RegisterUserResponse
 import realapps.live.callerlocator.loginModule.modalClass.UserInfoData
@@ -21,6 +22,8 @@ interface ApiHelper {
     suspend fun acceptFriendRequest(fromNumber: String,toNumber: String,requestStatus: String): RespondFriendRequestResponse
 
     suspend fun getMyFriends(fromNumber: String): GetMyFriendsResponse
+
+    suspend fun updateLocation(phoneNumber: String,lat: String,lng: String): UpdateLocationResponse
 
 
 }

@@ -41,5 +41,5 @@ class ContactManager(private val context: Context) {
     }
 }
 
-data class Contact(val name: String, val number: String, val themeSelected: Int = 0)
+data class Contact(val name: String, var number: String, val themeSelected: Int = 0)
 

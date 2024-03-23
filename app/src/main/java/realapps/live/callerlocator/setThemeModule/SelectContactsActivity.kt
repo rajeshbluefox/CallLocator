@@ -37,7 +37,7 @@ class SelectContactsActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         StatusBarUtils.transparentStatusBar(this)
-        StatusBarUtils.setTopPadding(resources,binding.titleBarLayout)
+        StatusBarUtils.setTopPadding(resources, binding.titleBarLayout)
 
         onClickListeners()
         coroutineScope.launch {
@@ -57,16 +57,14 @@ class SelectContactsActivity : AppCompatActivity() {
         }
     }
 
-    fun showPB()
-    {
-        binding.pb.visibility= View.VISIBLE
-        binding.contentLL.visibility=View.GONE
+    fun showPB() {
+        binding.pb.visibility = View.VISIBLE
+        binding.contentLL.visibility = View.GONE
     }
 
-    fun hidePB()
-    {
-        binding.pb.visibility=View.GONE
-        binding.contentLL.visibility=View.VISIBLE
+    fun hidePB() {
+        binding.pb.visibility = View.GONE
+        binding.contentLL.visibility = View.VISIBLE
     }
 
 
@@ -80,6 +78,8 @@ class SelectContactsActivity : AppCompatActivity() {
         val contacts = contactManager.getContacts()
 
         allContacts = contacts as ArrayList<Contact>
+
+        Log.e("Test", "82")
 
 
         getContactFromDB()
@@ -108,6 +108,8 @@ class SelectContactsActivity : AppCompatActivity() {
             adapter = otherContactsAdapter
         }
 
+        Log.e("Test","111")
+
     }
 
     private fun onContactClicked(contact: Contact, listType: Int, position: Int) {
@@ -125,7 +127,6 @@ class SelectContactsActivity : AppCompatActivity() {
             }
 
         } else {
-
 
             val insertPosition = otherContacts.size
             otherContacts.add(contact)
@@ -161,6 +162,7 @@ class SelectContactsActivity : AppCompatActivity() {
             adapter = selectedContactsAdapter
         }
 
+        Log.e("Test","166")
         hidePB()
     }
 
@@ -170,6 +172,8 @@ class SelectContactsActivity : AppCompatActivity() {
     }
 
     private fun getContactFromDB() {
+
+        Log.e("Test", "174")
         var allDBContacts = dbHelper.getAllContacts()
 
         for (contact in allContacts) {
@@ -178,13 +182,15 @@ class SelectContactsActivity : AppCompatActivity() {
                 addContact(contact)
         }
 
+        Log.e("Test", "183")
+
         allDBContacts = dbHelper.getAllContacts()
 
         for (contact in allDBContacts) {
-            Log.e(
-                "Test",
-                "Name: ${contact.name}, Number: ${contact.number} , Theme:${contact.themeSelected}"
-            )
+//            Log.e(
+//                "Test",
+//                "Name: ${contact.name}, Number: ${contact.number} , Theme:${contact.themeSelected}"
+//            )
 
             //Filter Contacts based on Theme
             if (contact.themeSelected == SelectedTheme.selectedThemeCount) {
@@ -193,6 +199,8 @@ class SelectContactsActivity : AppCompatActivity() {
                 otherContacts.add(contact)
             }
         }
+
+        Log.e("Test", "201")
     }
 
     private fun UpdateThemeSelected() {
@@ -212,8 +220,10 @@ class SelectContactsActivity : AppCompatActivity() {
 
         }
 
-        getContactFromDB()
+        UtilFunctions.showToast(this, "Updated Successfully")
         finish()
+//        getContactFromDB()
+//        finish()
     }
 
 }

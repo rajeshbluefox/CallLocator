@@ -8,6 +8,7 @@ import android.view.View
 import android.view.animation.LinearInterpolator
 import realapps.live.callerlocator.databinding.FragmentCallLocatorBinding
 import realapps.live.callerlocator.zCommonFuntions.StatusBarUtils
+import realapps.live.callerlocator.zDatabase.BlockedContactsDBHelper
 
 
 class CallLocatorFragmentUI(
@@ -42,6 +43,11 @@ class CallLocatorFragmentUI(
         toggleContactLayout(true)
 
         binding.tvPhoneNumber.text=phoneNumber
+
+        if(findIsNumberBlocked(phoneNumber))
+            binding.tvBlock.text="UnBlock"
+        else
+            binding.tvBlock.text="Block"
     }
 
     fun toggleContactLayout(show: Boolean)
@@ -74,6 +80,13 @@ class CallLocatorFragmentUI(
     {
         // Start the rotation animation
         rotationAnimator.cancel()
+    }
+
+    private var dbHelper = BlockedContactsDBHelper(context)
+
+    private fun findIsNumberBlocked(phoneNumber: String):Boolean
+    {
+        return dbHelper.findNumber(phoneNumber)
     }
 }
 

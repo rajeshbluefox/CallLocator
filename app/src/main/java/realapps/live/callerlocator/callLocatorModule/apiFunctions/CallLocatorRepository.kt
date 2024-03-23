@@ -6,6 +6,7 @@ import realapps.live.callerlocator.callLocatorModule.modalClass.GetFriendRequest
 import realapps.live.callerlocator.callLocatorModule.modalClass.GetMyFriendsResponse
 import realapps.live.callerlocator.callLocatorModule.modalClass.RespondFriendRequestResponse
 import realapps.live.callerlocator.callLocatorModule.modalClass.SendFriendRequestResponse
+import realapps.live.callerlocator.callLocatorModule.modalClass.UpdateLocationResponse
 import realapps.live.callerlocator.zAPIEndPoints.ApiHelper
 import javax.inject.Inject
 
@@ -59,5 +60,17 @@ class CallLocatorRepository @Inject constructor(
         } catch (_: Exception) {
         }
         return getMyFriendsResponse
+    }
+
+    private var updateLocationResponse = UpdateLocationResponse()
+
+    suspend fun updateLocation(phoneNumber: String,lat: String,lng: String): UpdateLocationResponse {
+        try {
+            withContext(Dispatchers.IO) {
+                updateLocationResponse = apiHelper.updateLocation(phoneNumber, lat, lng)
+            }
+        } catch (_: Exception) {
+        }
+        return updateLocationResponse
     }
 }

@@ -10,7 +10,7 @@ import realapps.live.callerlocator.R
 class LogoutDialog(
     layoutInflater: LayoutInflater,
     context: Context,
-    private val listener: (clickType: Int) -> Unit
+    private val listener: () -> Unit
 ) {
 
     private val mLayoutInflater: LayoutInflater
@@ -45,19 +45,15 @@ class LogoutDialog(
 
     }
 
-    fun openLogoutDialog(clickType: Int) {
+    fun openLogoutDialog() {
 
-        if(clickType==-1)
-            tvMainTitle.text="Do you want to logout?"
-        else
-            tvMainTitle.text="Do you want to delete?"
 
         btNo.setOnClickListener {
             messageBoxInstance.dismiss()
         }
 
         btYes.setOnClickListener {
-            listener.invoke(clickType)
+            listener.invoke()
             messageBoxInstance.dismiss()
         }
 

@@ -56,6 +56,7 @@
         android:id="@+id/contentLt"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/dp_6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleBarLayout"
@@ -79,7 +80,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvSelectedContacts"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"/>
 
 
             <TextView
@@ -91,7 +93,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvOtherContacts"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"/>
 
 
         </LinearLayout>

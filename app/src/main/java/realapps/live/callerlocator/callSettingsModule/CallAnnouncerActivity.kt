@@ -57,10 +57,9 @@ class CallAnnouncerActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         binding.repeatFrequencyBar.setOnSeekBarChangeListener(object :
             SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                // Update the TextView when the seek bar value changes
-//                updateTextView(progress)
 
                 binding.tvRepeatTimes.text = "$progress"
+                SettingsData.saveCallAnnFrequency(applicationContext, progress)
 
             }
 

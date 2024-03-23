@@ -134,9 +134,13 @@ class FriendRequestActivity : AppCompatActivity() {
         else
             sentFriendReqList
 
+        Log.e("Test","Size ${requestList.size}")
+
         if (requestList.size != 0) {
 
             requestList = ArrayList(requestList.reversed())
+            binding.friendRequestsRv.visibility = View.VISIBLE
+
 
             val friendRequestAdapter = FriendRequestAdapter(this, requestList, ::onAgreeClicked)
             binding.friendRequestsRv.apply {
@@ -178,13 +182,18 @@ class FriendRequestActivity : AppCompatActivity() {
     private var sentFriendReqList = ArrayList<GetFriendRequestDataItem>()
     private var receivedFriendReqList = ArrayList<GetFriendRequestDataItem>()
 
-    private fun getFriendRequestsResponse(requestList: List<GetFriendRequestDataItem?>?) {
-        if (SelectedTab.selectedTab == 1)
-            sentFriendReqList = requestList as ArrayList<GetFriendRequestDataItem>
-        else
-            receivedFriendReqList = requestList as ArrayList<GetFriendRequestDataItem>
+    private fun getFriendRequestsResponse(requestList: List<GetFriendRequestDataItem?>?,isListPresent: Boolean) {
+       if(isListPresent) {
+           if (SelectedTab.selectedTab == 1)
+               sentFriendReqList = requestList as ArrayList<GetFriendRequestDataItem>
+           else
+               receivedFriendReqList = requestList as ArrayList<GetFriendRequestDataItem>
 
-        initRv()
+           initRv()
+       }else{
+           binding.friendRequestsRv.visibility = View.GONE
+           UtilFunctions.showToast(this, "No Items Found")
+       }
     }
 
     object SelectedTab {

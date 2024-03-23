@@ -96,7 +96,7 @@ class ContactDatabaseHelper(context: Context) :
             "SELECT $COLUMN_THEME_SELECTED FROM $TABLE_CONTACTS WHERE TRIM($COLUMN_PHONE_NUMBER) = ?"
 
         val cursor = db.rawQuery(query, arrayOf(phoneNumber))
-        var themeSelected = 10 // Default theme if not found
+        var themeSelected = -1 // Default theme if not found
 
         if (cursor.moveToFirst()) {
             themeSelected = cursor.getInt(cursor.getColumnIndex(COLUMN_THEME_SELECTED))
@@ -107,6 +107,23 @@ class ContactDatabaseHelper(context: Context) :
 
         return themeSelected
     }
+
+    fun getNameForPhoneNumber(phoneNumber: String): String {
+        val db = this.readableDatabase
+        val query = "SELECT $COLUMN_NAME FROM $TABLE_CONTACTS WHERE TRIM($COLUMN_PHONE_NUMBER) = ?"
+        val cursor = db.rawQuery(query, arrayOf(phoneNumber))
+        var name = "Unknown" // Default name if not found
+
+        if (cursor.moveToFirst()) {
+            name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME))
+        }
+
+        cursor.close()
+        db.close()
+
+        return name
+    }
+
 
 
 }
