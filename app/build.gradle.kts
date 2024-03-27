@@ -106,4 +106,6 @@ dependencies {
     implementation("com.google.android.gms:play-services-maps:17.0.1")
     implementation("com.google.android.gms:play-services-location:17.1.0")
 
+    implementation("com.squareup.moshi:moshi:1.12.0")
+
 }

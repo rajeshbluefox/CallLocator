@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -39,11 +40,61 @@ class SelectContactsActivity : AppCompatActivity() {
         StatusBarUtils.transparentStatusBar(this)
         StatusBarUtils.setTopPadding(resources, binding.titleBarLayout)
 
+        editTextListener()
         onClickListeners()
         coroutineScope.launch {
             showPB()
             getContacts()
         }
+    }
+
+    private fun editTextListener() {
+
+        binding.etSearch.doOnTextChanged { text, _, _, _ ->
+
+            Log.e("Test", text.toString())
+
+            if (text!!.isEmpty()) {
+                binding.btClear.visibility = View.GONE
+                binding.btSearch.visibility = View.GONE
+
+                isFilteredList=false
+                initOtherContacts(otherContacts)
+
+            } else {
+                binding.btClear.visibility = View.VISIBLE
+                binding.btSearch.visibility = View.VISIBLE
+
+                filterList(text.toString())
+            }
+
+        }
+
+        binding.btClear.setOnClickListener {
+            binding.etSearch.setText("")
+        }
+    }
+
+    private var filteredContacts = ArrayList<Contact>()
+
+    private var isFilteredList = false
+    private fun filterList(searchValue: String) {
+        filteredContacts.clear()
+//        val filteredContacts = ArrayList<Contact>()
+//        val filteredContacts = otherContacts.filter { it.name.startsWith(searchValue, ignoreCase = true) }
+
+        for (contact in otherContacts) {
+            val originalName=contact.name.lowercase()
+            val enteredVal = searchValue.lowercase()
+            Log.e("Test","$originalName = $enteredVal ${originalName.startsWith(enteredVal)}")
+
+            if (originalName.startsWith(enteredVal)) {
+                filteredContacts.add(contact)
+            }
+        }
+        isFilteredList = true
+
+        initOtherContacts(filteredContacts)
     }
 
     private fun onClickListeners() {
@@ -84,7 +135,8 @@ class SelectContactsActivity : AppCompatActivity() {
 
         getContactFromDB()
 
-        initOtherContacts()
+//        filteredContacts = otherContacts
+        initOtherContacts(otherContacts)
         initSelectedContacts()
     }
 
@@ -92,11 +144,15 @@ class SelectContactsActivity : AppCompatActivity() {
     private var otherContacts: ArrayList<Contact> = ArrayList()
     private lateinit var otherContactsAdapter: OtherContactsAdapter
 
-    private fun initOtherContacts() {
+    private fun initOtherContacts(otherContactsLoc: ArrayList<Contact>) {
+
+       val otherContactsSorted = sortList(otherContactsLoc)
+
+        Log.e("Test","Filtered List Size ${otherContactsLoc.size}")
 
         otherContactsAdapter = OtherContactsAdapter(
             this,
-            otherContacts,
+            otherContactsSorted,
             0,
             ::onContactClicked
         )
@@ -108,8 +164,18 @@ class SelectContactsActivity : AppCompatActivity() {
             adapter = otherContactsAdapter
         }
 
-        Log.e("Test","111")
+        Log.e("Test", "111")
 
+    }
+
+    fun sortList(otherContacts: ArrayList<Contact>) : ArrayList<Contact>
+    {
+        otherContacts.sortWith(Comparator { contact1, contact2 ->
+            contact1.name.compareTo(contact2.name)
+        })
+
+
+        return otherContacts
     }
 
     private fun onContactClicked(contact: Contact, listType: Int, position: Int) {
@@ -121,16 +187,33 @@ class SelectContactsActivity : AppCompatActivity() {
             Log.e("Test", "Added $insertPosition")
 
             if (position != -1) {
-                otherContacts.remove(contact)
-                otherContactsAdapter.notifyItemRemoved(position)
-                Log.e("Test", "Item Removed $position")
+
+                if(isFilteredList)
+                {
+                    filteredContacts.remove(contact)
+                    otherContactsAdapter.notifyItemRemoved(position)
+                    Log.e("Test", "Item Removed $position")
+                }else{
+                    otherContacts.remove(contact)
+                    otherContactsAdapter.notifyItemRemoved(position)
+                    Log.e("Test", "Item Removed $position")
+                }
+
             }
 
         } else {
 
-            val insertPosition = otherContacts.size
-            otherContacts.add(contact)
-            otherContactsAdapter.notifyItemInserted(insertPosition)
+            if(isFilteredList)
+            {
+                val insertPosition = filteredContacts.size
+                filteredContacts.add(contact)
+                otherContactsAdapter.notifyItemInserted(insertPosition)
+            }else{
+                val insertPosition = otherContacts.size
+                otherContacts.add(contact)
+                otherContactsAdapter.notifyItemInserted(insertPosition)
+            }
+
 
 
             if (position != -1) {
@@ -162,7 +245,7 @@ class SelectContactsActivity : AppCompatActivity() {
             adapter = selectedContactsAdapter
         }
 
-        Log.e("Test","166")
+        Log.e("Test", "166")
         hidePB()
     }
 
@@ -173,16 +256,16 @@ class SelectContactsActivity : AppCompatActivity() {
 
     private fun getContactFromDB() {
 
-        Log.e("Test", "174")
+//        Log.e("Test", "174")
         var allDBContacts = dbHelper.getAllContacts()
 
         for (contact in allContacts) {
             val foundContact = allDBContacts.find { it.number == contact.number }
-            if (foundContact == null)
-                addContact(contact)
+//            if (foundContact == null) TODO Uc
+//                addContact(contact)
         }
 
-        Log.e("Test", "183")
+//        Log.e("Test", "183")
 
         allDBContacts = dbHelper.getAllContacts()
 
@@ -200,7 +283,7 @@ class SelectContactsActivity : AppCompatActivity() {
             }
         }
 
-        Log.e("Test", "201")
+//        Log.e("Test", "201")
     }
 
     private fun UpdateThemeSelected() {
