@@ -2,6 +2,7 @@ package realapps.live.callerlocator.zCommonFuntions
 
 import android.content.res.Resources
 import android.graphics.Color
+import android.os.Build
 import android.view.View
 import android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
 import androidx.appcompat.app.AppCompatActivity
@@ -13,8 +14,16 @@ object StatusBarUtils {
                 or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
         activity.window.statusBarColor = Color.TRANSPARENT
 
-//        activity.window().getDecorView().getWindowInsetsController().setSystemBarsAppearance(APPEARANCE_LIGHT_STATUS_BARS, APPEARANCE_LIGHT_STATUS_BARS);
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            // For Android 11 (API level 30) and above
+            activity.window.insetsController?.setSystemBarsAppearance(
+                APPEARANCE_LIGHT_STATUS_BARS,
+                APPEARANCE_LIGHT_STATUS_BARS
+            )
+        } else
+            // For Android 6.0 (API level 23) and above, but before Android 11
+            activity.window.decorView.systemUiVisibility = activity.window.decorView.systemUiVisibility or
+                    android.view.View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
     }
 
 

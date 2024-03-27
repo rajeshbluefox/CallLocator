@@ -6,6 +6,7 @@
 
 
 <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".profileModule.ProfileActivity"
@@ -64,6 +65,7 @@
 
 
     <androidx.appcompat.widget.AppCompatButton
+        android:visibility="gone"
         android:id="@+id/btLoad"
         android:layout_width="@dimen/dp_200"
         android:layout_height="wrap_content"
@@ -72,11 +74,12 @@
         android:text="Load"
         android:textColor="@color/white"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/btDownload"
+        app:layout_constraintTop_toBottomOf="@id/btDownload"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatButton
+        android:visibility="gone"
         android:id="@+id/btDownload"
         android:layout_width="@dimen/dp_200"
         android:layout_height="wrap_content"
@@ -85,7 +88,7 @@
         android:text="Download"
         android:textColor="@color/white"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/btLogout"
+        app:layout_constraintTop_toBottomOf="@id/btLogout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 

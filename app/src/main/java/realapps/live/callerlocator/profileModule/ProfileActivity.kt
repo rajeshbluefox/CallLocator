@@ -1,33 +1,30 @@
 package realapps.live.callerlocator.profileModule
 
+
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.airbnb.lottie.LottieCompositionFactory
 import dagger.hilt.android.AndroidEntryPoint
 import realapps.live.callerlocator.databinding.ActivityProfileBinding
 import realapps.live.callerlocator.loginModule.LogoutDialog
 import realapps.live.callerlocator.zCommonFuntions.CallIntent
+import realapps.live.callerlocator.zCommonFuntions.StatusBarUtils
 import realapps.live.callerlocator.zCommonFuntions.UtilFunctions
 import realapps.live.callerlocator.zSharedPreference.LoginData
+import java.io.File
+import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.net.HttpURLConnection
 import java.net.URL
-
-import android.os.Environment
-
-
-import android.util.Log
-import java.io.File
-import java.io.FileInputStream
-import java.io.InputStreamReader
-import android.util.JsonReader
-import com.airbnb.lottie.LottieCompositionFactory
 
 
 @AndroidEntryPoint
@@ -40,6 +37,9 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        StatusBarUtils.transparentStatusBar(this)
+        StatusBarUtils.setTopPadding(resources,binding.mainLayout)
 
         initViews()
         onClickListeners()
@@ -236,7 +236,6 @@ class ProfileActivity : AppCompatActivity() {
             // Set the composition to LottieAnimationView
             binding.lottieAnimationView.setComposition(composition!!)
             binding.lottieAnimationView.playAnimation()
-            binding.lottieAnimationView.repeatCount=10
         } catch (e: Exception) {
             Log.e(TAG, "Error loading animation: ${e.message}")
         }
