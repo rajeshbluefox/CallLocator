@@ -88,6 +88,23 @@ class CallLocatorFragmentUI(
     {
         return dbHelper.findNumber(phoneNumber)
     }
+
+    fun showMyFriendsPB()
+    {
+        binding.shimmerViewContainer.visibility=View.VISIBLE
+        binding.rvFriend.visibility=View.GONE
+        binding.noFriendsLt.visibility=View.GONE
+
+        binding.shimmerViewContainer.startShimmerAnimation()
+    }
+
+    fun hideMyFriendsPB()
+    {
+        binding.shimmerViewContainer.stopShimmerAnimation()
+        binding.shimmerViewContainer.visibility=View.GONE
+        binding.rvFriend.visibility=View.VISIBLE
+        binding.noFriendsLt.visibility=View.VISIBLE
+    }
 }
 
 object EnteredNumber{

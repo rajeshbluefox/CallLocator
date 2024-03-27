@@ -51,6 +51,59 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
+    <LinearLayout
+        android:id="@+id/searchBarLt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_6"
+        android:layout_marginHorizontal="@dimen/dp_12"
+        android:background="@drawable/rect_four"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleBarLayout"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_6"
+            android:src="@drawable/ic_search_normal" />
+
+        <EditText
+            android:id="@+id/etSearch"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_48"
+            android:layout_marginStart="@dimen/dp_8"
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:imeOptions="actionSearch"
+            android:ellipsize="end"
+            android:maxLength="10"
+            android:hint="Search Name"
+            android:background="@null"/>
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/btClear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_6"
+            android:src="@drawable/clear_search_24" />
+
+        <TextView
+            android:id="@+id/btSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/rect_five"
+            android:paddingHorizontal="@dimen/dp_18"
+            android:text="Search"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:gravity="center"/>
+
+    </LinearLayout>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/contentLt"
@@ -59,7 +112,7 @@
         android:layout_marginBottom="@dimen/dp_6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleBarLayout"
+        app:layout_constraintTop_toBottomOf="@id/searchBarLt"
         app:layout_constraintBottom_toTopOf="@id/btSet">
 
         <LinearLayout
@@ -101,6 +154,10 @@
 
 
     </androidx.core.widget.NestedScrollView>
+
+
+
+
 
     <TextView
         android:id="@+id/btSet"

@@ -577,6 +577,7 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
     ////////////////// GET My Friends Code
 
     fun getMyFriends() {
+        callLocatorFragmentUI.showMyFriendsPB()
         callLocatorApiFunctions.getMyFriends(LoginData.getUserPhone(requireContext()))
     }
 
@@ -608,6 +609,7 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
         allFriendRequestList: List<MyFriendsDataItem?>?
     ) {
 //        callLocatorFragmentUI.stopRotateAnimation()
+        callLocatorFragmentUI.hideMyFriendsPB()
 
         myFriendsList = ArrayList(data!!)
         allFriendRequests = ArrayList(allFriendRequestList!!)

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import realapps.live.callerlocator.callSettingsModule.adapters.BlockedNumbersAdapter
 import realapps.live.callerlocator.databinding.ActivityBlockedNumbersBinding
+import realapps.live.callerlocator.zCommonFuntions.StatusBarUtils
 import realapps.live.callerlocator.zCommonFuntions.UtilFunctions
 import realapps.live.callerlocator.zDatabase.BlockedContactsDBHelper
 
@@ -21,6 +22,10 @@ class BlockedNumbersActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityBlockedNumbersBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        StatusBarUtils.transparentStatusBar(this)
+        StatusBarUtils.setTopPadding(resources,binding.mainLayout)
+
 
         blockedNumbersDB = BlockedContactsDBHelper(this)
 
