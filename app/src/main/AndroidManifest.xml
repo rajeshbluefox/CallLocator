@@ -50,6 +50,9 @@
         android:requestLegacyExternalStorage="true"
         tools:targetApi="34">
         <activity
+            android:name=".profileModule.PasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".callSettingsModule.BlockedNumbersActivity"
             android:exported="false" />
         <activity
