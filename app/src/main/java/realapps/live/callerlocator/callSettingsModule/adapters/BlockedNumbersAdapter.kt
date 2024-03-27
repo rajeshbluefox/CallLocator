@@ -34,7 +34,7 @@ class BlockedNumbersAdapter(
 
         val blockedNumberItem = blockedNumbers[position]
 
-        holder.binding.tvPhoneNumber.text = blockedNumberItem
+        holder.binding.tvBLPhoneNumber.text = blockedNumberItem
 
         holder.binding.btUnblock.setOnClickListener {
             onUnBlockClicked.invoke(blockedNumberItem)
