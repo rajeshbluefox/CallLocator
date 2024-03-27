@@ -30,4 +30,7 @@
 
 
     <color name="app_bar">#E3430E</color>
+
+    <color name="main">#3796cc</color>
+
 </resources>
