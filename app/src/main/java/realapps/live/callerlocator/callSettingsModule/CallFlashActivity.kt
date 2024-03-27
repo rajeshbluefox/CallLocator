@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import realapps.live.callerlocator.callSettingsModule.supportFunctions.FlashlightManager
 import realapps.live.callerlocator.databinding.ActivityCallFlashBinding
+import realapps.live.callerlocator.zCommonFuntions.StatusBarUtils
 import realapps.live.callerlocator.zCommonFuntions.UtilFunctions
 import realapps.live.callerlocator.zSharedPreference.SettingsData
 
@@ -19,6 +20,10 @@ class CallFlashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCallFlashBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //Add these line to make status bar transparent
+        StatusBarUtils.transparentStatusBar(this)
+        StatusBarUtils.setTopPadding(resources,binding.mainLayout)
 
         initViews()
         onClickListeners()

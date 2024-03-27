@@ -38,6 +38,7 @@ class ProfileActivity : AppCompatActivity() {
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //Add these line to make status bar transparent
         StatusBarUtils.transparentStatusBar(this)
         StatusBarUtils.setTopPadding(resources,binding.mainLayout)
 

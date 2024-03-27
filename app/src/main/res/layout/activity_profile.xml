@@ -34,7 +34,7 @@
 
 
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/titleBar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

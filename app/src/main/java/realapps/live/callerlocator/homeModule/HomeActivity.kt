@@ -2,6 +2,7 @@ package realapps.live.callerlocator.homeModule
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import dagger.hilt.android.AndroidEntryPoint
 import realapps.live.callerlocator.R
@@ -55,19 +56,46 @@ class HomeActivity : AppCompatActivity() {
     fun setIcon(selectedItem: Int) {
         when (selectedItem) {
             1 -> {
-                binding.btCallLocator.setImageResource(R.drawable.call_locator_select)
-                binding.btCallThemes.setImageResource(R.drawable.call_setting_unselect)
-                binding.btSettings . setImageResource (R.drawable.call_theme_unselect)
+                binding.btCallLocator.setImageResource(R.drawable.caller_locator_s)
+                binding.btCallThemes.setImageResource(R.drawable.call_settings_us)
+                binding.btSettings . setImageResource (R.drawable.call_theme_us)
+
+                binding.tvCallLocator.setTextColor(resources.getColor(R.color.white))
+                binding.tvCallThemes.setTextColor(resources.getColor(R.color.text_color_1))
+                binding.tvSettings.setTextColor(resources.getColor(R.color.text_color_1))
+
+                binding.ivCallLocatorSelected.visibility=View.VISIBLE
+                binding.ivCallSettingsSelected.visibility=View.INVISIBLE
+                binding.ivCallThemesSelected.visibility=View.INVISIBLE
+
             }
             2 -> {
-                binding.btCallLocator.setImageResource(R.drawable.call_locator_unselect)
-                binding.btCallThemes.setImageResource(R.drawable.call_setting_select)
-                binding.btSettings.setImageResource(R.drawable.call_theme_unselect)
+                binding.btCallLocator.setImageResource(R.drawable.caller_locator_us)
+                binding.btCallThemes.setImageResource(R.drawable.call_settings_s)
+                binding.btSettings.setImageResource(R.drawable.call_theme_us)
+
+                binding.tvCallLocator.setTextColor(resources.getColor(R.color.text_color_1))
+                binding.tvCallThemes.setTextColor(resources.getColor(R.color.white))
+                binding.tvSettings.setTextColor(resources.getColor(R.color.text_color_1))
+
+                binding.ivCallLocatorSelected.visibility=View.INVISIBLE
+                binding.ivCallSettingsSelected.visibility=View.INVISIBLE
+                binding.ivCallThemesSelected.visibility=View.VISIBLE
+
             }
             3 -> {
-                binding.btCallLocator.setImageResource(R.drawable.call_locator_unselect)
-                binding.btCallThemes.setImageResource(R.drawable.call_setting_unselect)
-                binding.btSettings.setImageResource(R.drawable.call_theme_select)
+                binding.btCallLocator.setImageResource(R.drawable.caller_locator_us)
+                binding.btCallThemes.setImageResource(R.drawable.call_settings_us)
+                binding.btSettings.setImageResource(R.drawable.call_theme_s)
+
+                binding.tvCallLocator.setTextColor(resources.getColor(R.color.text_color_1))
+                binding.tvCallThemes.setTextColor(resources.getColor(R.color.text_color_1))
+                binding.tvSettings.setTextColor(resources.getColor(R.color.white))
+
+                binding.ivCallLocatorSelected.visibility=View.INVISIBLE
+                binding.ivCallSettingsSelected.visibility=View.VISIBLE
+                binding.ivCallThemesSelected.visibility=View.INVISIBLE
+
             }
         }
     }

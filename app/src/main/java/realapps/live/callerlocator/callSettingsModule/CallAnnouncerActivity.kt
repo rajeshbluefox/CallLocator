@@ -10,6 +10,7 @@ import android.util.Log
 import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
 import realapps.live.callerlocator.databinding.ActivityCallAnnouncerBinding
+import realapps.live.callerlocator.zCommonFuntions.StatusBarUtils
 import realapps.live.callerlocator.zSharedPreference.SettingsData
 import java.util.Locale
 
@@ -21,6 +22,10 @@ class CallAnnouncerActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         super.onCreate(savedInstanceState)
         binding = ActivityCallAnnouncerBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //Add these line to make status bar transparent
+        StatusBarUtils.transparentStatusBar(this)
+        StatusBarUtils.setTopPadding(resources,binding.mainLayout)
 
 
         tts = TextToSpeech(this, this)
