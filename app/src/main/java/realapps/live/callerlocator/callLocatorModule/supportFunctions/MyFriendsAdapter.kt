@@ -2,8 +2,10 @@ package realapps.live.callerlocator.callLocatorModule.supportFunctions
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import realapps.live.callerlocator.R
 import realapps.live.callerlocator.callLocatorModule.modalClass.MyFriendsDataItem
 import realapps.live.callerlocator.databinding.ItemMyfriendsBinding
 import java.text.SimpleDateFormat
@@ -17,6 +19,8 @@ class MyFriendsAdapter(
 ) :
     RecyclerView.Adapter<MyFriendsAdapter.MyFriendsAdapterViewHolder>() {
 
+    private var preSel = -1
+    private var curSel = -1
 
     class MyFriendsAdapterViewHolder(var binding: ItemMyfriendsBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -40,6 +44,33 @@ class MyFriendsAdapter(
 
         if (request != null) {
 
+            if(curSel==position)
+            {
+                holder.binding.itemFriend.setBackgroundColor(context.resources.getColor(R.color.bg_color_3))
+                holder.binding.ivUser.setImageResource(R.drawable.user_sel)
+                holder.binding.ivTimeStamp.setImageResource(R.drawable.clock_sel)
+
+                holder.binding.selTick.visibility=View.VISIBLE
+
+                holder.binding.tvContactName.setTextColor(context.resources.getColor(R.color.white))
+                holder.binding.tvPhoneNumber.setTextColor(context.resources.getColor(R.color.white))
+
+                holder.binding.tvTimeStamp.setTextColor(context.resources.getColor(R.color.bg_color_3))
+            }else
+            {
+                holder.binding.itemFriend.setBackgroundColor(context.resources.getColor(R.color.bg_color_1))
+                holder.binding.ivUser.setImageResource(R.drawable.user1)
+                holder.binding.ivTimeStamp.setImageResource(R.drawable.baseline_access_time_filled_24)
+
+                holder.binding.selTick.visibility=View.GONE
+
+                holder.binding.tvContactName.setTextColor(context.resources.getColor(R.color.bg_color_2))
+                holder.binding.tvPhoneNumber.setTextColor(context.resources.getColor(R.color.bg_color_2))
+
+                holder.binding.tvTimeStamp.setTextColor(context.resources.getColor(R.color.bg_color_2))
+
+            }
+
             if (request.friendName != null)
                 holder.binding.tvContactName.text = request.friendName
             else
@@ -52,6 +83,17 @@ class MyFriendsAdapter(
 
         holder.binding.itemFriend.setOnClickListener {
             onItemClicked.invoke(request!!)
+
+//            notifyItemChanged(position)
+            preSel=curSel
+            curSel=position
+
+            notifyItemChanged(curSel)
+
+            if(preSel!=-1)
+                notifyItemChanged(preSel)
+
+
         }
 
     }

@@ -58,7 +58,7 @@ class SelectContactsActivity : AppCompatActivity() {
                 binding.btClear.visibility = View.GONE
                 binding.btSearch.visibility = View.GONE
 
-                isFilteredList=false
+                isFilteredList = false
                 initOtherContacts(otherContacts)
 
             } else {
@@ -84,9 +84,9 @@ class SelectContactsActivity : AppCompatActivity() {
 //        val filteredContacts = otherContacts.filter { it.name.startsWith(searchValue, ignoreCase = true) }
 
         for (contact in otherContacts) {
-            val originalName=contact.name.lowercase()
+            val originalName = contact.name.lowercase()
             val enteredVal = searchValue.lowercase()
-            Log.e("Test","$originalName = $enteredVal ${originalName.startsWith(enteredVal)}")
+            Log.e("Test", "$originalName = $enteredVal ${originalName.startsWith(enteredVal)}")
 
             if (originalName.startsWith(enteredVal)) {
                 filteredContacts.add(contact)
@@ -146,9 +146,9 @@ class SelectContactsActivity : AppCompatActivity() {
 
     private fun initOtherContacts(otherContactsLoc: ArrayList<Contact>) {
 
-       val otherContactsSorted = sortList(otherContactsLoc)
+        val otherContactsSorted = sortList(otherContactsLoc)
 
-        Log.e("Test","Filtered List Size ${otherContactsLoc.size}")
+        Log.e("Test", "Filtered List Size ${otherContactsLoc.size}")
 
         otherContactsAdapter = OtherContactsAdapter(
             this,
@@ -168,8 +168,7 @@ class SelectContactsActivity : AppCompatActivity() {
 
     }
 
-    fun sortList(otherContacts: ArrayList<Contact>) : ArrayList<Contact>
-    {
+    fun sortList(otherContacts: ArrayList<Contact>): ArrayList<Contact> {
         otherContacts.sortWith(Comparator { contact1, contact2 ->
             contact1.name.compareTo(contact2.name)
         })
@@ -188,12 +187,11 @@ class SelectContactsActivity : AppCompatActivity() {
 
             if (position != -1) {
 
-                if(isFilteredList)
-                {
+                if (isFilteredList) {
                     filteredContacts.remove(contact)
                     otherContactsAdapter.notifyItemRemoved(position)
                     Log.e("Test", "Item Removed $position")
-                }else{
+                } else {
                     otherContacts.remove(contact)
                     otherContactsAdapter.notifyItemRemoved(position)
                     Log.e("Test", "Item Removed $position")
@@ -203,12 +201,11 @@ class SelectContactsActivity : AppCompatActivity() {
 
         } else {
 
-            if(isFilteredList)
-            {
+            if (isFilteredList) {
                 val insertPosition = filteredContacts.size
                 filteredContacts.add(contact)
                 otherContactsAdapter.notifyItemInserted(insertPosition)
-            }else{
+            } else {
                 val insertPosition = otherContacts.size
                 otherContacts.add(contact)
                 otherContactsAdapter.notifyItemInserted(insertPosition)
@@ -261,8 +258,8 @@ class SelectContactsActivity : AppCompatActivity() {
 
         for (contact in allContacts) {
             val foundContact = allDBContacts.find { it.number == contact.number }
-//            if (foundContact == null) TODO Uc
-//                addContact(contact)
+            if (foundContact == null)
+                addContact(contact)
         }
 
 //        Log.e("Test", "183")
@@ -283,7 +280,6 @@ class SelectContactsActivity : AppCompatActivity() {
             }
         }
 
-//        Log.e("Test", "201")
     }
 
     private fun UpdateThemeSelected() {
@@ -305,8 +301,6 @@ class SelectContactsActivity : AppCompatActivity() {
 
         UtilFunctions.showToast(this, "Updated Successfully")
         finish()
-//        getContactFromDB()
-//        finish()
     }
 
 }

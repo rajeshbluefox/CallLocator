@@ -8,73 +8,98 @@
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/dp_4"
         android:layout_marginEnd="@dimen/dp_12"
+        app:cardCornerRadius="@dimen/dp_16"
         app:cardElevation="@dimen/dp_3">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/itemFriend"
-            android:background="#F0F4C3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/dp_16">
+            android:background="@color/bg_color_1"
+            android:paddingStart="@dimen/dp_12"
+            android:paddingBottom="@dimen/dp_12"
+            android:paddingTop="@dimen/dp_6"
+            android:paddingEnd="@dimen/dp_6">
 
             <ImageView
                 android:id="@+id/ivUser"
-                android:layout_width="@dimen/dp_18"
-                android:layout_height="@dimen/dp_18"
-                android:src="@drawable/ic_baseline_account_circle_24"
+                android:layout_width="@dimen/dp_42"
+                android:layout_height="@dimen/dp_42"
+                android:src="@drawable/user1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/selTick"
+                android:visibility="gone"
+                android:layout_width="@dimen/dp_24"
+                android:layout_height="@dimen/dp_24"
+                android:src="@drawable/tick_sel"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
             <TextView
                 android:id="@+id/tvContactName"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="ContactName"
                 android:layout_marginStart="@dimen/dp_6"
+                android:text="Contact Name"
+                android:textColor="@color/bg_color_2"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:layout_marginEnd="@dimen/dp_6"
+                app:layout_constraintBottom_toTopOf="@id/tvPhoneNumber"
+                app:layout_constraintStart_toEndOf="@id/ivUser"
                 app:layout_constraintTop_toTopOf="@id/ivUser"
-                app:layout_constraintBottom_toBottomOf="@id/ivUser"
-                app:layout_constraintStart_toEndOf="@id/ivUser"/>
+                app:layout_constraintEnd_toStartOf="@id/selTick"/>
 
-
-            <ImageView
-                android:id="@+id/ivPhone"
-                android:layout_width="@dimen/dp_18"
-                android:layout_height="@dimen/dp_18"
-                android:layout_marginTop="@dimen/dp_6"
-                android:src="@drawable/baseline_local_phone_24"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ivUser"/>
 
             <TextView
                 android:id="@+id/tvPhoneNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="9123456789"
                 android:layout_marginStart="@dimen/dp_6"
-                app:layout_constraintTop_toTopOf="@id/ivPhone"
-                app:layout_constraintBottom_toBottomOf="@id/ivPhone"
-                app:layout_constraintStart_toEndOf="@id/ivPhone"/>
+                android:text="9123456789"
+                android:textColor="@color/bg_color_2"
+                app:layout_constraintBottom_toBottomOf="@id/ivUser"
+                app:layout_constraintStart_toEndOf="@id/ivUser"
+                app:layout_constraintTop_toBottomOf="@id/tvContactName" />
 
-            <ImageView
-                android:id="@+id/ivTimeStamp"
-                android:layout_width="@dimen/dp_18"
-                android:layout_height="@dimen/dp_18"
-                android:layout_marginTop="@dimen/dp_6"
-                android:src="@drawable/baseline_access_time_24"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ivPhone"/>
-
-
-            <TextView
-                android:id="@+id/tvTimeStamp"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="02:00 PM Friday"
-                android:layout_marginStart="@dimen/dp_6"
-                app:layout_constraintTop_toTopOf="@id/ivTimeStamp"
-                app:layout_constraintBottom_toBottomOf="@id/ivTimeStamp"
-                app:layout_constraintStart_toEndOf="@id/ivTimeStamp"/>
+                android:layout_marginTop="@dimen/dp_6"
+                android:background="@drawable/bg_rounded_rect_1"
+                android:paddingHorizontal="@dimen/dp_6"
+                android:paddingVertical="@dimen/dp_4"
+                app:layout_constraintStart_toStartOf="@id/ivUser"
+                app:layout_constraintTop_toBottomOf="@id/ivUser">
+
+
+                <ImageView
+                    android:id="@+id/ivTimeStamp"
+                    android:layout_width="@dimen/dp_18"
+                    android:layout_height="@dimen/dp_18"
+                    android:src="@drawable/baseline_access_time_filled_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/tvTimeStamp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_6"
+                    android:text="02:00 PM Friday"
+                    android:textColor="@color/bg_color_2"
+                    app:layout_constraintBottom_toBottomOf="@id/ivTimeStamp"
+                    app:layout_constraintStart_toEndOf="@id/ivTimeStamp"
+                    app:layout_constraintTop_toTopOf="@id/ivTimeStamp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

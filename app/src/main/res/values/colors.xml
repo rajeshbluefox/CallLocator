@@ -35,5 +35,13 @@
 
     <color name="text_color_1">#6766f2</color>
 
+    <color name="bg_color_1">#e7f1f8</color>
+
+
+    <color name="bg_color_2">#06286B</color>
+
+    <color name="bg_color_3">#13c984</color>
+
+
 
 </resources>

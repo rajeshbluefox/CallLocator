@@ -13,6 +13,7 @@ import realapps.live.callerlocator.callLocatorModule.apiFunctions.CallLocatorVie
 import realapps.live.callerlocator.callLocatorModule.modalClass.GetFriendRequestDataItem
 import realapps.live.callerlocator.callLocatorModule.supportFunctions.FriendRequestAdapter
 import realapps.live.callerlocator.databinding.ActivityFriendRequestBinding
+import realapps.live.callerlocator.zCommonFuntions.StatusBarUtils
 import realapps.live.callerlocator.zCommonFuntions.UtilFunctions
 import realapps.live.callerlocator.zSharedPreference.LoginData
 
@@ -29,6 +30,9 @@ class FriendRequestActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityFriendRequestBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        StatusBarUtils.transparentStatusBar(this)
+        StatusBarUtils.setTopPadding(resources,binding.mainLayout)
 
         initViews()
         initTabs()

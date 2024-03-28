@@ -31,8 +31,12 @@ class SetThemeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySetThemeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        StatusBarUtils.transparentStatusBar(this)
 
+        StatusBarUtils.transparentStatusBar(this)
+//        StatusBarUtils.setTopMargin(resources,binding.btBack)
+//        StatusBarUtils.setTopMargin(resources,binding.btSelectContact)
+
+        StatusBarUtils.setTopPadding(resources,binding.mainLayout)
 
         setTheme()
         onClickListeners()
