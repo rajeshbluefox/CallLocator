@@ -285,40 +285,60 @@ class IncomingCallActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private fun announceCaller(callerName: String?, frequency: Int) {
 
-        val audioManager = this.getSystemService(Context.AUDIO_SERVICE) as AudioManager
-        val originalVolume = audioManager.getStreamVolume(AudioManager.STREAM_RING)
+        try {
 
-        // Lower the ringtone volume
-        audioManager.setStreamVolume(AudioManager.STREAM_RING, 2, 0)
+            Log.e("Test","announceCaller")
 
-        val tts = TextToSpeech(this, TextToSpeech.OnInitListener {
-            if (it == TextToSpeech.SUCCESS) {
-                tts.setAudioAttributes(
-                    AudioAttributes.Builder().setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
-                        .setUsage(AudioAttributes.USAGE_ALARM).build()
-                )
-                for (i in 0 until frequency) {
-                    tts.speak("Incoming call from $callerName", TextToSpeech.QUEUE_ADD, null, null)
+            val audioManager = this.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+            val originalVolume = audioManager.getStreamVolume(AudioManager.STREAM_RING)
+
+            // Lower the ringtone volume
+            val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_RING)
+            audioManager.setStreamVolume(AudioManager.STREAM_RING,4 , 0)
+
+            val tts = TextToSpeech(this, TextToSpeech.OnInitListener {
+                if (it == TextToSpeech.SUCCESS) {
+                    Log.e("Test","Speach Success $frequency")
+
+
+                    tts.setAudioAttributes(
+                        AudioAttributes.Builder()
+                            .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+                            .setUsage(AudioAttributes.USAGE_ALARM).build()
+                    )
+                    for (i in 0 until frequency) {
+                        tts.speak(
+                            "Incoming call from $callerName",
+                            TextToSpeech.QUEUE_ADD,
+                            null,
+                            null
+                        )
+                    }
+                }else{
+                    Log.e("Test","Speach Failed")
                 }
-            }
-        })
+            })
 
-        tts.setOnUtteranceProgressListener(object : UtteranceProgressListener() {
-            override fun onStart(utteranceId: String?) {
-                // Utterance started
-            }
+            tts.setOnUtteranceProgressListener(object : UtteranceProgressListener() {
+                override fun onStart(utteranceId: String?) {
+                    // Utterance started
+                }
 
-            override fun onDone(utteranceId: String?) {
-                // Utterance completed
-                // Restore the original ringtone volume
-                audioManager.setStreamVolume(AudioManager.STREAM_RING, originalVolume, 0)
-                tts.shutdown()
-            }
+                override fun onDone(utteranceId: String?) {
+                    // Utterance completed
+                    // Restore the original ringtone volume
+                    audioManager.setStreamVolume(AudioManager.STREAM_RING, originalVolume, 0)
+                    tts.shutdown()
+                }
 
-            override fun onError(utteranceId: String?) {
-                // Error during utterance
-            }
-        })
+                override fun onError(utteranceId: String?) {
+                    // Error during utterance
+                }
+            })
+        }catch (e: Exception)
+        {
+            UtilFunctions.showToast(this,"Call Announer Not Working")
+        }
     }
 
     override fun onInit(status: Int) {

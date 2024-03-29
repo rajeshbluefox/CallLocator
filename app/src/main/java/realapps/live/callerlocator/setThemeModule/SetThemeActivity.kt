@@ -76,6 +76,10 @@ class SetThemeActivity : AppCompatActivity() {
         binding.btSelectContact.setOnClickListener {
             CallIntent.goToSelectContactsActivity(this, false, this)
         }
+
+        binding.btBack.setOnClickListener {
+            finish()
+        }
     }
 
     private val CALL_PERMISSION_REQUEST_CODE = 123

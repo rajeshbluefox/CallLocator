@@ -1,6 +1,7 @@
 package realapps.live.callerlocator.zSharedPreference
 
 import android.content.Context
+import realapps.live.callerlocator.R
 import realapps.live.callerlocator.zConstants.Constants
 
 object SettingsData {
@@ -26,7 +27,7 @@ object SettingsData {
 
     fun getDefaultTheme(context: Context): Int {
         val sharedPref = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        return sharedPref.getInt(Constants.CALL_DEFAULT_THEME, -1)
+        return sharedPref.getInt(Constants.CALL_DEFAULT_THEME, R.raw.call_theme_1)
     }
 
     fun saveCallFlashLightStatus(context: Context, value: Boolean,frequency: Int) {
@@ -80,7 +81,7 @@ object SettingsData {
 
     fun getCallAnnouncmentFrequency(context: Context):Int{
         val sharedPref = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        return sharedPref.getInt(Constants.CALL_ANNOUNCMENT_FREQUENCY, 1)
+        return sharedPref.getInt(Constants.CALL_ANNOUNCMENT_FREQUENCY, 3)
     }
 
 
