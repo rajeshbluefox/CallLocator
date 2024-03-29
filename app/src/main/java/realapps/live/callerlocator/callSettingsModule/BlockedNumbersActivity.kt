@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import realapps.live.callerlocator.callSettingsModule.adapters.BlockedNumbersAdapter
+import realapps.live.callerlocator.callSettingsModule.supportFunctions.BlockNumberDialog
 import realapps.live.callerlocator.databinding.ActivityBlockedNumbersBinding
 import realapps.live.callerlocator.zCommonFuntions.StatusBarUtils
 import realapps.live.callerlocator.zCommonFuntions.UtilFunctions
@@ -18,6 +19,11 @@ class BlockedNumbersActivity : AppCompatActivity() {
     private lateinit var blockedNumbersAdapter: BlockedNumbersAdapter
 
     private lateinit var blockedNumbersDB: BlockedContactsDBHelper
+
+    private lateinit var blockedNumbers : BlockNumberDialog
+
+    private lateinit var dbHelper: BlockedContactsDBHelper
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBlockedNumbersBinding.inflate(layoutInflater)
@@ -29,8 +35,31 @@ class BlockedNumbersActivity : AppCompatActivity() {
 
         blockedNumbersDB = BlockedContactsDBHelper(this)
 
+        initViews()
         initBlockedNumberRv()
         onClickListeners()
+    }
+
+    fun initViews()
+    {
+        dbHelper = BlockedContactsDBHelper(this)
+
+        blockedNumbers = BlockNumberDialog(layoutInflater,this,::addNumberToBlockList)
+    }
+
+    private fun addNumberToBlockList(phoneNumber: String)
+    {
+        val res = dbHelper.insertNumber(phoneNumber)
+        if (res) {
+            UtilFunctions.showToast(this, "Number Blocked Successfully")
+            blockedNumbers.close()
+
+            initBlockedNumberRv()
+        }else{
+            UtilFunctions.showToast(this, "Number Already Blocked")
+            blockedNumbers.close()
+
+        }
     }
 
     private fun initBlockedNumberRv() {
@@ -69,6 +98,10 @@ class BlockedNumbersActivity : AppCompatActivity() {
     private fun onClickListeners() {
         binding.btBack.setOnClickListener {
             finish()
+        }
+
+        binding.btAddNumber.setOnClickListener {
+            blockedNumbers.openBlockNumbersDialog()
         }
 
 

@@ -8,13 +8,13 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/bg_color_1"
         tools:context=".setThemeModule.SelectContactsActivity">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/titleBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/bg_color_2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -25,7 +25,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/dp_12"
-                android:src="@drawable/baseline_arrow_back_24" />
+                android:src="@drawable/baseline_arrow_back_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <TextView
                 android:id="@+id/titleBar"
@@ -33,14 +36,18 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingVertical="@dimen/dp_8"
-                android:text="Select Contacts"
+                android:text="Contacts"
                 android:textAlignment="center"
-                android:textColor="#FFF"
+                android:textColor="@color/bg_color_2"
                 android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ProgressBar
             android:id="@+id/pb"
@@ -160,12 +167,15 @@
             android:id="@+id/btSet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/bg_color_2"
+            android:background="@drawable/button_two"
             android:paddingVertical="@dimen/dp_12"
-            android:text="Set"
+            android:text="Apply For Selected"
+            android:layout_marginHorizontal="@dimen/dp_12"
+            android:layout_marginBottom="@dimen/dp_12"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_22"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

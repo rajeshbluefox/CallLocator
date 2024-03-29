@@ -74,7 +74,7 @@ class IncomingCallActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         onClickListeners()
     }
 
-    fun onCallEnded() {
+    private fun onCallEnded() {
         finish()
         stopFlashLight()
     }
@@ -110,7 +110,7 @@ class IncomingCallActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         }
     }
 
-    fun closeApplication() {
+    private fun closeApplication() {
         stopFlashLight()
         finish()
     }
@@ -191,7 +191,7 @@ class IncomingCallActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         }
     }
 
-    fun checkCallFlashLight() {
+    private fun checkCallFlashLight() {
         val status = SettingsData.getCallFlashLightStatus(this)
 
         if (status) {
@@ -216,7 +216,7 @@ class IncomingCallActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private var isFlashLightOn = false
 
-    fun initSensor() {
+    private fun initSensor() {
         // Getting the Sensor Manager instance
         if (SettingsData.getShakeStatus(this)) {
 

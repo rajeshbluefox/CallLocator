@@ -10,7 +10,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:paddingVertical="@dimen/dp_12"
             android:paddingHorizontal="@dimen/dp_12">
 
@@ -28,13 +28,13 @@
                 android:id="@+id/tvBLContactName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_6"
                 android:text="Anil Kumar"
-                android:textStyle="bold"
                 android:textColor="#06286B"
                 android:textSize="@dimen/sp_18"
+                android:textStyle="bold"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tvBLPhoneNumber"
