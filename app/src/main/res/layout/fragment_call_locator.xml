@@ -278,41 +278,42 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/itemFriend"
-            android:layout_width="wrap_content"
+            android:id="@+id/contactPu"
+            android:visibility="gone"
+            android:layout_width="@dimen/dp_250"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/dp_6"
-            android:background="@drawable/rect_7"
             android:layout_marginTop="@dimen/dp_12"
-            app:layout_constraintTop_toBottomOf="@id/mainSearchLt"
+            android:background="@drawable/rect_7"
+            android:paddingTop="@dimen/dp_6"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/mainSearchLt">
 
             <ImageView
                 android:id="@+id/ivUser"
                 android:layout_width="@dimen/dp_42"
                 android:layout_height="@dimen/dp_42"
-                android:src="@drawable/user_sel"
                 android:layout_marginStart="@dimen/dp_12"
+                android:src="@drawable/user_sel"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
             <TextView
                 android:id="@+id/tvContactName"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_6"
+                android:layout_marginEnd="@dimen/dp_12"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:text="Contact Name"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:layout_marginEnd="@dimen/dp_12"
-                app:layout_constraintBottom_toTopOf="@id/tvPhoneNumber"
+                app:layout_constraintBottom_toTopOf="@id/tvPhoneNumberPU"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/ivUser"
-                app:layout_constraintTop_toTopOf="@id/ivUser"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toTopOf="@id/ivUser" />
 
 
             <TextView
@@ -326,42 +327,126 @@
                 app:layout_constraintStart_toEndOf="@id/ivUser"
                 app:layout_constraintTop_toBottomOf="@id/tvContactName" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <ImageView
+                android:id="@+id/btClosePu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:rotation="45"
+                android:layout_marginEnd="@dimen/dp_6"
+                android:src="@drawable/baseline_close_filled"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_6"
-                android:background="@drawable/bg_rounded_rect_1"
+                android:background="@drawable/rect_8"
                 android:paddingHorizontal="@dimen/dp_6"
                 android:paddingVertical="@dimen/dp_4"
-                app:layout_constraintStart_toStartOf="@id/ivUser"
-                app:layout_constraintTop_toBottomOf="@id/ivUser">
+                android:layout_marginBottom="@dimen/dp_4"
+                android:layout_marginHorizontal="@dimen/dp_4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivUser"
+                app:layout_constraintBottom_toBottomOf="parent">
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-
-                <ImageView
-                    android:id="@+id/ivTimeStamp"
-                    android:layout_width="@dimen/dp_18"
-                    android:layout_height="@dimen/dp_18"
-                    android:src="@drawable/baseline_access_time_filled_24"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-                <TextView
-                    android:id="@+id/tvTimeStamp"
+                    android:id="@+id/btCallPU"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Call"
-                    android:textColor="@color/bg_color_2"
-                    android:layout_marginTop="@dimen/dp_4"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ivTimeStamp" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/btAddNumberPu">
+
+
+                    <ImageView
+                        android:id="@+id/ivTimeStamp"
+                        android:layout_width="@dimen/dp_18"
+                        android:layout_height="@dimen/dp_18"
+                        android:src="@drawable/baseline_access_time_filled_24"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/tvTimeStamp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_4"
+                        android:text="Call"
+                        android:textColor="@color/bg_color_2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/ivTimeStamp" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/btAddNumberPu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/btCallPU"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/btBlockNumberPU">
+
+
+                    <ImageView
+                        android:id="@+id/ivaddNumberPU"
+                        android:layout_width="@dimen/dp_18"
+                        android:layout_height="@dimen/dp_18"
+                        android:src="@drawable/baseline_access_time_filled_24"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvAddNumberPU"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_4"
+                        android:text="Add Number"
+                        android:textColor="@color/bg_color_2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/ivaddNumberPU" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/btBlockNumberPU"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/btAddNumberPu"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+
+                    <ImageView
+                        android:id="@+id/ivBlockNumberPU"
+                        android:layout_width="@dimen/dp_18"
+                        android:layout_height="@dimen/dp_18"
+                        android:src="@drawable/baseline_access_time_filled_24"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvBlockNumberPU"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_4"
+                        android:text="Block"
+                        android:textColor="@color/bg_color_2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/ivBlockNumberPU" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

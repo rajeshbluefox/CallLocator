@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
@@ -149,7 +150,7 @@ class CallThemesFragment : Fragment() {
     private val ANSWER_PHONE_CALLS_REQUEST_CODE = 124
     private val REQUEST_OVERLAY_PERMISSION = 125
     private val REQUEST_CALL_LOG_PERMISSION = 126
-    private val FOREGROUND_SERVICE_CONNECTED_DEVICE_PERMISSION_REQUEST_CODE = 1001
+    private val FOREGROUND_SERVICE_CONNECTED_DEVICE_PERMISSION_REQUEST_CODE = 100
 
 
     private val phoneStatePermissions = arrayOf(android.Manifest.permission.READ_PHONE_STATE)
@@ -233,15 +234,15 @@ class CallThemesFragment : Fragment() {
 
     fun checkForeGroundServicePermission()
     {
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.FOREGROUND_SERVICE_PHONE_CALL) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
             // Permission is not granted, request it from the user
-            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.FOREGROUND_SERVICE_PHONE_CALL), FOREGROUND_SERVICE_CONNECTED_DEVICE_PERMISSION_REQUEST_CODE)
+            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.POST_NOTIFICATIONS), FOREGROUND_SERVICE_CONNECTED_DEVICE_PERMISSION_REQUEST_CODE)
         } else {
             Log.e("Test","ForeGroundServicePermission Already Granted 5")
 
+            startBGDirectly()
             // Permission is already granted, proceed with starting the foreground service
-            startBackgroundService()
-//            startForegroundService()
+//            startBackgroundService()
         }
     }
 
@@ -260,9 +261,11 @@ class CallThemesFragment : Fragment() {
         )
     }
 
+
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
-        permissions: Array<String>,
+        permissions: Array<out String>,
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -303,11 +306,14 @@ class CallThemesFragment : Fragment() {
     }
 
     private fun handleForeGroundServicePermissionResult(grantResults: IntArray) {
+        Log.e("Test","Push Notifications Result")
+
         if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             // Permission granted, proceed with your logic
             Log.e("Test","ForeGroundServicePermission Granted 5")
 
-            startBackgroundService()
+            startBGDirectly()
+//            startBackgroundService()
         } else {
             // Permission denied. Inform the user.
             Toast.makeText(
@@ -359,8 +365,23 @@ class CallThemesFragment : Fragment() {
     }
 
     private fun startBackgroundService() {
-        // Implement your logic for starting the background service
-        UtilFunctions.showToast(requireContext(), "Call Theme Enabled")
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            checkForeGroundServicePermission()
+//        }else {
+            // Implement your logic for starting the background service
+            UtilFunctions.showToast(requireContext(), "Call Theme Enabled")
+
+            val serviceIntent = Intent(requireContext(), BackgroundCallService::class.java)
+            requireContext().startService(serviceIntent)
+
+            checkAndRequestAnswerPhoneCallsPermission()
+//        }
+    }
+
+    private fun startBGDirectly()
+    {
+        UtilFunctions.showToast(requireContext(), "Call Theme Enabled Directly")
 
         val serviceIntent = Intent(requireContext(), BackgroundCallService::class.java)
         requireContext().startService(serviceIntent)

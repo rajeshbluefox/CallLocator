@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.res.Resources
 import android.view.View
 import android.view.animation.LinearInterpolator
+import realapps.live.callerlocator.callLocatorModule.modalClass.MyFriendsDataItem
 import realapps.live.callerlocator.databinding.FragmentCallLocatorBinding
 import realapps.live.callerlocator.zCommonFuntions.StatusBarUtils
 import realapps.live.callerlocator.zDatabase.BlockedContactsDBHelper
@@ -104,6 +105,30 @@ class CallLocatorFragmentUI(
         binding.shimmerViewContainer.visibility=View.GONE
         binding.rvFriend.visibility=View.VISIBLE
         binding.noFriendsLt.visibility=View.VISIBLE
+    }
+
+    fun showContactPopUp(myFriendsDataItem: MyFriendsDataItem)
+    {
+        if(myFriendsDataItem.friendName==null)
+            binding.tvContactName.text="Unknown"
+        else
+            binding.tvContactName.text=myFriendsDataItem.friendName
+
+        if(findIsNumberBlocked(myFriendsDataItem.friendNumber!!))
+            binding.tvBlockNumberPU.text="UnBlock"
+        else
+            binding.tvBlockNumberPU.text="Block"
+
+        binding.tvPhoneNumberPU.text=myFriendsDataItem.friendNumber
+
+        binding.contactPu.visibility=View.VISIBLE
+        binding.contactLayout.visibility=View.GONE
+    }
+
+    fun hideContactPopUp()
+    {
+        binding.contactPu.visibility=View.GONE
+
     }
 }
 

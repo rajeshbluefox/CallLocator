@@ -236,9 +236,9 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
             val mPhoneNumber = binding.etSearch.text.toString()
 
             if (binding.tvBlock.text.toString() == "Block") {
-                openBlockNumberSettings(mPhoneNumber)
+                openBlockNumberSettings(mPhoneNumber,false)
             } else {
-                unBlockNumber(mPhoneNumber)
+                unBlockNumber(mPhoneNumber,false)
             }
         }
 
@@ -268,7 +268,7 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
         }
 
         binding.btCall.setOnClickListener {
-            checkCallPermission(true)
+            checkCallPermission(true,EnteredNumber.phoneNumber)
         }
 
         binding.btClear.setOnClickListener {
@@ -449,7 +449,7 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
         // Check if the permission is granted
         if (arePermissionsGranted(contactPermissions)) {
             // Permission is already granted, you can proceed with contact retrieval
-            checkCallPermission(false)
+            checkCallPermission(false,EnteredNumber.phoneNumber)
             getContacts()
         } else {
             // Permission is not granted, request it
@@ -457,13 +457,13 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
         }
     }
 
-    private fun checkCallPermission(isForCall: Boolean) {
+    private fun checkCallPermission(isForCall: Boolean,phoneNumber: String) {
         // Check if CALL_PHONE and READ_PHONE_STATE permissions are granted
         if (arePermissionsGranted(callPermissions)) {
             // Both permissions are granted, proceed with the call
             isCallPermissionGiven = true
             if (isForCall)
-                UtilFunctions.callNumber(requireContext(), EnteredNumber.phoneNumber)
+                UtilFunctions.callNumber(requireContext(), phoneNumber)
             else
                 checkLocationPermission()
         } else {
@@ -505,7 +505,7 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
     private fun handleContactPermissionResult(grantResults: IntArray) {
         if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             // Permission granted, proceed with contact retrieval
-            checkCallPermission(false)
+            checkCallPermission(false,EnteredNumber.phoneNumber)
             getContacts()
         } else {
             // Permission denied, inform the user
@@ -645,7 +645,7 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
                 val phoneNumber = UtilFunctions.makePhoneNumber10(contact.number)
 
                 if (dbNumber == phoneNumber) {
-                    Log.e("Test", contact.name)
+//                    Log.e("Test", contact.name)
                     myFriendsList[position]?.friendName = contact.name
                     break
                 }
@@ -662,6 +662,9 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
             )
         else
             Log.e("Test", "EMPTY ${myFriendsDataItem.friendNumber}")
+
+        callLocatorFragmentUI.showContactPopUp(myFriendsDataItem)
+        popUponClickListeners(myFriendsDataItem)
     }
 
     private fun moveCameraToLocation(lat: Double, lng: Double) {
@@ -724,21 +727,58 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
 
 //    private var dbHelper = BlockedContactsDBHelper(requireContext())
 
-    private fun openBlockNumberSettings(phoneNumber: String) {
+    private fun openBlockNumberSettings(phoneNumber: String,isCalledFromPU: Boolean) {
         val res = dbHelper.insertNumber(phoneNumber)
         if (res) {
             UtilFunctions.showToast(requireContext(), "Number Blocked Successfully")
-            binding.tvBlock.text = "UnBlock"
+
+
+            if(isCalledFromPU)
+                binding.tvBlockNumberPU.text="UnBlock"
+            else
+                binding.tvBlock.text = "UnBlock"
         }
 //        Log.e("Test", "AI $res")
     }
 
-    private fun unBlockNumber(phoneNumber: String) {
+    private fun unBlockNumber(phoneNumber: String,isCalledFromPU: Boolean) {
         val res = dbHelper.deleteNumber(phoneNumber)
 
         if (res) {
             UtilFunctions.showToast(requireContext(), "Number UnBlocked Successfully")
-            binding.tvBlock.text = "Block"
+
+            if(isCalledFromPU)
+                binding.tvBlockNumberPU.text="Block"
+            else
+                binding.tvBlock.text = "Block"
+
+        }
+    }
+
+    //PopUp OnClick Listeners
+    fun popUponClickListeners(myFriendsDataItem: MyFriendsDataItem)
+    {
+        binding.btCallPU.setOnClickListener {
+            checkCallPermission(true,myFriendsDataItem.friendNumber!!)
+        }
+
+        binding.btAddNumberPu.setOnClickListener {
+            val mPhoneNumber = myFriendsDataItem.friendNumber
+            openAddToContactsScreen(mPhoneNumber!!)
+        }
+
+        binding.btBlockNumberPU.setOnClickListener {
+            val mPhoneNumber = myFriendsDataItem.friendNumber
+
+            if (binding.tvBlockNumberPU.text.toString() == "Block") {
+                openBlockNumberSettings(mPhoneNumber!!,true)
+            } else {
+                unBlockNumber(mPhoneNumber!!,true)
+            }
+        }
+
+        binding.btClosePu.setOnClickListener {
+            callLocatorFragmentUI.hideContactPopUp()
         }
     }
 }

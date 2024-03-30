@@ -1,8 +1,6 @@
 package realapps.live.callerlocator.callThemesModule
 
-import android.content.BroadcastReceiver
 import android.content.Context
-import android.content.Intent
 import android.content.IntentFilter
 import android.hardware.Sensor
 import android.hardware.SensorEvent
@@ -38,18 +36,6 @@ class IncomingCallActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private lateinit var incomingNumber: String
 
     private var dbHelper = ContactDatabaseHelper(this)
-
-
-    private val callEndedReceiver1 = object : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent?) {
-            if (intent?.action == "ACTION_CALL_ENDED") {
-                // Call ended, finish the activity
-                finish()
-                stopFlashLight()
-
-            }
-        }
-    }
 
     private lateinit var callEndedReceiver: CallEndedReceiver
 
@@ -154,10 +140,14 @@ class IncomingCallActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
         allContacts = contacts as ArrayList<Contact>
 
-        for (contact in allContacts) {
-            val number = UtilFunctions.normalizePhoneNumber(contact.number)
+        val incomingNumber10 =UtilFunctions.makePhoneNumber10(incomingNumber)
 
-            if (number == incomingNumber)
+        for (contact in allContacts) {
+            var number = UtilFunctions.normalizePhoneNumber(contact.number)
+
+            number=UtilFunctions.makePhoneNumber10(number)
+//            Log.e("Test","$number == $incomingNumber10")
+            if (number == incomingNumber10)
                 return contact.name
         }
 
