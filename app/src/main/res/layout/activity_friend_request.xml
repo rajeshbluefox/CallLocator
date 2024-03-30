@@ -2,75 +2,72 @@
 
 <layout>
 
-
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/mainLayout"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".callLocatorModule.FriendRequestActivity">
-
-    <LinearLayout
-        android:id="@+id/titleBarLayout"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/mainLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/bg_color_2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:background="@color/main_back_ground"
+        tools:context=".callLocatorModule.FriendRequestActivity">
 
-        <ImageView
-            android:id="@+id/btBack"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/titleBarLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/dp_12"
-            android:src="@drawable/baseline_arrow_back_24" />
+            android:background="@color/bg_color_2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/titleBar"
-            android:layout_width="0dp"
+            <ImageView
+                android:id="@+id/btBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/dp_12"
+                android:src="@drawable/baseline_arrow_back_24" />
+
+            <TextView
+                android:id="@+id/titleBar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingVertical="@dimen/dp_8"
+                android:text="Friend Requests"
+                android:textAlignment="center"
+                android:textColor="#FFF"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingVertical="@dimen/dp_8"
-            android:text="Friend Requests"
-            android:textAlignment="center"
-            android:textColor="#FFF"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:layout_alignParentTop="true"
+            android:background="@color/bg_color_2"
+            android:textColor="@color/bg_color_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titleBarLayout"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/white"
+            app:tabMode="fixed"
+            app:tabRippleColor="@color/bg_color_1"
+            app:tabSelectedTextColor="@color/text_color_1"
+            app:tabTextColor="@color/white" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/friendRequestsRv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tabLayout" />
 
-    </LinearLayout>
-
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:background="@color/bg_color_2"
-        android:textColor="@color/bg_color_1"
-        app:tabGravity="fill"
-        app:tabMode="fixed"
-        app:tabRippleColor="@color/bg_color_1"
-        app:tabSelectedTextColor="@color/text_color_1"
-        app:tabTextColor="@color/white"
-        app:tabIndicatorColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleBarLayout"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/friendRequestsRv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_12"
-        android:layout_marginHorizontal="@dimen/dp_12"
-        app:layout_constraintTop_toBottomOf="@id/tabLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

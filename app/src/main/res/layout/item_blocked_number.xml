@@ -3,73 +3,54 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<!--    <androidx.cardview.widget.CardView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginBottom="@dimen/dp_6">-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="@dimen/dp_12"
+        android:paddingVertical="@dimen/dp_12">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <TextView
+            android:id="@+id/tvBLContactName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_6"
+            android:text="Anil Kumar"
+            android:textColor="#06286B"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvBLPhoneNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="+91 9123456789"
+            android:textColor="#06286B"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintStart_toStartOf="@id/tvBLContactName"
+            app:layout_constraintTop_toBottomOf="@id/tvBLContactName" />
+
+        <ImageView
+            android:id="@+id/btUnblock"
+            android:layout_width="@dimen/dp_28"
+            android:layout_height="@dimen/dp_28"
+            android:src="@drawable/ic_delete"
+            app:layout_constraintBottom_toBottomOf="@+id/tvBLPhoneNumber"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvBLContactName" />
+
+        <View
+            android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingVertical="@dimen/dp_12"
-            android:paddingHorizontal="@dimen/dp_12">
+            android:layout_height="2dp"
+            android:layout_marginTop="12dp"
+            android:background="#06286B"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvBLPhoneNumber" />
 
-<!--            <ImageView-->
-<!--                android:id="@+id/ivPhone"-->
-<!--                android:layout_width="@dimen/dp_18"-->
-<!--                android:layout_height="@dimen/dp_18"-->
-<!--                android:layout_marginTop="@dimen/dp_6"-->
-<!--                android:src="@drawable/baseline_local_phone_24"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"/>-->
-
-            <TextView
-                android:id="@+id/tvBLContactName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_6"
-                android:text="Anil Kumar"
-                android:textStyle="bold"
-                android:textColor="#06286B"
-                android:textSize="@dimen/sp_18"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-            <TextView
-                android:id="@+id/tvBLPhoneNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:text="+91 9123456789"
-                android:textColor="#06286B"
-                android:textSize="@dimen/sp_16"
-                app:layout_constraintStart_toStartOf="@id/tvBLContactName"
-                app:layout_constraintTop_toBottomOf="@id/tvBLContactName" />
-
-
-            <ImageView
-                android:id="@+id/btUnblock"
-                android:layout_width="@dimen/dp_24"
-                android:layout_height="@dimen/dp_24"
-                android:src="@drawable/baseline_unblock_36"
-                app:layout_constraintBottom_toBottomOf="@+id/tvBLPhoneNumber"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tvBLContactName" />
-
-            <View
-                android:id="@+id/view"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="#06286B"
-                android:layout_marginTop="12dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvBLPhoneNumber" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-<!--    </androidx.cardview.widget.CardView>-->
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

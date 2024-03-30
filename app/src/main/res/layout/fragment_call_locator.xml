@@ -5,13 +5,11 @@
     xmlns:shimmer="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mainLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".callLocatorModule.CallLocatorFragment">
-
 
         <fragment
             android:id="@+id/map"
@@ -33,7 +31,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/searchBarMainLt"
                 android:layout_width="match_parent"
@@ -52,7 +49,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
-
 
                     <EditText
                         android:id="@+id/etSearch"
@@ -223,9 +219,7 @@
                                 app:layout_constraintStart_toStartOf="@id/ivAdd"
                                 app:layout_constraintTop_toBottomOf="@id/ivAdd" />
 
-
                         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/btBlock"
@@ -256,7 +250,6 @@
                                 app:layout_constraintStart_toStartOf="@id/ivBlock"
                                 app:layout_constraintTop_toBottomOf="@id/ivBlock" />
 
-
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <androidx.constraintlayout.widget.Guideline
@@ -266,16 +259,13 @@
                             android:orientation="vertical"
                             app:layout_constraintGuide_begin="194dp" />
 
-
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
-
 
         <ImageView
             android:id="@+id/btLocation"
@@ -349,7 +339,6 @@
 
             </com.facebook.shimmer.ShimmerFrameLayout>
 
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvFriend"
                 android:layout_width="match_parent"
@@ -379,7 +368,6 @@
                     android:textSize="@dimen/sp_18"
                     android:textStyle="bold" />
 
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -392,7 +380,6 @@
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -15,21 +15,20 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/contentLt"
-            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/horizontal1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.10"/>
-
+                app:layout_constraintGuide_percent="0.10" />
 
             <ImageView
                 android:id="@+id/imageView"
@@ -77,43 +76,42 @@
                 android:drawableStart="@drawable/ic_baseline_person_24"
                 android:drawablePadding="10dp"
                 android:hint="Phone Number"
-                android:maxLines="1"
-                android:lines="1"
                 android:imeOptions="actionGo"
                 android:inputType="number"
+                android:lines="1"
+                android:maxLines="1"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
             <EditText
                 android:id="@+id/etPassword"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dp_50"
                 android:layout_marginTop="6dp"
-                android:textColor="@color/black_to_white"
                 android:background="@drawable/et_background"
                 android:drawableStart="@drawable/baseline_password_24"
                 android:drawablePadding="10dp"
                 android:hint="Password"
                 android:inputType="number"
                 android:maxLines="1"
+                android:textColor="@color/black_to_white"
+                android:visibility="gone"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/etUserName" />
-
 
             <ProgressBar
                 android:id="@+id/progressBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="42dp"
                 android:indeterminate="true"
                 android:progress="0"
-                android:layout_marginTop="42dp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
-                app:layout_constraintTop_toBottomOf="@+id/etPassword"/>
+                app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btLogin"
@@ -131,9 +129,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </layout>
