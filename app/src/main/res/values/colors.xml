@@ -42,6 +42,15 @@
 
     <color name="bg_color_3">#13c984</color>
 
+    <color name="main_back_ground">#e7f1fa</color>
 
+
+    <color name="your_thumb_color">#13c984</color> <!-- Example color for thumb (circle) -->
+    <color name="your_track_color">#e7f1fa</color> <!-- Example color for track (background) -->
+
+    <color name="your_thumb_color_on">#13c984</color> <!-- Example color for thumb when "on" -->
+    <color name="your_thumb_color_off">#e7f1fa</color> <!-- Example color for thumb when "off" -->
+
+    <color name="your_progress_color">#FF0000</color> <!-- Example color for the progress bar -->
 
 </resources>

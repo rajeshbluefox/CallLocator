@@ -39,7 +39,7 @@ class FriendRequestAdapter(
         val request = requestsList[position]
 
         if (FriendRequestActivity.SelectedTab.selectedTab == 0) {
-            holder.binding.title1.text = "Request From :"
+            holder.binding.title1.text = "You have received Request"
             holder.binding.content.text = "You have received request"
             holder.binding.numberValue.text = request.fromNumber
 

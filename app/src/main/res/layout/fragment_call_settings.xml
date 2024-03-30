@@ -4,11 +4,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".callSettingsModule.CallSettingsFragment"
+        android:background="@color/main_back_ground"
         android:padding="@dimen/dp_16">
 
         <TextView
@@ -23,16 +23,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-
-<!--        <ImageView-->
-<!--            android:id="@+id/topGradinet"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="@dimen/dp_100"-->
-<!--            android:src="@drawable/gradient1"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
 
         <androidx.cardview.widget.CardView
             android:id="@+id/btCallFlashLight"
@@ -54,7 +44,7 @@
                     android:id="@+id/ivCallFlashLight"
                     android:layout_width="@dimen/dp_36"
                     android:layout_height="@dimen/dp_36"
-                    android:src="@drawable/ic_baseline_account_circle_24"
+                    android:src="@drawable/ic_flashlight"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -83,7 +73,6 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -106,7 +95,7 @@
                     android:id="@+id/ivCallAnnouncment"
                     android:layout_width="@dimen/dp_36"
                     android:layout_height="@dimen/dp_36"
-                    android:src="@drawable/ic_baseline_account_circle_24"
+                    android:src="@drawable/ic_announcer"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -135,7 +124,6 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -158,7 +146,7 @@
                     android:id="@+id/ivCallBlocking"
                     android:layout_width="@dimen/dp_36"
                     android:layout_height="@dimen/dp_36"
-                    android:src="@drawable/ic_baseline_account_circle_24"
+                    android:src="@drawable/ic_blocked"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -187,9 +175,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
         </androidx.cardview.widget.CardView>
-
 
         <androidx.cardview.widget.CardView
             android:id="@+id/btProfile"
@@ -211,7 +197,7 @@
                     android:id="@+id/ivProfile"
                     android:layout_width="@dimen/dp_36"
                     android:layout_height="@dimen/dp_36"
-                    android:src="@drawable/ic_baseline_account_circle_24"
+                    android:src="@drawable/ic_profile"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -239,7 +225,6 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
 
         </androidx.cardview.widget.CardView>
 

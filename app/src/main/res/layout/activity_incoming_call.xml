@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
             android:scaleType="fitXY"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
-            app:lottie_rawRes="@raw/call_theme_1"/>
+            app:lottie_rawRes="@raw/call_theme_1" />
 
         <TextView
             android:id="@+id/userName"
@@ -31,16 +31,15 @@
             app:layout_constraintTop_toTopOf="@id/guideLine2"
             tools:text="Incoming Name" />
 
-
         <TextView
             android:id="@+id/incomingNumberTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_12"
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_marginTop="@dimen/dp_12"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/userName"
@@ -55,7 +54,6 @@
             android:layout_marginTop="50dp"
             android:text="Accept"
             android:visibility="gone" />
-
 
         <Button
             android:id="@+id/rejectButton"
@@ -116,7 +114,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.25" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
