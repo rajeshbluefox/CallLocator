@@ -13,7 +13,7 @@ import realapps.live.callerlocator.databinding.ItemFriendRequestBinding
 class FriendRequestAdapter(
     private var context: Context,
     private var requestsList: ArrayList<GetFriendRequestDataItem>,
-    private val onItemClicked: (getFriendRequestDataItem: GetFriendRequestDataItem) -> Unit,
+    private val onItemClicked: (getFriendRequestDataItem: GetFriendRequestDataItem,clickType: Int) -> Unit,
 ) :
     RecyclerView.Adapter<FriendRequestAdapter.FriendRequestAdapterViewHolder>() {
 
@@ -39,44 +39,50 @@ class FriendRequestAdapter(
         val request = requestsList[position]
 
         if (FriendRequestActivity.SelectedTab.selectedTab == 0) {
-            holder.binding.title1.text = "You have received Request"
-            holder.binding.content.text = "You have received request"
+//            holder.binding.content.text = "You have received request"
             holder.binding.numberValue.text = request.fromNumber
 
             if (request.requestStatus == "0") {
-                holder.binding.btAgree.visibility = View.VISIBLE
-                holder.binding.requestStatus.visibility = View.GONE
+                holder.binding.btAccept.visibility = View.VISIBLE
+                holder.binding.tvSentAccepted.visibility = View.GONE
             } else if (request.requestStatus == "1") {
-                holder.binding.btAgree.visibility = View.GONE
-                holder.binding.requestStatus.visibility = View.VISIBLE
-                holder.binding.requestStatus.text = "Accepted"
+                holder.binding.btAccept.visibility = View.GONE
+                holder.binding.tvSentAccepted.visibility = View.VISIBLE
+                holder.binding.tvSentAccepted.text = "Accepted"
+
+                holder.binding.ivDelete.visibility=View.VISIBLE
             } else {
-                holder.binding.btAgree.visibility = View.GONE
-                holder.binding.requestStatus.visibility = View.VISIBLE
-                holder.binding.requestStatus.text = "Rejected"
+                holder.binding.btAccept.visibility = View.GONE
+                holder.binding.tvSentAccepted.visibility = View.VISIBLE
+                holder.binding.tvSentAccepted.text = "Rejected"
             }
         } else {
-            holder.binding.title1.text = "Sent to :"
-            holder.binding.content.text = "You have sent request"
+//            holder.binding.content.text = "You have sent request"
             holder.binding.numberValue.text = request.toNumber
 
             if (request.requestStatus == "0") {
-                holder.binding.btAgree.visibility = View.GONE
-                holder.binding.requestStatus.visibility = View.VISIBLE
-                holder.binding.requestStatus.text = "Pending"
+                holder.binding.btAccept.visibility = View.GONE
+                holder.binding.tvSentAccepted.visibility = View.VISIBLE
+                holder.binding.tvSentAccepted.text = "Pending"
             } else if (request.requestStatus == "1") {
-                holder.binding.btAgree.visibility = View.GONE
-                holder.binding.requestStatus.visibility = View.VISIBLE
-                holder.binding.requestStatus.text = "Accepted"
+                holder.binding.btAccept.visibility = View.GONE
+                holder.binding.tvSentAccepted.visibility = View.VISIBLE
+                holder.binding.tvSentAccepted.text = "Accepted"
+
+                holder.binding.ivDelete.visibility=View.VISIBLE
             } else {
-                holder.binding.btAgree.visibility = View.GONE
-                holder.binding.requestStatus.visibility = View.VISIBLE
-                holder.binding.requestStatus.text = "Rejected"
+                holder.binding.btAccept.visibility = View.GONE
+                holder.binding.tvSentAccepted.visibility = View.VISIBLE
+                holder.binding.tvSentAccepted.text = "Rejected"
             }
         }
 
-        holder.binding.btAgree.setOnClickListener {
-            onItemClicked.invoke(request)
+        holder.binding.btAccept.setOnClickListener {
+            onItemClicked.invoke(request,1)
+        }
+
+        holder.binding.ivDelete.setOnClickListener {
+            onItemClicked.invoke(request,2)
         }
 
     }

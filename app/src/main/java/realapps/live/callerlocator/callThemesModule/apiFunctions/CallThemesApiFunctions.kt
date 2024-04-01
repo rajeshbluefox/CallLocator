@@ -1,0 +1,36 @@
+package realapps.live.callerlocator.callThemesModule.apiFunctions
+
+import android.app.Activity
+import android.content.Context
+import androidx.lifecycle.LifecycleOwner
+import realapps.live.callerlocator.callThemesModule.modalClass.ThemesData
+
+
+class CallThemesApiFunctions(
+    val context: Context,
+    val activity: Activity,
+    private val lifeCycleOwner: LifecycleOwner,
+    private var callThemesViewModel: CallThemesViewModel,
+    private val getThemesResponse: (data: List<ThemesData>) -> Unit,
+)
+{
+    fun getThemes()
+    {
+        callThemesViewModel.resetGetThemes()
+        callThemesViewModel.getThemes()
+        getThemesObserver()
+    }
+
+    private fun getThemesObserver()
+    {
+        callThemesViewModel.getThemesResponse().observe(lifeCycleOwner){
+            if(it.status==200)
+            {
+                if(it.data!!.isNotEmpty())
+                {
+                    getThemesResponse.invoke(it.data as List<ThemesData>)
+                }
+            }
+        }
+    }
+}

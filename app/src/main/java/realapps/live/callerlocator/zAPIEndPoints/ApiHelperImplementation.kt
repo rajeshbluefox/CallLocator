@@ -5,6 +5,7 @@ import realapps.live.callerlocator.callLocatorModule.modalClass.GetMyFriendsResp
 import realapps.live.callerlocator.callLocatorModule.modalClass.RespondFriendRequestResponse
 import realapps.live.callerlocator.callLocatorModule.modalClass.SendFriendRequestResponse
 import realapps.live.callerlocator.callLocatorModule.modalClass.UpdateLocationResponse
+import realapps.live.callerlocator.callThemesModule.modalClass.GetThemesResponse
 import realapps.live.callerlocator.loginModule.modalClass.GetUserInfoResponse
 import realapps.live.callerlocator.loginModule.modalClass.RegisterUserResponse
 import realapps.live.callerlocator.loginModule.modalClass.UserInfoData
@@ -13,6 +14,10 @@ import javax.inject.Inject
 
 class ApiHelperImplementation @Inject constructor(private val apiService: ApiInterface) :
     ApiHelper {
+    override suspend fun getThemes(): GetThemesResponse {
+        return apiService.getThemes()
+    }
+
     override suspend fun getUserInfo(phoneNumber: String): GetUserInfoResponse {
         return apiService.getUserInfo(phoneNumber)
     }

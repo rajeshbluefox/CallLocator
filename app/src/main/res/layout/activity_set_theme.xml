@@ -17,8 +17,16 @@
             android:layout_height="match_parent"
             android:scaleType="fitXY"
             app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/call_theme_1" />
+            app:lottie_loop="true" />
+
+        <ImageView
+            android:id="@+id/themeThumbNail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
         <ImageView
             android:id="@+id/btBack"
@@ -74,6 +82,7 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <TextView
+                android:id="@+id/tvButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#60ff00"

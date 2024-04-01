@@ -4,15 +4,15 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import realapps.live.callerlocator.callThemesModule.modalClass.ThemesData
 import realapps.live.callerlocator.databinding.ItemCallerThemeBinding
-import realapps.live.callerlocator.zCommonFuntions.Contact
 
 
 class CallerThemesAdapter(
     private var context: Context,
-    private var contactList: ArrayList<Contact>,
-    private var themes: ArrayList<Int>,
-    private val onContactClicked: () -> Unit,
+    private var themesList: ArrayList<ThemesData>,
+    private val onThemeClicked: () -> Unit,
 ) :
     RecyclerView.Adapter<CallerThemesAdapter.CallerThemesAdapterViewHolder>() {
 
@@ -35,35 +35,24 @@ class CallerThemesAdapter(
 
     override fun onBindViewHolder(holder: CallerThemesAdapterViewHolder, position: Int) {
 
-//        val contact = contactList[position]
+        val themeItem = themesList[position]
 
-        var theme = 0
-
-        if (position <= 3)
-            theme = themes[position]
-
-//        holder.binding.tvCount.text = position.toString()
-
-
-        if (position <= 3) {
-
-            holder.binding.lottieAnimationView.setAnimation(
-                theme
-            )
-        }
-//        holder.binding.lottieAnimationView.tag = themeItem.jsonFileName // You can use this tag to identify the JSON file later if needed
-
+        Glide.with(context)
+            .load(themeItem.thumbNail)
+            .fitCenter()
+            .into(holder.binding.ivThemeThumbnail)
 
         holder.binding.themeLt.setOnClickListener {
-            SelectedTheme.selectedThemeCount = position+1
-            onContactClicked.invoke()
+            SelectedTheme.selectedTheme=themeItem
+            SelectedTheme.selectedThemeCount = position + 1
+            onThemeClicked.invoke()
         }
 
 
     }
 
     override fun getItemCount(): Int {
-        return themes.size
+        return themesList.size
     }
 
 }

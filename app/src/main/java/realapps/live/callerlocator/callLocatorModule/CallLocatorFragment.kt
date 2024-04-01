@@ -81,7 +81,7 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_call_locator, container, false)
@@ -615,24 +615,29 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
 //        callLocatorFragmentUI.stopRotateAnimation()
         callLocatorFragmentUI.hideMyFriendsPB()
 
-        myFriendsList = ArrayList(data!!)
-        allFriendRequests = ArrayList(allFriendRequestList!!)
+        if(data!=null&&allFriendRequestList!=null) {
+            myFriendsList = ArrayList(data!!)
+            allFriendRequests = ArrayList(allFriendRequestList!!)
 
-        if (myFriendsList.isNotEmpty()) {
-            findNames()
-            binding.noFriendsLt.visibility = View.GONE
-            binding.rvFriend.visibility = View.VISIBLE
+            if (myFriendsList.isNotEmpty()) {
+                findNames()
+                binding.noFriendsLt.visibility = View.GONE
+                binding.rvFriend.visibility = View.VISIBLE
 
-            val myFriendsAdapter =
-                MyFriendsAdapter(requireContext(), myFriendsList, ::onFriendSelected)
-            binding.rvFriend.apply {
-                layoutManager = LinearLayoutManager(
-                    context,
-                    LinearLayoutManager.HORIZONTAL, false
-                )
-                adapter = myFriendsAdapter
+                val myFriendsAdapter =
+                    MyFriendsAdapter(requireContext(), myFriendsList, ::onFriendSelected)
+                binding.rvFriend.apply {
+                    layoutManager = LinearLayoutManager(
+                        context,
+                        LinearLayoutManager.HORIZONTAL, false
+                    )
+                    adapter = myFriendsAdapter
+                }
+            } else {
+                binding.noFriendsLt.visibility = View.VISIBLE
+                binding.rvFriend.visibility = View.GONE
             }
-        } else {
+        }else{
             binding.noFriendsLt.visibility = View.VISIBLE
             binding.rvFriend.visibility = View.GONE
         }

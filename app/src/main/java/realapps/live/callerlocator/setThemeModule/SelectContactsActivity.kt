@@ -259,7 +259,13 @@ class SelectContactsActivity : AppCompatActivity() {
         for (contact in allContacts) {
             val foundContact = allDBContacts.find { it.number == contact.number }
             if (foundContact == null)
+            {
+                var number=contact.number
+                number = UtilFunctions.normalizePhoneNumber(number)
+                number =UtilFunctions.makePhoneNumber10(number)
+                contact.number=number
                 addContact(contact)
+            }
         }
 
 //        Log.e("Test", "183")

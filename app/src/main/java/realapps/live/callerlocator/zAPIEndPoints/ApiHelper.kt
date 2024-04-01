@@ -5,11 +5,14 @@ import realapps.live.callerlocator.callLocatorModule.modalClass.GetMyFriendsResp
 import realapps.live.callerlocator.callLocatorModule.modalClass.RespondFriendRequestResponse
 import realapps.live.callerlocator.callLocatorModule.modalClass.SendFriendRequestResponse
 import realapps.live.callerlocator.callLocatorModule.modalClass.UpdateLocationResponse
+import realapps.live.callerlocator.callThemesModule.modalClass.GetThemesResponse
 import realapps.live.callerlocator.loginModule.modalClass.GetUserInfoResponse
 import realapps.live.callerlocator.loginModule.modalClass.RegisterUserResponse
 import realapps.live.callerlocator.loginModule.modalClass.UserInfoData
 
 interface ApiHelper {
+
+    suspend fun getThemes(): GetThemesResponse
 
     suspend fun getUserInfo(phoneNumber: String): GetUserInfoResponse
 

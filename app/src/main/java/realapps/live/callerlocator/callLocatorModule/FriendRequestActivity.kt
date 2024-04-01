@@ -32,7 +32,7 @@ class FriendRequestActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         StatusBarUtils.transparentStatusBar(this)
-        StatusBarUtils.setTopPadding(resources,binding.mainLayout)
+        StatusBarUtils.setTopPadding(resources, binding.mainLayout)
 
         initViews()
         initTabs()
@@ -57,7 +57,7 @@ class FriendRequestActivity : AppCompatActivity() {
             sendFriendRequestObserverCB = {},
             ::getFriendRequestsResponse,
             ::acceptFRResponse,
-            getMyFriendsResponse = { _,_ ->}
+            getMyFriendsResponse = { _, _ -> }
         )
     }
 
@@ -97,37 +97,23 @@ class FriendRequestActivity : AppCompatActivity() {
 
         if (position == 0) {
 
+            binding.title1.text = "You have received Request"
+
             callLocatorApiFunctions.getFriendRequests(
                 LoginData.getUserPhone(this),
                 "0"
             )
 
-//            if (receivedFriendReqList.size == 0)
-//                callLocatorApiFunctions.getFriendRequests(
-//                    LoginData.getUserPhone(this),
-//                    "0"
-//                )
-//            else {
-//                initRv()
-//            }
 
         } else {
             Log.e("Test", "92")
+            binding.title1.text = "Sent to:"
 
             callLocatorApiFunctions.getFriendRequests(
                 LoginData.getUserPhone(this),
                 "1"
             )
 
-//            if (sentFriendReqList.size == 0) {
-//                Log.e("Test", "95")
-//                callLocatorApiFunctions.getFriendRequests(
-//                    LoginData.getUserPhone(this),
-//                    "1"
-//                )
-//            } else {
-//                initRv()
-//            }
         }
     }
 
@@ -138,7 +124,7 @@ class FriendRequestActivity : AppCompatActivity() {
         else
             sentFriendReqList
 
-        Log.e("Test","Size ${requestList.size}")
+        Log.e("Test", "Size ${requestList.size}")
 
         if (requestList.size != 0) {
 
@@ -160,17 +146,21 @@ class FriendRequestActivity : AppCompatActivity() {
         }
     }
 
-    private fun onAgreeClicked(getFriendRequestDataItem: GetFriendRequestDataItem) {
-        if (getFriendRequestDataItem.requestStatus == "0") {
+    private fun onAgreeClicked(getFriendRequestDataItem: GetFriendRequestDataItem,clickType: Int) {
+        if (SelectedTab.selectedTab == 0) {
             val fromNumber = getFriendRequestDataItem.fromNumber!!
             val toNumber = LoginData.getUserPhone(this)
 
-            callLocatorApiFunctions.respondToFriendRequest(fromNumber, toNumber, "1")
+            Log.e("Test","if - fn : $fromNumber - tn : $toNumber")
+
+            callLocatorApiFunctions.respondToFriendRequest(fromNumber, toNumber, clickType.toString())
         } else {
             val fromNumber = LoginData.getUserPhone(this)
             val toNumber = getFriendRequestDataItem.toNumber!!
 
-            callLocatorApiFunctions.respondToFriendRequest(fromNumber, toNumber, "1")
+            Log.e("Test","else - fn : $fromNumber - tn : $toNumber")
+
+            callLocatorApiFunctions.respondToFriendRequest(fromNumber, toNumber, clickType.toString())
         }
     }
 
@@ -186,18 +176,21 @@ class FriendRequestActivity : AppCompatActivity() {
     private var sentFriendReqList = ArrayList<GetFriendRequestDataItem>()
     private var receivedFriendReqList = ArrayList<GetFriendRequestDataItem>()
 
-    private fun getFriendRequestsResponse(requestList: List<GetFriendRequestDataItem?>?,isListPresent: Boolean) {
-       if(isListPresent) {
-           if (SelectedTab.selectedTab == 1)
-               sentFriendReqList = requestList as ArrayList<GetFriendRequestDataItem>
-           else
-               receivedFriendReqList = requestList as ArrayList<GetFriendRequestDataItem>
+    private fun getFriendRequestsResponse(
+        requestList: List<GetFriendRequestDataItem?>?,
+        isListPresent: Boolean
+    ) {
+        if (isListPresent) {
+            if (SelectedTab.selectedTab == 1)
+                sentFriendReqList = requestList as ArrayList<GetFriendRequestDataItem>
+            else
+                receivedFriendReqList = requestList as ArrayList<GetFriendRequestDataItem>
 
-           initRv()
-       }else{
-           binding.friendRequestsRv.visibility = View.GONE
-           UtilFunctions.showToast(this, "No Items Found")
-       }
+            initRv()
+        } else {
+            binding.friendRequestsRv.visibility = View.GONE
+            UtilFunctions.showToast(this, "No Items Found")
+        }
     }
 
     object SelectedTab {

@@ -12,7 +12,6 @@
         android:layout_height="match_parent"
         tools:context=".callLocatorModule.CallLocatorFragment">
 
-
         <fragment
             android:id="@+id/map"
             class="com.google.android.gms.maps.SupportMapFragment"
@@ -367,7 +366,7 @@
                         android:id="@+id/ivTimeStamp"
                         android:layout_width="@dimen/dp_18"
                         android:layout_height="@dimen/dp_18"
-                        android:src="@drawable/baseline_access_time_filled_24"
+                        android:src="@drawable/pu_ic_phone"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -400,7 +399,7 @@
                         android:id="@+id/ivaddNumberPU"
                         android:layout_width="@dimen/dp_18"
                         android:layout_height="@dimen/dp_18"
-                        android:src="@drawable/baseline_access_time_filled_24"
+                        android:src="@drawable/pu_ic_add"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -432,7 +431,7 @@
                         android:id="@+id/ivBlockNumberPU"
                         android:layout_width="@dimen/dp_18"
                         android:layout_height="@dimen/dp_18"
-                        android:src="@drawable/baseline_access_time_filled_24"
+                        android:src="@drawable/pu_ic_block"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />

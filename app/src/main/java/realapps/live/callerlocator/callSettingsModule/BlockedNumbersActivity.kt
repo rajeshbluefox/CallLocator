@@ -1,6 +1,7 @@
 package realapps.live.callerlocator.callSettingsModule
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -66,6 +67,7 @@ class BlockedNumbersActivity : AppCompatActivity() {
 
         val blockedNumbers = blockedNumbersDB.getAllNumbers()
 
+
         if (blockedNumbers.isNotEmpty()) {
             blockedNumbersAdapter = BlockedNumbersAdapter(
                 this,
@@ -80,6 +82,7 @@ class BlockedNumbersActivity : AppCompatActivity() {
                 adapter = blockedNumbersAdapter
             }
         } else {
+            binding.rvBlocketNumbers.visibility=View.GONE
             UtilFunctions.showToast(this, "No Blocked Numbers")
         }
 

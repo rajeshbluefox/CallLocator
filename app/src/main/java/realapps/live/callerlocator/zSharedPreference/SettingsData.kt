@@ -19,15 +19,15 @@ object SettingsData {
         return sharedPref.getBoolean(Constants.CALL_THEME, false)
     }
 
-    fun saveDefaultTheme(context: Context, value: Int) {
+    fun saveDefaultTheme(context: Context, value: String) {
         val sharedPref = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val editor = sharedPref.edit()
-        editor.putInt(Constants.CALL_DEFAULT_THEME, value).apply()
+        editor.putString(Constants.CALL_DEFAULT_THEME, value).apply()
     }
 
-    fun getDefaultTheme(context: Context): Int {
+    fun getDefaultTheme(context: Context): String {
         val sharedPref = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        return sharedPref.getInt(Constants.CALL_DEFAULT_THEME, R.raw.call_theme_1)
+        return sharedPref.getString(Constants.CALL_DEFAULT_THEME, "EMPTY")?:"EMPTY"
     }
 
     fun saveCallFlashLightStatus(context: Context, value: Boolean,frequency: Int) {

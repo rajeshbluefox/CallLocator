@@ -223,6 +223,7 @@ class ProfileActivity : AppCompatActivity() {
             Environment.getExternalStorageDirectory()
                 .toString() + "/Download/CallApp/$fileName"
         )
+
         if (!file.exists()) {
             Log.e(TAG, "File does not exist")
             return

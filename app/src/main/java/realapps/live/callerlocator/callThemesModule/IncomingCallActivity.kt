@@ -9,11 +9,13 @@ import android.hardware.SensorManager
 import android.media.AudioAttributes
 import android.media.AudioManager
 import android.os.Bundle
+import android.os.Environment
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
 import android.telecom.TelecomManager
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.airbnb.lottie.LottieCompositionFactory
 import dagger.hilt.android.AndroidEntryPoint
 import realapps.live.callerlocator.R
 import realapps.live.callerlocator.callSettingsModule.supportFunctions.FlashlightManager
@@ -22,8 +24,11 @@ import realapps.live.callerlocator.databinding.ActivityIncomingCallBinding
 import realapps.live.callerlocator.setThemeModule.supportFunctions.ContactDatabaseHelper
 import realapps.live.callerlocator.zCommonFuntions.Contact
 import realapps.live.callerlocator.zCommonFuntions.ContactManager
+import realapps.live.callerlocator.zCommonFuntions.StatusBarUtils
 import realapps.live.callerlocator.zCommonFuntions.UtilFunctions
 import realapps.live.callerlocator.zSharedPreference.SettingsData
+import java.io.File
+import java.io.FileInputStream
 import java.util.Locale
 import java.util.Objects
 
@@ -44,10 +49,8 @@ class IncomingCallActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         binding = ActivityIncomingCallBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        UtilFunctions.showToast(this,"Call Coming")
-        // Register the BroadcastReceiver
-//        val filter = IntentFilter("ACTION_CALL_ENDED")
-//        registerReceiver(callEndedReceiver, filter)
+        StatusBarUtils.transparentStatusBar(this)
+        StatusBarUtils.setTopPadding(resources,binding.callerTheme)
 
         callEndedReceiver = CallEndedReceiver()
         callEndedReceiver.initCallBack(::onCallEnded)
@@ -157,26 +160,44 @@ class IncomingCallActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private fun findThemeandSet(incomingNumber: String) {
 
-        var theme = dbHelper.getThemeForPhoneNumber(incomingNumber)
+        var locPhoneNumber = UtilFunctions.normalizePhoneNumber(incomingNumber)
+        locPhoneNumber = UtilFunctions.makePhoneNumber10(incomingNumber)
 
-        if (theme == 0) {
-            val trimmedNumber =
-                if (incomingNumber.startsWith("+91")) incomingNumber.substring(3) else incomingNumber
-            theme = dbHelper.getThemeForPhoneNumber(trimmedNumber)
-        }
+        Log.e("Test","Searching $locPhoneNumber")
+
+        val theme = dbHelper.getThemeForPhoneNumber(locPhoneNumber)
+
+//        if (theme == 0) {
+//            val trimmedNumber =
+//                if (incomingNumber.startsWith("+91")) incomingNumber.substring(3) else incomingNumber
+//            theme = dbHelper.getThemeForPhoneNumber(trimmedNumber)
+//        }
 
 
         Log.e("Test", "Found Theme $theme")
 
         val defaultThemeId = SettingsData.getDefaultTheme(this)
+        Log.e("Test","L1 $defaultThemeId")
+
+
+//        if(defaultThemeId=="EMPTY")
+//            theme=0
 
         when (theme) {
-            -1 -> binding.callerTheme.setAnimation(defaultThemeId)
-            0 -> binding.callerTheme.setAnimation(defaultThemeId)
-            1 -> binding.callerTheme.setAnimation(R.raw.call_theme_1)
-            2 -> binding.callerTheme.setAnimation(R.raw.call_theme_2)
-            3 -> binding.callerTheme.setAnimation(R.raw.call_theme_3)
-            4 -> binding.callerTheme.setAnimation(R.raw.call_theme_4)
+            -1,0 -> {
+                if (defaultThemeId == "EMPTY")
+                    binding.callerTheme.setAnimation(R.raw.call_theme_1)
+                else
+                    loadAnimationFromJsonFile(defaultThemeId)
+            }
+            else -> {
+                val themeId ="call_theme_$theme.json"
+                loadAnimationFromJsonFile(themeId)
+
+            }
+
+
+
 
         }
     }
@@ -342,5 +363,33 @@ class IncomingCallActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             Log.e("TTS", "Initialization failed")
         }
     }
+
+
+    private fun loadAnimationFromJsonFile(fileName: String) {
+        Log.e("Test","Loading... $fileName")
+        val file = File(
+            Environment.getExternalStorageDirectory()
+                .toString() + "/Download/CallApp/$fileName"
+        )
+
+        if (!file.exists()) {
+            return
+        }
+
+        try {
+            val inputStream = FileInputStream(file)
+
+            val composition =
+                LottieCompositionFactory.fromJsonInputStreamSync(inputStream, "$fileName").value
+            inputStream.close()
+
+            // Set the composition to LottieAnimationView
+            binding.callerTheme.setComposition(composition!!)
+            binding.callerTheme.playAnimation()
+        } catch (e: Exception) {
+            UtilFunctions.showToast(this, "Error loading animation")
+        }
+    }
+
 
 }

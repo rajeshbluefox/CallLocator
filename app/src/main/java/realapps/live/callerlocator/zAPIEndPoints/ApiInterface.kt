@@ -5,14 +5,18 @@ import realapps.live.callerlocator.callLocatorModule.modalClass.GetMyFriendsResp
 import realapps.live.callerlocator.callLocatorModule.modalClass.RespondFriendRequestResponse
 import realapps.live.callerlocator.callLocatorModule.modalClass.SendFriendRequestResponse
 import realapps.live.callerlocator.callLocatorModule.modalClass.UpdateLocationResponse
+import realapps.live.callerlocator.callThemesModule.modalClass.GetThemesResponse
 import realapps.live.callerlocator.loginModule.modalClass.GetUserInfoResponse
 import realapps.live.callerlocator.loginModule.modalClass.RegisterUserResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface ApiInterface {
 
+    @GET("CallerThemes_get.php")
+    suspend fun getThemes(): GetThemesResponse
 
     @FormUrlEncoded
     @POST("get_users.php")
