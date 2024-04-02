@@ -86,6 +86,8 @@
         <activity
             android:name=".callThemesModule.IncomingCallActivity"
             android:excludeFromRecents="true"
+            android:launchMode="singleTask"
+            android:taskAffinity=""
             android:exported="true"
             android:theme="@style/Theme.Realapps" />
 

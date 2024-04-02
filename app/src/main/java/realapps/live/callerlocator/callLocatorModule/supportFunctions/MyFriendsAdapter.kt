@@ -22,6 +22,11 @@ class MyFriendsAdapter(
     private var preSel = -1
     private var curSel = -1
 
+    fun resetValues()
+    {
+        preSel=-1
+        curSel=-1
+    }
     class MyFriendsAdapterViewHolder(var binding: ItemMyfriendsBinding) :
         RecyclerView.ViewHolder(binding.root)
 
@@ -87,6 +92,8 @@ class MyFriendsAdapter(
 //            notifyItemChanged(position)
             preSel=curSel
             curSel=position
+
+            SelectedFriend.selectedFriendNo=curSel
 
             notifyItemChanged(curSel)
 

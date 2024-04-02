@@ -173,11 +173,13 @@ class BackgroundCallService : Service() {
 
         try {
             val incomingCallIntent = Intent(this, IncomingCallActivity::class.java)
-            incomingCallIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+//            incomingCallIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
 
-//            incomingCallIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            incomingCallIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             incomingCallIntent.putExtra("incoming_number", incomingNumber)
             startActivity(incomingCallIntent)
+            Log.e("Test","Opened activity")
+
         } catch (e: Exception) {
             Log.e("Test", e.message.toString())
         }

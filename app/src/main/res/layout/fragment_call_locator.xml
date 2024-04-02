@@ -456,6 +456,83 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+        <androidx.cardview.widget.CardView
+            android:visibility="gone"
+            android:id="@+id/cvAddress"
+            android:layout_width="@dimen/dp_250"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            app:cardCornerRadius="@dimen/dp_6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/contactPu">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_8"
+                android:background="@drawable/rect_9">
+
+                <TextView
+                    android:id="@+id/tvStreetName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="KPHB Colony"
+                    android:textColor="@color/text_color_1"
+                    android:textStyle="bold"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/btCopy"/>
+
+                <TextView
+                    android:id="@+id/tvAddress"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_6"
+                    android:text="KPHB Colony KPHB Colony, Hyderabad, Telangana"
+                    android:textColor="@color/black"
+                    android:maxLines="3"
+                    android:ellipsize="end"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvStreetName"
+                    app:layout_constraintEnd_toStartOf="@id/btShare"/>
+
+                <ImageView
+                    android:id="@+id/btCloseAddressPU"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/baseline_add_circle_1_24"
+                    android:rotation="45"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <ImageView
+                    android:id="@+id/btCopy"
+                    android:layout_width="@dimen/dp_24"
+                    android:layout_height="@dimen/dp_24"
+                    android:src="@drawable/copy"
+                    android:layout_marginTop="@dimen/dp_6"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btCloseAddressPU"/>
+
+                <ImageView
+                    android:id="@+id/btShare"
+                    android:layout_width="@dimen/dp_24"
+                    android:layout_height="@dimen/dp_24"
+                    android:src="@drawable/share"
+                    android:layout_marginTop="@dimen/dp_6"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btCopy"/>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
         <ImageView
             android:id="@+id/btLocation"
             android:layout_width="@dimen/dp_24"

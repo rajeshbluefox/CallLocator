@@ -58,7 +58,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_16"
-            android:text="Send Freind Request to get the location"
+            android:text="Send Friend Request to get the location"
             android:textAlignment="center"
             android:textColor="#06286B"
             android:textSize="@dimen/sp_16"

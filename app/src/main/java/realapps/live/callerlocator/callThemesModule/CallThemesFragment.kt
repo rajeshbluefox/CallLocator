@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
@@ -32,6 +33,7 @@ import realapps.live.callerlocator.zCommonFuntions.CallIntent
 import realapps.live.callerlocator.zCommonFuntions.StatusBarUtils
 import realapps.live.callerlocator.zCommonFuntions.UtilFunctions
 import realapps.live.callerlocator.zSharedPreference.SettingsData
+import java.util.Locale
 
 
 @AndroidEntryPoint
@@ -145,6 +147,7 @@ class CallThemesFragment : Fragment() {
     private val ANSWER_PHONE_CALLS_REQUEST_CODE = 124
     private val REQUEST_OVERLAY_PERMISSION = 125
     private val REQUEST_CALL_LOG_PERMISSION = 126
+    private val REQUEST_OVERLAY_RUNNING_PERMISSION = 127
     private val FOREGROUND_SERVICE_CONNECTED_DEVICE_PERMISSION_REQUEST_CODE = 100
 
 
@@ -185,11 +188,29 @@ class CallThemesFragment : Fragment() {
         } else {
             Log.e("Test", "RequestOverlay Permission Already Granted 3")
 
+//            checkAndRequestOverlayPermissionRunning()
             checkAndRequestPhoneStatePermission()
 
             // Permission already granted or not needed
 //            openYourActivity()
         }
+    }
+
+    fun checkAndRequestOverlayPermissionRunning()
+    {
+        Log.e("Test", "RequestOverlay Running Permission ")
+
+        if ("xiaomi" == Build.MANUFACTURER.toLowerCase(Locale.ROOT)) {
+            val intent = Intent("miui.intent.action.APP_PERM_EDITOR")
+            intent.setClassName(
+                "com.miui.securitycenter",
+                "com.miui.permcenter.permissions.PermissionsEditorActivity"
+            )
+            intent.putExtra("extra_pkgname", "package:realapps.live.callerlocator")
+            startActivityForResult(intent, REQUEST_OVERLAY_RUNNING_PERMISSION)
+        }
+
+
     }
 
     private fun requestOverlayPermission() {
@@ -280,6 +301,7 @@ class CallThemesFragment : Fragment() {
             FOREGROUND_SERVICE_CONNECTED_DEVICE_PERMISSION_REQUEST_CODE -> handleForeGroundServicePermissionResult(
                 grantResults
             )
+            REQUEST_OVERLAY_RUNNING_PERMISSION -> handleOverlayRunningPermissionResult(grantResults)
         }
     }
 
@@ -345,6 +367,24 @@ class CallThemesFragment : Fragment() {
         if (Settings.canDrawOverlays(requireContext())) {
             // Permission granted, proceed with your logic
             Log.e("Test", "RequestOverlay Permission Granted 3")
+
+//            checkAndRequestOverlayPermissionRunning()
+            checkAndRequestPhoneStatePermission()
+//            openYourActivity()
+        } else {
+            // Permission not granted, show a message or take appropriate action
+            Toast.makeText(
+                requireContext(),
+                "Overlay permission not granted",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+    private fun handleOverlayRunningPermissionResult(grantResults: IntArray) {
+        if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            // Permission granted, proceed with your logic
+            Log.e("Test", "RequestOverlay Running Permission Granted 3")
 
             checkAndRequestPhoneStatePermission()
 //            openYourActivity()

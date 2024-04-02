@@ -1,12 +1,10 @@
 package realapps.live.callerlocator.callLocatorModule.supportFunctions
 
-import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.Context
 import android.content.res.Resources
 import android.view.View
 import android.view.animation.LinearInterpolator
-import realapps.live.callerlocator.callLocatorModule.modalClass.MyFriendsDataItem
 import realapps.live.callerlocator.databinding.FragmentCallLocatorBinding
 import realapps.live.callerlocator.zCommonFuntions.StatusBarUtils
 import realapps.live.callerlocator.zDatabase.BlockedContactsDBHelper
@@ -17,55 +15,58 @@ class CallLocatorFragmentUI(
     private val binding: FragmentCallLocatorBinding
 ) {
 
-     fun setTopPadding(resources: Resources) {
+    fun setTopPadding(resources: Resources) {
         val topPadding = StatusBarUtils.getStatusBarHeight(resources) + 12
 
 //         val layoutParams = binding.searchBarMainLt.layoutParams as ConstraintLayout.LayoutParams
 //         layoutParams.setMargins(0, topPadding, 0, 0) // Left, Top, Right, Bottom
 //         binding.searchBarMainLt.layoutParams = layoutParams
 
-         binding.searchBarMainLt.setPadding(
-             binding.searchBarMainLt.paddingLeft,
-             topPadding,
-             binding.searchBarMainLt.paddingRight,
-             binding.searchBarMainLt.paddingBottom
-         )
+        binding.searchBarMainLt.setPadding(
+            binding.searchBarMainLt.paddingLeft,
+            topPadding,
+            binding.searchBarMainLt.paddingRight,
+            binding.searchBarMainLt.paddingBottom
+        )
     }
 
-    fun clearSearch()
-    {
-        binding.etSearch.text=null
+    fun clearSearch() {
+        binding.etSearch.text = null
+        binding.etSearch.clearFocus()
     }
 
-    fun setContactNumber(phoneNumber: String)
-    {
-        EnteredNumber.phoneNumber =phoneNumber
+    fun setContactNumber(phoneNumber: String) {
+        EnteredNumber.phoneNumber = phoneNumber
 
         toggleContactLayout(true)
 
-        binding.tvPhoneNumber.text=phoneNumber
+        binding.tvPhoneNumberPU.text = phoneNumber
 
-        if(findIsNumberBlocked(phoneNumber))
-            binding.tvBlock.text="UnBlock"
+        if (findIsNumberBlocked(phoneNumber))
+            binding.tvBlockNumberPU.text = "UnBlock"
         else
-            binding.tvBlock.text="Block"
+            binding.tvBlockNumberPU.text = "Block"
     }
 
-    fun toggleContactLayout(show: Boolean)
-    {
-        binding.contactLayout.visibility= if(show) View.VISIBLE else View.GONE
+    fun toggleContactLayout(show: Boolean) {
+        //contactLayout
+        binding.contactPu.visibility = if (show) View.VISIBLE else View.GONE
+        binding.cvAddress.visibility=View.GONE
+
+        binding.etSearch.clearFocus()
+
     }
 
     // Creating the ValueAnimator for rotation
     val rotationAnimator = ValueAnimator.ofFloat(0f, 360f)
 
-    fun startRotateAnimation()
-    {
+    fun startRotateAnimation() {
 
         // Setting up rotation properties
         rotationAnimator.duration = 1000 // Duration in milliseconds
         rotationAnimator.repeatCount = ValueAnimator.INFINITE // Infinite rotation
-        rotationAnimator.interpolator = LinearInterpolator() // Linear interpolator for smooth rotation
+        rotationAnimator.interpolator =
+            LinearInterpolator() // Linear interpolator for smooth rotation
 
         // Update listener for rotating the ImageView
         rotationAnimator.addUpdateListener { valueAnimator ->
@@ -77,61 +78,71 @@ class CallLocatorFragmentUI(
         rotationAnimator.start()
     }
 
-    fun stopRotateAnimation()
-    {
+    fun stopRotateAnimation() {
         // Start the rotation animation
         rotationAnimator.cancel()
     }
 
     private var dbHelper = BlockedContactsDBHelper(context)
 
-    private fun findIsNumberBlocked(phoneNumber: String):Boolean
-    {
+    private fun findIsNumberBlocked(phoneNumber: String): Boolean {
         return dbHelper.findNumber(phoneNumber)
     }
 
-    fun showMyFriendsPB()
-    {
-        binding.shimmerViewContainer.visibility=View.VISIBLE
-        binding.rvFriend.visibility=View.GONE
-        binding.noFriendsLt.visibility=View.GONE
+    fun showMyFriendsPB() {
+        binding.shimmerViewContainer.visibility = View.VISIBLE
+        binding.rvFriend.visibility = View.GONE
+        binding.noFriendsLt.visibility = View.GONE
 
         binding.shimmerViewContainer.startShimmerAnimation()
     }
 
-    fun hideMyFriendsPB()
-    {
+    fun hideMyFriendsPB() {
         binding.shimmerViewContainer.stopShimmerAnimation()
-        binding.shimmerViewContainer.visibility=View.GONE
-        binding.rvFriend.visibility=View.VISIBLE
-        binding.noFriendsLt.visibility=View.VISIBLE
+        binding.shimmerViewContainer.visibility = View.GONE
+        binding.rvFriend.visibility = View.VISIBLE
+        binding.noFriendsLt.visibility = View.VISIBLE
     }
 
-    fun showContactPopUp(myFriendsDataItem: MyFriendsDataItem)
-    {
-        if(myFriendsDataItem.friendName==null)
-            binding.tvContactName.text="Unknown"
-        else
-            binding.tvContactName.text=myFriendsDataItem.friendName
+//    myFriendsDataItem: MyFriendsDataItem
 
-        if(findIsNumberBlocked(myFriendsDataItem.friendNumber!!))
-            binding.tvBlockNumberPU.text="UnBlock"
-        else
-            binding.tvBlockNumberPU.text="Block"
+    fun showContactPopUp() {
+//        if (myFriendsDataItem.friendName == null)
+//            binding.tvContactName.text = "Unknown"
+//        else
+//            binding.tvContactName.text = myFriendsDataItem.friendName
+//
+//        if (findIsNumberBlocked(myFriendsDataItem.friendNumber!!))
+//            binding.tvBlockNumberPU.text = "UnBlock"
+//        else
+//            binding.tvBlockNumberPU.text = "Block"
+//
+//        binding.tvPhoneNumberPU.text = myFriendsDataItem.friendNumber
 
-        binding.tvPhoneNumberPU.text=myFriendsDataItem.friendNumber
-
-        binding.contactPu.visibility=View.VISIBLE
-        binding.contactLayout.visibility=View.GONE
+        binding.contactPu.visibility = View.VISIBLE
+        binding.contactLayout.visibility = View.GONE
     }
 
-    fun hideContactPopUp()
-    {
-        binding.contactPu.visibility=View.GONE
+    fun hideContactPopUp() {
+        binding.contactPu.visibility = View.GONE
+    }
+
+    fun showAddressPopUp(streetName: String, address: String) {
+
+        binding.contactPu.visibility = View.GONE
+        binding.cvAddress.visibility = View.VISIBLE
+
+        binding.tvStreetName.text = streetName
+        binding.tvAddress.text = address
 
     }
+
 }
 
-object EnteredNumber{
+object EnteredNumber {
     var phoneNumber = ""
+}
+
+object SelectedFriend{
+    var selectedFriendNo = -1
 }

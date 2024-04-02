@@ -3,9 +3,13 @@ package realapps.live.callerlocator.callLocatorModule
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Address
+import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
@@ -46,6 +50,7 @@ import realapps.live.callerlocator.callLocatorModule.supportFunctions.EnteredNum
 import realapps.live.callerlocator.callLocatorModule.supportFunctions.InviteUserDialog
 import realapps.live.callerlocator.callLocatorModule.supportFunctions.MyFriendsAdapter
 import realapps.live.callerlocator.callLocatorModule.supportFunctions.PermissionResultListener
+import realapps.live.callerlocator.callLocatorModule.supportFunctions.SelectedFriend
 import realapps.live.callerlocator.callLocatorModule.supportFunctions.SendRequestDialog
 import realapps.live.callerlocator.databinding.FragmentCallLocatorBinding
 import realapps.live.callerlocator.loginModule.apiFunctions.LoginViewModel
@@ -56,6 +61,8 @@ import realapps.live.callerlocator.zCommonFuntions.ContactManager
 import realapps.live.callerlocator.zCommonFuntions.UtilFunctions
 import realapps.live.callerlocator.zDatabase.BlockedContactsDBHelper
 import realapps.live.callerlocator.zSharedPreference.LoginData
+import java.io.IOException
+import java.util.Locale
 
 
 @AndroidEntryPoint
@@ -226,19 +233,19 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
             getLocation()
         }
 
-        binding.btAddContact.setOnClickListener {
+        binding.btAddNumberPu.setOnClickListener {
             val mPhoneNumber = binding.etSearch.text.toString()
 
             openAddToContactsScreen(mPhoneNumber)
         }
 
-        binding.btBlock.setOnClickListener {
+        binding.btBlockNumberPU.setOnClickListener {
             val mPhoneNumber = binding.etSearch.text.toString()
 
-            if (binding.tvBlock.text.toString() == "Block") {
-                openBlockNumberSettings(mPhoneNumber,false)
+            if (binding.tvBlockNumberPU.text.toString() == "Block") {
+                openBlockNumberSettings(mPhoneNumber, true)
             } else {
-                unBlockNumber(mPhoneNumber,false)
+                unBlockNumber(mPhoneNumber, true)
             }
         }
 
@@ -248,6 +255,14 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
 
             if (mPhoneNumber.isEmpty())
                 return@setOnClickListener
+
+            if(SelectedFriend.selectedFriendNo!=-1)
+            {
+                myFriendsAdapter.resetValues()
+                myFriendsAdapter.notifyItemChanged(SelectedFriend.selectedFriendNo)
+
+            }
+
 
             callLocatorFragmentUI.setContactNumber(binding.etSearch.text.toString())
             UtilFunctions.hideKeyboard(binding.etSearch)
@@ -267,8 +282,8 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
             }
         }
 
-        binding.btCall.setOnClickListener {
-            checkCallPermission(true,EnteredNumber.phoneNumber)
+        binding.btCallPU.setOnClickListener {
+            checkCallPermission(true, EnteredNumber.phoneNumber)
         }
 
         binding.btClear.setOnClickListener {
@@ -283,6 +298,10 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
 //            callLocatorFragmentUI.startRotateAnimation()
             getMyFriends()
 
+        }
+
+        binding.btCloseAddressPU.setOnClickListener {
+            binding.cvAddress.visibility=View.GONE
         }
     }
 
@@ -357,7 +376,7 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
 
     var isLocationListening = false
 
-    fun listenForLocation() {
+    private fun listenForLocation() {
 
         Log.e("Test", "Listening for Location")
 
@@ -397,6 +416,8 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
             location.longitude
         )
 
+        Log.e("Test", "Address ${getAddressFromLocation(location.latitude, location.longitude)}")
+
         mMap.clear()
 
         mMap.addMarker(
@@ -410,6 +431,44 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
 
         stopLocationUpdates()
         isLocationListening = false
+    }
+
+    private fun getAddressFromLocation(latitude: Double, longitude: Double): String {
+        val geocoder = Geocoder(requireContext(), Locale.getDefault())
+        var result = ""
+
+        try {
+            val addresses: List<Address>? = geocoder.getFromLocation(latitude, longitude, 1)
+            if (!addresses.isNullOrEmpty()) {
+                val address = addresses[0]
+                val addressStringBuilder = StringBuilder()
+                for (i in 0 until address.maxAddressLineIndex + 1) {
+                    addressStringBuilder.append(address.getAddressLine(i)).append("\n")
+                }
+                result = addressStringBuilder.toString()
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+
+        return result
+    }
+
+    private fun getStreetNameFromLocation(latitude: Double, longitude: Double): String {
+        val geocoder = Geocoder(requireContext(), Locale.getDefault())
+        var streetName = ""
+
+        try {
+            val addresses: List<Address>? = geocoder.getFromLocation(latitude, longitude, 1)
+            if (!addresses.isNullOrEmpty()) {
+                val address = addresses[0]
+                streetName = address.thoroughfare ?: ""
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+
+        return streetName
     }
 
     private fun isLocationEnabled(): Boolean {
@@ -438,7 +497,7 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
         Manifest.permission.ACCESS_FINE_LOCATION
     )
 
-    fun askPermissions() {
+    private fun askPermissions() {
 //        checkLocationPermission()
 
         checkContactPermission()
@@ -449,7 +508,7 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
         // Check if the permission is granted
         if (arePermissionsGranted(contactPermissions)) {
             // Permission is already granted, you can proceed with contact retrieval
-            checkCallPermission(false,EnteredNumber.phoneNumber)
+            checkCallPermission(false, EnteredNumber.phoneNumber)
             getContacts()
         } else {
             // Permission is not granted, request it
@@ -457,7 +516,7 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
         }
     }
 
-    private fun checkCallPermission(isForCall: Boolean,phoneNumber: String) {
+    private fun checkCallPermission(isForCall: Boolean, phoneNumber: String) {
         // Check if CALL_PHONE and READ_PHONE_STATE permissions are granted
         if (arePermissionsGranted(callPermissions)) {
             // Both permissions are granted, proceed with the call
@@ -497,7 +556,7 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
         }
     }
 
-    fun requestPermission(permissions: Array<String>, requestCode: Int) {
+    private fun requestPermission(permissions: Array<String>, requestCode: Int) {
         requestPermissions(permissions, requestCode)
     }
 
@@ -505,7 +564,7 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
     private fun handleContactPermissionResult(grantResults: IntArray) {
         if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             // Permission granted, proceed with contact retrieval
-            checkCallPermission(false,EnteredNumber.phoneNumber)
+            checkCallPermission(false, EnteredNumber.phoneNumber)
             getContacts()
         } else {
             // Permission denied, inform the user
@@ -607,6 +666,7 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
         return true
     }
 
+    lateinit var myFriendsAdapter : MyFriendsAdapter
 
     private fun myFriendsResponse(
         data: List<MyFriendsDataItem?>?,
@@ -615,7 +675,7 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
 //        callLocatorFragmentUI.stopRotateAnimation()
         callLocatorFragmentUI.hideMyFriendsPB()
 
-        if(data!=null&&allFriendRequestList!=null) {
+        if (data != null && allFriendRequestList != null) {
             myFriendsList = ArrayList(data!!)
             allFriendRequests = ArrayList(allFriendRequestList!!)
 
@@ -624,7 +684,7 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
                 binding.noFriendsLt.visibility = View.GONE
                 binding.rvFriend.visibility = View.VISIBLE
 
-                val myFriendsAdapter =
+                myFriendsAdapter =
                     MyFriendsAdapter(requireContext(), myFriendsList, ::onFriendSelected)
                 binding.rvFriend.apply {
                     layoutManager = LinearLayoutManager(
@@ -637,7 +697,7 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
                 binding.noFriendsLt.visibility = View.VISIBLE
                 binding.rvFriend.visibility = View.GONE
             }
-        }else{
+        } else {
             binding.noFriendsLt.visibility = View.VISIBLE
             binding.rvFriend.visibility = View.GONE
         }
@@ -668,8 +728,8 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
         else
             Log.e("Test", "EMPTY ${myFriendsDataItem.friendNumber}")
 
-        callLocatorFragmentUI.showContactPopUp(myFriendsDataItem)
-        popUponClickListeners(myFriendsDataItem)
+//        callLocatorFragmentUI.showContactPopUp(myFriendsDataItem)
+//        popUponClickListeners(myFriendsDataItem)
     }
 
     private fun moveCameraToLocation(lat: Double, lng: Double) {
@@ -684,6 +744,14 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
                 .title("Location")
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.iv_location))
         )
+
+
+        val streetName = getStreetNameFromLocation(lng, lat)
+        val address = getAddressFromLocation(lng, lat)
+
+        addressPopUpListeners(address)
+
+        callLocatorFragmentUI.showAddressPopUp(streetName, address)
 
         // Zoom level for the animation
         val zoomLevel = 18f
@@ -732,28 +800,28 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
 
 //    private var dbHelper = BlockedContactsDBHelper(requireContext())
 
-    private fun openBlockNumberSettings(phoneNumber: String,isCalledFromPU: Boolean) {
+    private fun openBlockNumberSettings(phoneNumber: String, isCalledFromPU: Boolean) {
         val res = dbHelper.insertNumber(phoneNumber)
         if (res) {
             UtilFunctions.showToast(requireContext(), "Number Blocked Successfully")
 
 
-            if(isCalledFromPU)
-                binding.tvBlockNumberPU.text="UnBlock"
+            if (isCalledFromPU)
+                binding.tvBlockNumberPU.text = "UnBlock"
             else
                 binding.tvBlock.text = "UnBlock"
         }
 //        Log.e("Test", "AI $res")
     }
 
-    private fun unBlockNumber(phoneNumber: String,isCalledFromPU: Boolean) {
+    private fun unBlockNumber(phoneNumber: String, isCalledFromPU: Boolean) {
         val res = dbHelper.deleteNumber(phoneNumber)
 
         if (res) {
             UtilFunctions.showToast(requireContext(), "Number UnBlocked Successfully")
 
-            if(isCalledFromPU)
-                binding.tvBlockNumberPU.text="Block"
+            if (isCalledFromPU)
+                binding.tvBlockNumberPU.text = "Block"
             else
                 binding.tvBlock.text = "Block"
 
@@ -761,10 +829,9 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
     }
 
     //PopUp OnClick Listeners
-    fun popUponClickListeners(myFriendsDataItem: MyFriendsDataItem)
-    {
+    fun popUponClickListeners(myFriendsDataItem: MyFriendsDataItem) {
         binding.btCallPU.setOnClickListener {
-            checkCallPermission(true,myFriendsDataItem.friendNumber!!)
+            checkCallPermission(true, myFriendsDataItem.friendNumber!!)
         }
 
         binding.btAddNumberPu.setOnClickListener {
@@ -776,14 +843,39 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
             val mPhoneNumber = myFriendsDataItem.friendNumber
 
             if (binding.tvBlockNumberPU.text.toString() == "Block") {
-                openBlockNumberSettings(mPhoneNumber!!,true)
+                openBlockNumberSettings(mPhoneNumber!!, true)
             } else {
-                unBlockNumber(mPhoneNumber!!,true)
+                unBlockNumber(mPhoneNumber!!, true)
             }
         }
 
         binding.btClosePu.setOnClickListener {
             callLocatorFragmentUI.hideContactPopUp()
         }
+    }
+
+    fun addressPopUpListeners(address: String) {
+        binding.btCopy.setOnClickListener {
+            copyAddressToClipboard(address)
+        }
+
+        binding.btShare.setOnClickListener {
+            shareAddress(address)
+        }
+    }
+
+    fun copyAddressToClipboard(address: String) {
+        val clipboardManager =
+            requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clipData = ClipData.newPlainText("Address", address)
+        clipboardManager.setPrimaryClip(clipData)
+        Toast.makeText(context, "Address copied to clipboard", Toast.LENGTH_SHORT).show()
+    }
+
+    fun shareAddress(address: String) {
+        val shareIntent = Intent(Intent.ACTION_SEND)
+        shareIntent.type = "text/plain"
+        shareIntent.putExtra(Intent.EXTRA_TEXT, address)
+        requireContext().startActivity(Intent.createChooser(shareIntent, "Share address"))
     }
 }

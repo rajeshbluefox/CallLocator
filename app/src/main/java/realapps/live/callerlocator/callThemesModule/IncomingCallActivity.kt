@@ -49,6 +49,8 @@ class IncomingCallActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         binding = ActivityIncomingCallBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        UtilFunctions.showToast(this,"IC")
+
         StatusBarUtils.transparentStatusBar(this)
         StatusBarUtils.setTopPadding(resources,binding.callerTheme)
 

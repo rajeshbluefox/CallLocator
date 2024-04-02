@@ -80,7 +80,8 @@
             tools:text="Testing" />
 
         <ImageButton
-            android:id="@+id/btAccept"
+            android:id="@+id/btAccept1"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/call_answer"
@@ -90,8 +91,41 @@
             app:layout_constraintStart_toEndOf="@+id/btDecline"
             tools:layout_editor_absoluteY="600dp" />
 
-        <ImageButton
+        <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/btDecline"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="@dimen/dp_100"
+            android:scaleType="fitXY"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/decline"
+            app:layout_constraintBottom_toBottomOf="@id/guideLine1"
+            app:layout_constraintEnd_toStartOf="@+id/btAccept"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="600dp"/>
+
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/btAccept"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="@dimen/dp_100"
+            android:scaleType="fitXY"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/accept"
+            app:layout_constraintBottom_toBottomOf="@id/guideLine1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toEndOf="@id/btDecline"
+            tools:layout_editor_absoluteY="600dp"/>
+
+
+        <ImageButton
+            android:visibility="gone"
+            android:id="@+id/btDecline1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/call_decline"

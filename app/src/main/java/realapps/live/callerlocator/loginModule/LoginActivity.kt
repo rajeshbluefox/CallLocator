@@ -1,6 +1,7 @@
 package realapps.live.callerlocator.loginModule
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import dagger.hilt.android.AndroidEntryPoint
@@ -10,6 +11,7 @@ import realapps.live.callerlocator.loginModule.modalClass.UserInfoDataClass
 import realapps.live.callerlocator.loginModule.supportFunctions.LoginAPIFunctions
 import realapps.live.callerlocator.loginModule.supportFunctions.LoginUI
 import realapps.live.callerlocator.zCommonFuntions.CallIntent
+import realapps.live.callerlocator.zCommonFuntions.StatusBarUtils
 import realapps.live.callerlocator.zCommonFuntions.UtilFunctions
 import realapps.live.callerlocator.zSharedPreference.LoginData
 
@@ -33,6 +35,8 @@ class LoginActivity : AppCompatActivity() {
         val window = window
         UtilFunctions.setStatusBarIconColor(window, true) // Set status bar icons to light
 
+        StatusBarUtils.transparentStatusBar(this)
+
 
         initViews()
         setOnClickListeners()
@@ -41,40 +45,77 @@ class LoginActivity : AppCompatActivity() {
 
     private fun initViews() {
         loginUI = LoginUI(this, binding, ::findUserExistence, ::gotoHomeScreen, ::postNewUser)
-        loginAPIFunctions = LoginAPIFunctions(this,this,this,loginViewModel,::showPasswordLayout,::gotoHomeScreen)
+        loginAPIFunctions = LoginAPIFunctions(
+            this,
+            this,
+            this,
+            loginViewModel,
+            ::showPasswordLayout,
+            ::gotoHomeScreen
+        )
     }
 
-    private fun showPasswordLayout(status: Boolean)
-    {
-        loginUI.showPasswordLayout(status)
+    private fun showPasswordLayout(status: Boolean) {
+        if (status)
+            loginUI.checkPassword(UserInfoDataClass.userData.password!!)
+        else
+        {
+            loginUI.showPB(false)
+            UtilFunctions.showToast(this,"Account doesn't exists")
+        }
+//        loginUI.showPasswordLayout(status)
     }
 
     private fun setOnClickListeners() {
         binding.btLogin.setOnClickListener {
 
             when (binding.btLogin.text) {
-                "Login" -> {
-                    loginUI.checkPassword(UserInfoDataClass.userData.password!!)
+                "SignIn" -> {
+                    loginUI.checkFields()
                 }
+
                 "Register" -> {
                     loginUI.createPassword()
                 }
+
                 else -> {
-                    loginUI.checkFields()
                 }
             }
 
+        }
+
+        binding.showRegister.setOnClickListener {
+            val btText = binding.showRegister.text.toString()
+
+            if(btText=="Register")
+            {
+                binding.etCPassword.visibility=View.VISIBLE
+                binding.tvDes.text = "Already have an account?"
+                binding.showRegister.text = "SignIn"
+
+                binding.textView2.text="Register"
+                binding.btLogin.text="Register"
+            }else{
+                binding.etCPassword.visibility=View.GONE
+                binding.tvDes.text = "Don't have an account?"
+                binding.showRegister.text = "Register"
+
+                binding.textView2.text="SignIn"
+                binding.btLogin.text="SignIn"
+            }
         }
     }
 
 
     private fun findUserExistence(phoneNumber: String) {
+        loginUI.showPB(true)
         loginAPIFunctions.findUserExistence(phoneNumber)
 //        loginViewModel.getUserInfo(phoneNumber)
 //        findUserExistenceObserver()
     }
 
     private fun postNewUser(phoneNumber: String, password: String) {
+        loginUI.showPB(true)
         loginAPIFunctions.postNewUser(phoneNumber, password)
 
 //        val userInfoData = userInfoData()
@@ -89,7 +130,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun gotoHomeScreen() {
-        LoginData.saveUserLoginStatus(this,true)
+        loginUI.showPB(false)
+        LoginData.saveUserLoginStatus(this, true)
         CallIntent.goToHomeActivity(this, true, this)
     }
 
