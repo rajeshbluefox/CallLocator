@@ -21,35 +21,48 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
-//        homeActivityViewModel = ViewModelProvider(this)[HomeActivityViewModel::class.java]
         setContentView(binding.root)
         StatusBarUtils.transparentStatusBar(this)
 
 //        LoginData.saveUserPhone(this, "9123456789")
 
 
-        setIcon(1)
+        setFragment()
         onClickListeners()
-        gotoCallLocatorFragment()
+
+    }
+
+    private fun setFragment()
+    {
+
+        when(SelectedButton.buttonClicked)
+        {
+            1 -> {
+                gotoCallLocatorFragment()
+            }
+            2 ->{
+                gotoCallThemesFragment()
+            }
+            3 ->{
+                gotoCallSettingsFragment()
+            }
+        }
     }
 
     private fun onClickListeners() {
         binding.btCallLocator.setOnClickListener {
             gotoCallLocatorFragment()
 
-            setIcon(1)
         }
 
         binding.btCallThemes.setOnClickListener {
             gotoCallSettingsFragment()
 
-            setIcon(2)
         }
 
         binding.btSettings.setOnClickListener {
             gotoCallThemesFragment()
 
-            setIcon(3)
         }
     }
 
@@ -101,18 +114,21 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun gotoCallLocatorFragment() {
+        setIcon(1)
         supportFragmentManager.beginTransaction()
             .replace(R.id.containerFragment, CallLocatorFragment())
             .commit()
     }
 
     private fun gotoCallSettingsFragment() {
+        setIcon(2)
         supportFragmentManager.beginTransaction()
             .replace(R.id.containerFragment, CallSettingsFragment())
             .commit()
     }
 
     private fun gotoCallThemesFragment() {
+        setIcon(3)
         supportFragmentManager.beginTransaction()
             .replace(R.id.containerFragment, CallThemesFragment())
             .commit()

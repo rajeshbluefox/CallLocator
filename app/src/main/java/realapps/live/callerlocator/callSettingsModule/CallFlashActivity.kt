@@ -109,6 +109,10 @@ class CallFlashActivity : AppCompatActivity() {
             }
         }
 
+        binding.btBack.setOnClickListener {
+            finish()
+        }
+
         binding.flashFrequencyBar.setOnSeekBarChangeListener(object :
             SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {

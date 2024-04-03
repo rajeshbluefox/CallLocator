@@ -132,7 +132,7 @@ class LoginActivity : AppCompatActivity() {
     private fun gotoHomeScreen() {
         loginUI.showPB(false)
         LoginData.saveUserLoginStatus(this, true)
-        CallIntent.goToHomeActivity(this, true, this)
+        CallIntent.goToControllingActivity(this, true, this)
     }
 
 

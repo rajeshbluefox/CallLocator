@@ -49,8 +49,8 @@
                 android:layout_width="@dimen/dp_300"
                 android:layout_height="@dimen/dp_300"
                 app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/sendrequest"
+                app:lottie_loop="false"
+                app:lottie_rawRes="@raw/signin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textView2"/>

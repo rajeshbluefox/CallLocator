@@ -40,6 +40,9 @@ import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import realapps.live.callerlocator.R
 import realapps.live.callerlocator.callLocatorModule.apiFunctions.CallLocatorApiFunctions
 import realapps.live.callerlocator.callLocatorModule.apiFunctions.CallLocatorViewModel
@@ -85,6 +88,10 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
     private lateinit var sendRequestDialog: SendRequestDialog
 
     private lateinit var dbHelper: BlockedContactsDBHelper
+
+    private val coroutineScope =
+        CoroutineScope(Dispatchers.Main) // Dispatchers.Main represents the main (UI) thread
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -105,8 +112,12 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
 
         initViews()
         editTextListener()
-        setMapView()
+
         onClickListeners()
+
+        coroutineScope.launch {
+            setMapView()
+        }
 
     }
 

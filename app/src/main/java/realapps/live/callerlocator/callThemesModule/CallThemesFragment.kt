@@ -104,6 +104,10 @@ class CallThemesFragment : Fragment() {
                 SettingsData.saveCallThemeStatus(requireContext(), false)
             }
         }
+
+        binding.btHome.setOnClickListener {
+            CallIntent.goToControllingActivity(requireContext(),true,requireActivity())
+        }
     }
 
 

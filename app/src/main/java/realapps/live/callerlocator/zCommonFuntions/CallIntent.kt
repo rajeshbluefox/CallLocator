@@ -7,6 +7,7 @@ import realapps.live.callerlocator.callLocatorModule.FriendRequestActivity
 import realapps.live.callerlocator.callSettingsModule.BlockedNumbersActivity
 import realapps.live.callerlocator.callSettingsModule.CallAnnouncerActivity
 import realapps.live.callerlocator.callSettingsModule.CallFlashActivity
+import realapps.live.callerlocator.homeModule.ControllingActivity
 import realapps.live.callerlocator.setThemeModule.SetThemeActivity
 import realapps.live.callerlocator.homeModule.HomeActivity
 import realapps.live.callerlocator.loginModule.LoginActivity
@@ -14,6 +15,13 @@ import realapps.live.callerlocator.profileModule.ProfileActivity
 import realapps.live.callerlocator.setThemeModule.SelectContactsActivity
 
 object CallIntent {
+
+    fun goToControllingActivity(context: Context, killMe: Boolean, activity: Activity) {
+        val intent = Intent(context, ControllingActivity::class.java)
+        context.startActivity(intent)
+        if (killMe) activity.finish()
+    }
+
     fun goToHomeActivity(context: Context, killMe: Boolean, activity: Activity) {
         val intent = Intent(context, HomeActivity::class.java)
         context.startActivity(intent)

@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 
 import dagger.hilt.android.AndroidEntryPoint
 import realapps.live.callerlocator.zCommonFuntions.CallIntent
+import realapps.live.callerlocator.zCommonFuntions.StatusBarUtils
 import realapps.live.callerlocator.zCommonFuntions.UtilFunctions
 import realapps.live.callerlocator.zSharedPreference.LoginData
 
@@ -21,6 +22,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        StatusBarUtils.transparentStatusBar(this)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             requestPostNotificationsPermission()
@@ -34,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
             if (LoginData.getUserLoginStatus(this)) {
 
-                CallIntent.goToHomeActivity(this, true, this)
+                CallIntent.goToControllingActivity(this,true,this)
 
             } else {
                 CallIntent.goToLoginActivity(this, true, this)

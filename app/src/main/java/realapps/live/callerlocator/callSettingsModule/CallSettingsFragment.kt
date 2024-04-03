@@ -52,6 +52,10 @@ class CallSettingsFragment : Fragment() {
         binding.btCallBlocking.setOnClickListener {
             CallIntent.goToCallBlockingActivity(requireContext(),false,requireActivity())
         }
+
+        binding.btHome.setOnClickListener {
+            CallIntent.goToControllingActivity(requireContext(),true,requireActivity())
+        }
     }
 
 }

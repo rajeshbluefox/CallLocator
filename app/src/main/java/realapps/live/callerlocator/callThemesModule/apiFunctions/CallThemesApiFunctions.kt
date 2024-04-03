@@ -2,6 +2,7 @@ package realapps.live.callerlocator.callThemesModule.apiFunctions
 
 import android.app.Activity
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import realapps.live.callerlocator.callThemesModule.modalClass.ThemesData
 
@@ -26,6 +27,8 @@ class CallThemesApiFunctions(
         callThemesViewModel.getThemesResponse().observe(lifeCycleOwner){
             if(it.status==200)
             {
+                Log.e("Test","Size ${it.data?.size}")
+
                 if(it.data!!.isNotEmpty())
                 {
                     getThemesResponse.invoke(it.data as List<ThemesData>)

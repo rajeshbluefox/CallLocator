@@ -81,6 +81,10 @@ class CallAnnouncerActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             announceCaller()
         }
 
+        binding.btBack.setOnClickListener {
+            finish()
+        }
+
     }
 
     private lateinit var tts: TextToSpeech

@@ -12,6 +12,16 @@
         android:padding="@dimen/dp_16"
         tools:context=".callThemesModule.CallThemesFragment">
 
+
+        <ImageView
+            android:id="@+id/btHome"
+            android:layout_width="@dimen/dp_36"
+            android:layout_height="@dimen/dp_36"
+            android:src="@drawable/home_new"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/titleBar"
+            app:layout_constraintBottom_toBottomOf="@id/titleBar"/>
+
         <TextView
             android:id="@+id/titleBar"
             android:layout_width="wrap_content"
