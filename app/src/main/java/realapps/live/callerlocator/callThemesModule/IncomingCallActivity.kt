@@ -2,6 +2,7 @@ package realapps.live.callerlocator.callThemesModule
 
 import android.content.Context
 import android.content.IntentFilter
+import android.graphics.PixelFormat
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -14,6 +15,8 @@ import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
 import android.telecom.TelecomManager
 import android.util.Log
+import android.view.Gravity
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.airbnb.lottie.LottieCompositionFactory
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,7 +27,6 @@ import realapps.live.callerlocator.databinding.ActivityIncomingCallBinding
 import realapps.live.callerlocator.setThemeModule.supportFunctions.ContactDatabaseHelper
 import realapps.live.callerlocator.zCommonFuntions.Contact
 import realapps.live.callerlocator.zCommonFuntions.ContactManager
-import realapps.live.callerlocator.zCommonFuntions.StatusBarUtils
 import realapps.live.callerlocator.zCommonFuntions.UtilFunctions
 import realapps.live.callerlocator.zSharedPreference.SettingsData
 import java.io.File
@@ -47,22 +49,21 @@ class IncomingCallActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityIncomingCallBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
-        UtilFunctions.showToast(this,"IC")
+        UtilFunctions.showToast(this,"IC 2")
 
-        StatusBarUtils.transparentStatusBar(this)
-        StatusBarUtils.setTopPadding(resources,binding.callerTheme)
-
+//        StatusBarUtils.transparentStatusBar(this)
+//        StatusBarUtils.setTopPadding(resources,binding.callerTheme)
+//
         callEndedReceiver = CallEndedReceiver()
         callEndedReceiver.initCallBack(::onCallEnded)
         val filter = IntentFilter("ACTION_CALL_ENDED")
         registerReceiver(callEndedReceiver, filter, RECEIVER_EXPORTED)
-
+//
         tts = TextToSpeech(this, this)
-
-        setDetails()
-        onClickListeners()
+//
+//        setDetails()
+//        onClickListeners()
     }
 
     private fun onCallEnded() {
@@ -114,9 +115,9 @@ class IncomingCallActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
         findName(incomingNumber)
         findThemeandSet(incomingNumber)
-        checkCallAnnouncment(incomingNumber)
-        checkCallFlashLight()
-        initSensor()
+//        checkCallAnnouncment(incomingNumber)
+//        checkCallFlashLight()
+//        initSensor()
     }
 
     private fun findName(incomingNumber: String) {

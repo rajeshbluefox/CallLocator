@@ -119,7 +119,6 @@ class CallThemesFragment : Fragment() {
 
     private fun initThemes() {
 
-
         val callerThemesAdapter = CallerThemesAdapter(
             requireContext(),
             themes,
@@ -159,6 +158,11 @@ class CallThemesFragment : Fragment() {
     private val overlayPermissions = arrayOf(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
     private val callLogPermissions = arrayOf(Manifest.permission.READ_CALL_LOG)
     private val answerPhoneCallsPermissions = arrayOf(Manifest.permission.ANSWER_PHONE_CALLS)
+
+//    private val overlayPermissions = arrayOf(
+//        Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+//        Manifest.permission.SYSTEM_ALERT_WINDOW
+//    )
 
     private fun checkAndRequestPermissions() {
         checkAndRequestCallLogPermission()

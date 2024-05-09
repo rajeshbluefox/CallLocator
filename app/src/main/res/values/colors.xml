@@ -8,9 +8,17 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red">#FF0000</color>
+    <color name="grey">#6C6C6C</color>
 
     <color name="bt_one">#FFFFFFFF</color>
     <color name="bt_two">#FFFFFFFF</color>
+
+    <color name="lightgrey">#E9E9E9</color>
+
+    <color name="colorPrimary">#418CEC</color>
+    <color name="colorPrimaryDark">#418CEC</color>
+    <color name="colorAccent">#418CEC</color>
+    <color name="colorAccent1">#C1C1C1</color>
 
     <!--    #2F3C7E-->
     <color name="primary_one">#0090d5</color>

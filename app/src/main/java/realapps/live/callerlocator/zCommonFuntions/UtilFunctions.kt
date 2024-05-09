@@ -16,6 +16,10 @@ object UtilFunctions {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
+    fun showToastLong(context: Context, message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+    }
+
     fun getCurrentDateTime(): String {
         val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
         val currentDate = Date()

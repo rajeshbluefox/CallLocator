@@ -5,19 +5,23 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         tools:context=".callThemesModule.IncomingCallActivity">
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/callerTheme"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:scaleType="fitXY"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
-            app:lottie_rawRes="@raw/call_theme_1" />
+            app:lottie_rawRes="@raw/call_theme_1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <TextView
             android:id="@+id/userName"
@@ -46,50 +50,7 @@
             app:layout_constraintTop_toBottomOf="@id/userName"
             tools:text="Incoming Number" />
 
-        <Button
-            android:id="@+id/acceptButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/incomingNumberTextView"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"
-            android:text="Accept"
-            android:visibility="gone" />
 
-        <Button
-            android:id="@+id/rejectButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/acceptButton"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:text="Reject"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/incomingNumberTextView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/rejectButton"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="100dp"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:visibility="gone"
-            tools:text="Testing" />
-
-        <ImageButton
-            android:id="@+id/btAccept1"
-            android:visibility="gone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/call_answer"
-            app:layout_constraintBottom_toBottomOf="@id/guideLine1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/btDecline"
-            tools:layout_editor_absoluteY="600dp" />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/btDecline"
@@ -123,18 +84,6 @@
             tools:layout_editor_absoluteY="600dp"/>
 
 
-        <ImageButton
-            android:visibility="gone"
-            android:id="@+id/btDecline1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/call_decline"
-            app:layout_constraintBottom_toBottomOf="@id/guideLine1"
-            app:layout_constraintEnd_toStartOf="@+id/btAccept"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="600dp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideLine1"

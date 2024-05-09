@@ -3,6 +3,7 @@ package realapps.live.callerlocator.callThemesModule.supportFunctions
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import com.journeyapps.barcodescanner.Util
 import realapps.live.callerlocator.zCommonFuntions.UtilFunctions
 
@@ -19,6 +20,7 @@ class CallEndedReceiver() : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         if (intent?.action == "ACTION_CALL_ENDED") {
 //            UtilFunctions.showToast(context!!,"Call Ended")
+            Log.e("Test","Call Ended")
             onResponseReceived.invoke()
             // Call ended, handle it here
             // For example, you can perform actions or start services

@@ -3,6 +3,7 @@ package realapps.live.callerlocator.zCommonFuntions
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import realapps.live.callerlocator.bankInformationModule.BankInfomationActivity
 import realapps.live.callerlocator.callLocatorModule.FriendRequestActivity
 import realapps.live.callerlocator.callSettingsModule.BlockedNumbersActivity
 import realapps.live.callerlocator.callSettingsModule.CallAnnouncerActivity
@@ -11,8 +12,10 @@ import realapps.live.callerlocator.homeModule.ControllingActivity
 import realapps.live.callerlocator.setThemeModule.SetThemeActivity
 import realapps.live.callerlocator.homeModule.HomeActivity
 import realapps.live.callerlocator.loginModule.LoginActivity
+import realapps.live.callerlocator.phoneToolsModule.PhoneToolActivity
 import realapps.live.callerlocator.profileModule.ProfileActivity
 import realapps.live.callerlocator.setThemeModule.SelectContactsActivity
+import realapps.live.callerlocator.simInfoModule.SimInfomationActivity
 
 object CallIntent {
 
@@ -83,4 +86,21 @@ object CallIntent {
         if (killMe) activity.finish()
     }
 
+    fun goToPhoneToolActivity(context: Context, killMe: Boolean, activity: Activity) {
+        val intent = Intent(context, PhoneToolActivity::class.java)
+        context.startActivity(intent)
+        if (killMe) activity.finish()
+    }
+
+    fun goToSimInfomationActivity(context: Context, killMe: Boolean, activity: Activity) {
+        val intent = Intent(context, SimInfomationActivity::class.java)
+        context.startActivity(intent)
+        if (killMe) activity.finish()
+    }
+
+    fun goToBankInfomationActivity(context: Context, killMe: Boolean, activity: Activity) {
+        val intent = Intent(context, BankInfomationActivity::class.java)
+        context.startActivity(intent)
+        if (killMe) activity.finish()
+    }
 }

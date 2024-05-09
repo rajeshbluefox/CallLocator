@@ -44,6 +44,19 @@ class ControllingActivity : AppCompatActivity() {
 
         }
 
+        binding.ivMobileTools.setOnClickListener {
+            CallIntent.goToPhoneToolActivity(this, false, this)
+
+        }
+
+        binding.ivSimInfomatoin.setOnClickListener {
+            CallIntent.goToSimInfomationActivity(this,false,this)
+        }
+
+        binding.ivBankInfomation.setOnClickListener {
+            CallIntent.goToBankInfomationActivity(this,false,this)
+        }
+
         binding.btShareApp.setOnClickListener {
             shareApp("DownLoad Family Locator App")
         }
