@@ -50,13 +50,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="34">
         <activity
+            android:name=".nearByPlacesModule.TrafficActivity"
+            android:exported="false"
+            android:label="@string/title_activity_traffic"
+            android:theme="@style/Theme.Realapps" />
+        <activity
             android:name=".callThemesModule.CallSettingActivity"
-            android:exported="true" >
-
-
-
-        </activity>
-
+            android:exported="true"></activity>
         <activity
             android:name=".callThemesModule.CallActivity"
             android:exported="true">
@@ -66,43 +66,37 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".phoneToolsModule.PhoneToolActivity"
-            android:exported="true" >
-
-
-
-        </activity>
-
+            android:exported="true"></activity>
         <activity
             android:name=".phoneToolsModule.PhoneInfomationActivity"
             android:exported="false" />
-
         <activity
             android:name=".phoneToolsModule.AudioControlActivity"
             android:exported="false" />
-
         <activity
             android:name=".phoneToolsModule.SystemUseActivity"
             android:exported="false" />
-
         <activity
             android:name=".simInfoModule.SimInfomationActivity"
             android:exported="false" />
-
         <activity
             android:name=".simInfoModule.NomInfomationActivity"
             android:exported="false" />
-
         <activity
             android:name=".bankInformationModule.BankInfomationActivity"
             android:exported="false" />
-
         <activity
             android:name=".bankInformationModule.BankViewActivity"
             android:exported="false" />
+        <activity
+            android:name=".nearByPlacesModule.FindTraficActivity"
+            android:exported="false" />
 
+        <activity
+            android:name=".nearByPlacesModule.CompassActivity"
+            android:exported="false" />
         <activity
             android:name=".homeModule.ControllingActivity"
             android:exported="false" />
@@ -123,11 +117,7 @@
             android:exported="false" />
         <activity
             android:name=".callSettingsModule.CallFlashActivity"
-            android:exported="true">
-
-
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".setThemeModule.SelectContactsActivity"
             android:exported="true"

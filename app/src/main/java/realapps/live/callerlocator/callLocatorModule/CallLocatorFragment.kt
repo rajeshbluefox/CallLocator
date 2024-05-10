@@ -322,6 +322,8 @@ class CallLocatorFragment : Fragment(), OnMapReadyCallback, PermissionResultList
 
         mMap = googleMap
 
+        mMap.isTrafficEnabled=true
+
         if (isCallPermissionGiven)
             getLocation()
     }

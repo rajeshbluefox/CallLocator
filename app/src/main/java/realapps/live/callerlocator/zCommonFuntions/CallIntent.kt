@@ -12,6 +12,9 @@ import realapps.live.callerlocator.homeModule.ControllingActivity
 import realapps.live.callerlocator.setThemeModule.SetThemeActivity
 import realapps.live.callerlocator.homeModule.HomeActivity
 import realapps.live.callerlocator.loginModule.LoginActivity
+import realapps.live.callerlocator.nearByPlacesModule.CompassActivity
+import realapps.live.callerlocator.nearByPlacesModule.FindTraficActivity
+import realapps.live.callerlocator.nearByPlacesModule.TrafficActivity
 import realapps.live.callerlocator.phoneToolsModule.PhoneToolActivity
 import realapps.live.callerlocator.profileModule.ProfileActivity
 import realapps.live.callerlocator.setThemeModule.SelectContactsActivity
@@ -100,6 +103,24 @@ object CallIntent {
 
     fun goToBankInfomationActivity(context: Context, killMe: Boolean, activity: Activity) {
         val intent = Intent(context, BankInfomationActivity::class.java)
+        context.startActivity(intent)
+        if (killMe) activity.finish()
+    }
+
+    fun goToFindTraficActivity(context: Context, killMe: Boolean, activity: Activity) {
+        val intent = Intent(context, FindTraficActivity::class.java)
+        context.startActivity(intent)
+        if (killMe) activity.finish()
+    }
+
+    fun goToTrafficActivity(context: Context, killMe: Boolean, activity: Activity) {
+        val intent = Intent(context, TrafficActivity::class.java)
+        context.startActivity(intent)
+        if (killMe) activity.finish()
+    }
+
+    fun goToCompassActivity(context: Context, killMe: Boolean, activity: Activity) {
+        val intent = Intent(context, CompassActivity::class.java)
         context.startActivity(intent)
         if (killMe) activity.finish()
     }

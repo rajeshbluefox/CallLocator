@@ -1,6 +1,7 @@
 package realapps.live.callerlocator.homeModule
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -56,6 +57,17 @@ class ControllingActivity : AppCompatActivity() {
         binding.ivBankInfomation.setOnClickListener {
             CallIntent.goToBankInfomationActivity(this,false,this)
         }
+        binding.ivNearBy.setOnClickListener {
+            CallIntent.goToFindTraficActivity(this,false,this)
+        }
+
+        binding.ivFindTrafic.setOnClickListener {
+            CallIntent.goToTrafficActivity(this,false,this)
+        }
+
+        binding.ivNavCompass.setOnClickListener {
+            CallIntent.goToCompassActivity(this,false,this)
+        }
 
         binding.btShareApp.setOnClickListener {
             shareApp("DownLoad Family Locator App")
@@ -68,6 +80,8 @@ class ControllingActivity : AppCompatActivity() {
         shareIntent.putExtra(Intent.EXTRA_TEXT, appLink)
         startActivity(Intent.createChooser(shareIntent, "Share App"))
     }
+
+
 }
 
 object SelectedButton{

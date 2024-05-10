@@ -34,6 +34,7 @@ android {
     }
     useLibrary("org.apache.http.legacy")
 
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -43,6 +44,7 @@ android {
     }
     buildFeatures{
         dataBinding=true
+        viewBinding = true
     }
 }
 
@@ -55,6 +57,8 @@ dependencies {
     implementation("com.google.firebase:firebase-messaging-ktx:23.4.1")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation("androidx.activity:activity:1.8.0")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -113,5 +117,8 @@ dependencies {
     implementation("com.squareup.moshi:moshi:1.12.0")
 
     implementation ("androidx.legacy:legacy-support-v4:1.0.0")
+
+    implementation("com.github.arbelkilani:Compass-View:v1.1.1")
+
 
 }
