@@ -11,7 +11,9 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@id/rel_banner"
+        android:background="@color/main_back_ground">
 
 
 
@@ -51,180 +53,183 @@
 
             </LinearLayout>
 
-
-            <LinearLayout
+            <androidx.cardview.widget.CardView
+                android:id="@+id/btAudioManager"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:orientation="vertical">
+                android:layout_marginTop="@dimen/dp_12"
+                android:layout_marginHorizontal="@dimen/dp_12"
+                app:cardCornerRadius="@dimen/dp_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvCallerSetting">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:orientation="horizontal">
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/dp_8">
 
-                    <LinearLayout
-                        android:id="@+id/llDeviceInfo"
-                        android:layout_width="0dp"
-                        android:layout_height="120dp"
-                        android:layout_gravity="center"
-                        android:layout_marginHorizontal="@dimen/dp_10"
-                        android:layout_marginVertical="@dimen/dp_10"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg"
-                        android:gravity="center"
-                        android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/ivAudioManager"
+                        android:layout_width="@dimen/dp_36"
+                        android:layout_height="@dimen/dp_36"
+                        android:src="@drawable/audio_manager"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tvAudioManager"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:text="Audio Manager"
+                        android:textColor="#06286B"
+                        android:textSize="@dimen/sp_18"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/ivAudioManager"
+                        app:layout_constraintStart_toEndOf="@+id/ivAudioManager"
+                        app:layout_constraintTop_toTopOf="@+id/ivAudioManager" />
 
-                            <com.airbnb.lottie.LottieAnimationView
-                                android:layout_width="80dp"
-                                android:layout_height="80dp"
-                                android:layout_centerInParent="true"
-                                app:lottie_autoPlay="true"
-                                app:lottie_loop="true"
-                                app:lottie_rawRes="@raw/device_info" />
-                        </RelativeLayout>
+                    <ImageView
+                        android:id="@+id/ivArrow"
+                        android:layout_width="@dimen/dp_28"
+                        android:layout_height="@dimen/dp_28"
+                        android:src="@drawable/ic_arrow_right"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_5"
-                            android:text="Device Info"
-                            android:textColor="@color/black" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-                    <LinearLayout
-                        android:id="@+id/llDataUsage"
-                        android:layout_width="0dp"
-                        android:layout_height="120dp"
-                        android:layout_gravity="center"
-                        android:layout_marginHorizontal="@dimen/dp_10"
-                        android:layout_marginVertical="@dimen/dp_10"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-
-
-                            <com.airbnb.lottie.LottieAnimationView
-                                android:layout_width="80dp"
-                                android:layout_height="80dp"
-                                android:layout_centerInParent="true"
-                                app:lottie_autoPlay="true"
-                                app:lottie_loop="true"
-                                app:lottie_rawRes="@raw/data_use" />
-
-                        </RelativeLayout>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_5"
-                            android:text="Data Usage"
-                            android:textColor="@color/black" />
-
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:id="@+id/llAudioManager"
-                        android:layout_width="0dp"
-                        android:layout_height="120dp"
-                        android:layout_gravity="center"
-                        android:layout_marginHorizontal="@dimen/dp_10"
-                        android:layout_marginVertical="@dimen/dp_10"
-                        android:layout_marginBottom="@dimen/dp_10"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-
-                            <com.airbnb.lottie.LottieAnimationView
-                                android:layout_width="80dp"
-                                android:layout_height="80dp"
-                                android:layout_centerInParent="true"
-                                app:lottie_autoPlay="true"
-                                app:lottie_loop="true"
-                                app:lottie_rawRes="@raw/audio_manaer" />
-                        </RelativeLayout>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_5"
-                            android:text="Audio Manager"
-                            android:textColor="@color/black" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/llSystemUsage"
-                        android:layout_width="0dp"
-                        android:layout_height="120dp"
-                        android:layout_gravity="center"
-                        android:layout_marginHorizontal="@dimen/dp_10"
-                        android:layout_marginVertical="@dimen/dp_10"
-                        android:layout_marginBottom="@dimen/dp_10"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-
-
-                            <com.airbnb.lottie.LottieAnimationView
-                                android:layout_width="80dp"
-                                android:layout_height="80dp"
-                                android:layout_centerInParent="true"
-                                app:lottie_autoPlay="true"
-                                app:lottie_loop="true"
-                                app:lottie_rawRes="@raw/system_use" />
-
-                        </RelativeLayout>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_10"
-                            android:text="System Usage"
-                            android:textColor="@color/black" />
-
-                    </LinearLayout>
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <RelativeLayout
+            <androidx.cardview.widget.CardView
+                android:id="@+id/btDeviceInfo"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_12"
+                android:layout_marginHorizontal="@dimen/dp_12"
+                app:cardCornerRadius="@dimen/dp_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvCallerSetting">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/dp_8">
+
+                    <ImageView
+                        android:id="@+id/ivDeviceInfo"
+                        android:layout_width="@dimen/dp_36"
+                        android:layout_height="@dimen/dp_36"
+                        android:src="@drawable/device_info"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvDeviceInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:text="Device Info"
+                        android:textColor="#06286B"
+                        android:textSize="@dimen/sp_18"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/ivDeviceInfo"
+                        app:layout_constraintStart_toEndOf="@+id/ivDeviceInfo"
+                        app:layout_constraintTop_toTopOf="@+id/ivDeviceInfo" />
+
+                    <ImageView
+                        android:id="@+id/ivArrow2"
+                        android:layout_width="@dimen/dp_28"
+                        android:layout_height="@dimen/dp_28"
+                        android:src="@drawable/ic_arrow_right"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/btSystemUsage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_12"
+                android:layout_marginHorizontal="@dimen/dp_12"
+                app:cardCornerRadius="@dimen/dp_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvCallerSetting">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/dp_8">
+
+                    <ImageView
+                        android:id="@+id/ivSystemUsage"
+                        android:layout_width="@dimen/dp_36"
+                        android:layout_height="@dimen/dp_36"
+                        android:src="@drawable/system_usage"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvSystemUsage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:text="System Usage"
+                        android:textColor="#06286B"
+                        android:textSize="@dimen/sp_18"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/ivSystemUsage"
+                        app:layout_constraintStart_toEndOf="@+id/ivSystemUsage"
+                        app:layout_constraintTop_toTopOf="@+id/ivSystemUsage" />
+
+                    <ImageView
+                        android:id="@+id/ivArrow3"
+                        android:layout_width="@dimen/dp_28"
+                        android:layout_height="@dimen/dp_28"
+                        android:src="@drawable/ic_arrow_right"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginTop="10dp">-->
 
 <!--                <include layout="@layout/layout_main" />-->
-            </RelativeLayout>
+<!--            </RelativeLayout>-->
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/rl_adplaceholder"/>               android:id="@+id/btSystemUsage" " />
+
+    <RelativeLayout
+        android:id="@+id/rel_banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"/>
+
 </RelativeLayout>
 

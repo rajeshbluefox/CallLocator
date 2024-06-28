@@ -11,13 +11,19 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
 
-        maven { url = uri("https://www.jitpack.io" ) }
-    }
+        maven {
+            url = uri("https://www.jitpack.io")}
 
+        maven {  url =
+                uri("https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea")
+        }
+    }
 }
 
 
 
-rootProject.name = "CallerLocator"
+
+
+rootProject.name = "CallerThemesL1"
 include(":app")
  

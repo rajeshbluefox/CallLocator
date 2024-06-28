@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/main_back_ground">
 
     <LinearLayout
         android:id="@+id/titleBarLayout"
@@ -50,7 +50,7 @@
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/rel_banner"
+        android:layout_above="@+id/rl_adplaceholder"
         android:layout_below="@+id/tv_title"
         android:scrollbars="none">
 
@@ -78,8 +78,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:text="DEVICE INFORMATION"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
+                        android:textColor="#06286B"
+                        android:textSize="@dimen/sp_18"
                         android:textStyle="bold" />
 
                     <LinearLayout
@@ -233,8 +233,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:text="SCREEN INFORMATION"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
+                        android:textColor="#06286B"
+                        android:textSize="@dimen/sp_18"
                         android:textStyle="bold" />
 
                     <LinearLayout
@@ -362,8 +362,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:text="CAMERA INFORMATION"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
+                        android:textColor="#06286B"
+                        android:textSize="@dimen/sp_18"
                         android:textStyle="bold" />
 
                     <LinearLayout
@@ -442,8 +442,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:text="CAMERA INFORMATION"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
+                        android:textColor="#06286B"
+                        android:textSize="@dimen/sp_18"
                         android:textStyle="bold" />
 
                     <LinearLayout
@@ -521,8 +521,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:text="CPU INFORMATION"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
+                        android:textColor="#06286B"
+                        android:textSize="@dimen/sp_18"
                         android:textStyle="bold" />
 
                     <LinearLayout
@@ -626,8 +626,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:text="NETWORK INFORMATION"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
+                        android:textColor="#06286B"
+                        android:textSize="@dimen/sp_18"
                         android:textStyle="bold" />
 
                     <LinearLayout
@@ -731,8 +731,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:text="OPERATOR AND COUNTRY"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
+                        android:textColor="#06286B"
+                        android:textSize="@dimen/sp_18"
                         android:textStyle="bold" />
 
                     <LinearLayout
@@ -841,8 +841,15 @@
         </RelativeLayout>
     </ScrollView>
 
-<!--    <RelativeLayout-->
-<!--        android:id="@+id/rel_banner"-->
-<!--        style="@style/BannerAdsView" />-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/rl_adplaceholder"/>               android:id="@+id/btSystemUsage" " />
+
+
+    <RelativeLayout
+        android:id="@+id/rel_banner"
+        style="@style/BannerAdsView" />
 
 </RelativeLayout>

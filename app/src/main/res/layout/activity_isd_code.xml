@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_back_ground">
+
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_title"
+        style="@style/TitleToolbar"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="0dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:paddingTop="40dp"
+        android:paddingBottom="15dp"
+        android:text="ISD Codes"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/titleBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_color_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/btBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/dp_12"
+            android:src="@drawable/baseline_arrow_back_24_white" />
+
+        <TextView
+            android:id="@+id/titleBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingVertical="@dimen/dp_8"
+            android:text="ISD Codes"
+            android:textAlignment="center"
+            android:textColor="#FFF"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/bank_view_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titleBarLayout"
+        android:layout_margin="5dp"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        app:cardBackgroundColor="@color/lightgrey"
+        app:cardCornerRadius="25dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/bank_view_img"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp"
+                android:padding="@dimen/dp_5"
+                android:src="@android:drawable/ic_menu_search"
+                app:tint="@color/black" />
+
+            <EditText
+                android:id="@+id/et_search"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="25dp"
+                android:layout_toEndOf="@+id/bank_view_img"
+                android:background="@null"
+                android:backgroundTint="@null"
+                android:hint="Search Coutry..."
+                android:imeOptions="actionDone"
+                android:maxLength="15"
+                android:maxLines="1"
+                android:paddingStart="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rl_adplaceholder"
+        android:layout_below="@+id/bank_view_card"
+        android:clipToPadding="false"
+        android:paddingHorizontal="@dimen/dp_10" />
+
+    <RelativeLayout
+        android:id="@+id/rl_adplaceholder"
+        style="@style/RelativeNativeAds"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
+
+    <RelativeLayout
+        android:id="@+id/rel_banner"
+        style="@style/BannerAdsView"
+        android:layout_alignParentBottom="true" />
+
+
+
+</RelativeLayout>

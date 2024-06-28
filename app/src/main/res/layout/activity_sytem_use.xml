@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/main_back_ground">
 
     <LinearLayout
         android:id="@+id/titleBarLayout"
@@ -49,6 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/tv_title"
+        android:layout_above="@id/rl_adplaceholder"
         android:scrollbars="none">
 
         <RelativeLayout
@@ -76,9 +77,8 @@
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginTop="10dp"
                         android:text="RAM INFORMATION"
-                        android:textColor="@color/black"
-
-                        android:textSize="18dp"
+                        android:textColor="#06286B"
+                        android:textSize="@dimen/sp_18"
                         android:textStyle="bold" />
 
                     <LinearLayout
@@ -186,9 +186,8 @@
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginTop="15dp"
                         android:text="INTERNAL STORAGE INFORMATION"
-                        android:textColor="@color/black"
-
-                        android:textSize="18sp"
+                        android:textColor="#06286B"
+                        android:textSize="@dimen/sp_18"
                         android:textStyle="bold" />
 
                     <LinearLayout
@@ -268,9 +267,8 @@
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginTop="15dp"
                         android:text="EXTERNAL STORAGE INFORMATION"
-                        android:textColor="@color/black"
-
-                        android:textSize="18sp"
+                        android:textColor="#06286B"
+                        android:textSize="@dimen/sp_18"
                         android:textStyle="bold" />
 
                     <LinearLayout
@@ -349,9 +347,9 @@
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginTop="15dp"
                         android:text="BATTERY"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textColor="#06286B"
+                        android:textSize="@dimen/sp_18"
+                        android:textStyle="bold"/>
 
                     <LinearLayout
                         android:id="@+id/battery_part_level"
@@ -536,10 +534,16 @@
         </RelativeLayout>
     </ScrollView>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/rl_adplaceholder"/>               android:id="@+id/btSystemUsage" " />
 
-<!--    <RelativeLayout-->
-<!--        android:id="@+id/rel_banner"-->
-<!--        style="@style/BannerAdsView" />-->
+
+    <RelativeLayout
+        android:id="@+id/rel_banner"
+        style="@style/BannerAdsView" />
 
 
 </RelativeLayout>

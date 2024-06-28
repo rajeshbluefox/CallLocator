@@ -70,6 +70,24 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_end="12dp" />
 
+            <com.hbb20.CountryCodePicker
+                android:visibility="gone"
+                app:ccp_defaultNameCode="IND"
+                android:id="@+id/country_code"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ccp_autoDetectCountry="true"
+                app:ccp_showFlag="true"
+                app:ccp_showNameCode="true"
+                app:ccp_showFullName="true"
+                android:background="@drawable/et_bg_2"
+                android:layout_marginHorizontal="@dimen/dp_50"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/selectedTheme"/>
+
+
             <EditText
                 android:id="@+id/etUserName"
                 android:layout_width="match_parent"
@@ -86,7 +104,7 @@
                 android:maxLines="1"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
-                app:layout_constraintTop_toBottomOf="@+id/selectedTheme" />
+                app:layout_constraintTop_toBottomOf="@+id/country_code" />
 
             <EditText
                 android:id="@+id/etPassword"

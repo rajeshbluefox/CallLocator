@@ -1,5 +1,7 @@
 <resources>
     <!-- Base application theme. -->
+<!--    Theme.MaterialComponents.DayNight.NoActionBar-->
+<!--    Theme.AppCompat.DayNight.NoActionBar-->
     <style name="Theme.Realapps" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>

@@ -45,4 +45,34 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+
+<!--    Dummy Ads-->
+
+<!--    <string name="admob_app_id">ca-app-pub-3940256099942544~3347511710</string>-->
+<!--    <string name="admob_interstitial_ads_id_test">ca-app-pub-3940256099942544/1033173710</string>-->
+<!--    <string name="admob_native_Ad_test">ca-app-pub-3940256099942544/2247696111</string>-->
+<!--    <string name="admob_banner_ads_id_test">ca-app-pub-3940256099942544/630097810</string>-->
+<!--    <string name="admob_open_Ad_test">ca-app-pub-4644402642324922/324095070</string>-->
+
+    <!--    Test AdMob-->
+<!--        <string name="admob_app_id">ca-app-pub-3940256099942544~3347511713</string>-->
+<!--        <string name="admob_interstitial_ads_id_test">ca-app-pub-3940256099942544/1033173712</string>-->
+<!--        <string name="admob_native_Ad_test">ca-app-pub-3940256099942544/2247696110</string>-->
+<!--        <string name="admob_banner_ads_id_test">ca-app-pub-3940256099942544/6300978111</string>-->
+<!--        <string name="admob_open_Ad_test">ca-app-pub-4644402642324922/3240950747</string>-->
+
+    <!--    Live ID's-->
+    <string name="admob_app_id">ca-app-pub-4644402642324922~2710797279</string>
+    <string name="admob_interstitial_ads_id_test">ca-app-pub-4644402642324922/5667803537</string>
+    <string name="admob_native_Ad_test">ca-app-pub-4644402642324922/1279048101</string>
+    <string name="admob_banner_ads_id_test">ca-app-pub-4644402642324922/2530919596</string>
+    <string name="admob_open_Ad_test">ca-app-pub-4644402642324922/3240950747</string>
+
+
+    <string name="hidden_number">Номер скрыт</string>
+    <string name="full_company">%1$s - %2$s</string>
+    <string name="photo_description">Фото</string>
+
+
+    <string name="app_version">App Version 1.5</string>
 </resources>
