@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/contentLt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/main_back_ground">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/titleBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/dp_12"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/btShareApp"
+                android:layout_width="@dimen/dp_32"
+                android:layout_height="@dimen/dp_32"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_share"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/titleBar"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/titleBar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingVertical="@dimen/dp_8"
+                android:text="Family Locator"
+                android:textAlignment="center"
+                android:textColor="#06286B"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titleBarLayout"
+            app:layout_constraintBottom_toTopOf="@id/rl_adplaceholder">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/mainLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_12"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+
+                <ImageView
+                    android:id="@+id/btCallLocator"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_100"
+                    android:layout_marginTop="@dimen/dp_12"
+                    android:src="@drawable/bt_family_locator"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <ImageView
+                    android:id="@+id/btCallThemes"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp_100"
+                    android:src="@drawable/hd_wallpapers"
+                    app:layout_constraintEnd_toStartOf="@id/btCurrentLocator"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btCallLocator" />
+
+
+                <ImageView
+                    android:id="@+id/btCallAnnouncer"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp_100"
+                    android:src="@drawable/caller_announcer"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/btMobileTools"
+                    app:layout_constraintTop_toBottomOf="@id/btCallLocator" />
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_adplaceholder1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btCallAnnouncer"  />
+
+
+
+                <ImageView
+                    android:id="@+id/btMobileTools"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp_100"
+                    android:src="@drawable/mobile_tools"
+                    app:layout_constraintEnd_toStartOf="@id/btCurrentLocator"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rl_adplaceholder1" />
+
+
+                <ImageView
+                    android:id="@+id/btCurrentLocator"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp_100"
+                    android:src="@drawable/current_locator"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/btMobileTools"
+                    app:layout_constraintTop_toBottomOf="@id/rl_adplaceholder1" />
+
+
+                <ImageView
+                    android:id="@+id/btCompass"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp_100"
+                    android:src="@drawable/compass_navigation"
+                    app:layout_constraintEnd_toStartOf="@id/btCurrentLocator"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btCurrentLocator" />
+
+
+                <ImageView
+                    android:id="@+id/btBankInformation"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp_100"
+                    android:src="@drawable/bank_info"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/btMobileTools"
+                    app:layout_constraintTop_toBottomOf="@id/btCurrentLocator" />
+
+
+                <ImageView
+                    android:id="@+id/btSimCard"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp_100"
+                    android:src="@drawable/sim_info"
+                    app:layout_constraintEnd_toStartOf="@id/btCurrentLocator"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btCompass" />
+
+
+                <ImageView
+                    android:id="@+id/btISDCodes"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp_100"
+                    android:src="@drawable/isd_codes"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/btMobileTools"
+                    app:layout_constraintTop_toBottomOf="@id/btCompass" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_adplaceholder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btISDCodes"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+
+
+
+        <RelativeLayout
+            android:id="@+id/rel_banner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

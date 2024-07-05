@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout3"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_back_ground"
+    android:padding="@dimen/dp_16">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/titleBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/btBack"
+            android:layout_width="@dimen/dp_32"
+            android:layout_height="@dimen/dp_32"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_share"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/titleBar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/titleBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingVertical="@dimen/dp_8"
+            android:text="Profile"
+            android:textAlignment="center"
+            android:textColor="#06286B"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardCallLocator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_4"
+        android:layout_marginTop="28dp"
+        app:cardBackgroundColor="@color/black"
+        app:cardCornerRadius="@dimen/dp_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleBarLayout">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/dp_18">
+
+            <ImageView
+                android:id="@+id/ivCallFlashLightss"
+                android:layout_width="@dimen/dp_36"
+                android:layout_height="@dimen/dp_36"
+                android:src="@drawable/caller_locator_s"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvCallFlashLightsss"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="Family Locator"
+                android:textColor="#FFF"
+                android:textSize="@dimen/sp_18"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/ivCallFlashLightss"
+                app:layout_constraintStart_toEndOf="@+id/ivCallFlashLightss"
+                app:layout_constraintTop_toTopOf="@+id/ivCallFlashLightss" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardCallThemes"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_4"
+        android:layout_marginTop="18dp"
+        app:cardBackgroundColor="@color/black"
+        app:cardCornerRadius="@dimen/dp_16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardCallLocator">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/dp_18">
+
+            <ImageView
+                android:id="@+id/ivCallFlashLighttt"
+                android:layout_width="@dimen/dp_36"
+                android:layout_height="@dimen/dp_36"
+                android:src="@drawable/caller_locator_s"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvCallFlashLighttt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="Caller\nThemes"
+                android:textColor="#FFF"
+                android:textSize="@dimen/sp_18"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/ivCallFlashLighttt"
+                app:layout_constraintStart_toEndOf="@+id/ivCallFlashLighttt"
+                app:layout_constraintTop_toTopOf="@+id/ivCallFlashLighttt" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/btCallFlashLight"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_4"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="18dp"
+        app:cardBackgroundColor="@color/black"
+        app:cardCornerRadius="@dimen/dp_16"
+        app:layout_constraintStart_toEndOf="@+id/cardCallThemes"
+        app:layout_constraintTop_toBottomOf="@+id/cardCallLocator">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/dp_18"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/cardCallThemes">
+
+            <ImageView
+                android:id="@+id/ivCallFlashLight"
+                android:layout_width="@dimen/dp_36"
+                android:layout_height="@dimen/dp_36"
+                android:src="@drawable/caller_locator_s"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvCallFlashLight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="Caller\nAnnouncer"
+                android:textColor="#FFF"
+                android:textSize="@dimen/sp_18"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/ivCallFlashLight"
+                app:layout_constraintStart_toEndOf="@+id/ivCallFlashLight"
+                app:layout_constraintTop_toTopOf="@+id/ivCallFlashLight" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

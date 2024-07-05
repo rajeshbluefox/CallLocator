@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/splashLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/selectedTheme"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        android:scaleType="fitXY"
+        app:lottie_rawRes="@raw/splash_anim"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvAppVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_version"
+        android:textStyle="italic"
+        android:layout_marginBottom="@dimen/dp_12"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:visibility="gone"
+        android:id="@+id/tutorialsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        
+        <ImageView
+            android:id="@+id/tutorialsIv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/buttonLt"/>
+
+
+        <LinearLayout
+            android:id="@+id/buttonLt"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:gravity="center_vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/rl_adplaceholder">
+
+            <ImageView
+                android:id="@+id/btPrevious"
+                android:layout_width="@dimen/dp_100"
+                android:layout_height="@dimen/dp_50"
+                android:src="@drawable/back_tutorials"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+
+
+            <LinearLayout
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/dot1"
+                    android:layout_width="@dimen/dp_8"
+                    android:layout_height="@dimen/dp_8"
+                    android:layout_marginEnd="@dimen/dp_6"
+                    android:src="@drawable/dot_indicator_unsel"/>
+
+                <ImageView
+                    android:id="@+id/dot2"
+                    android:layout_width="@dimen/dp_8"
+                    android:layout_height="@dimen/dp_8"
+                    android:layout_marginEnd="@dimen/dp_6"
+                    android:src="@drawable/dot_indicator_unsel"/>
+
+                <ImageView
+                    android:id="@+id/dot3"
+                    android:layout_width="@dimen/dp_8"
+                    android:layout_height="@dimen/dp_8"
+                    android:layout_marginEnd="@dimen/dp_6"
+                    android:src="@drawable/dot_indicator_sel"/>
+
+                <ImageView
+                    android:id="@+id/dot4"
+                    android:layout_width="@dimen/dp_8"
+                    android:layout_height="@dimen/dp_8"
+                    android:src="@drawable/dot_indicator_unsel"/>
+
+
+
+            </LinearLayout>
+
+            </LinearLayout>
+
+
+
+            <ImageView
+                android:id="@+id/btNext"
+                android:layout_width="@dimen/dp_100"
+                android:layout_height="wrap_content"
+                android:src="@drawable/next_tutorials"
+                android:layout_marginEnd="@dimen/dp_6"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_adplaceholder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_banner"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

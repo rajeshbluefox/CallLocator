@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".homeModule.HomeActivity">
+
+        <FrameLayout
+            android:id="@+id/containerFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/rel_banner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RelativeLayout
+            android:id="@+id/rel_banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/bottomNavigationBar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:visibility="gone"
+            android:id="@+id/bottomNavigationBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#06286B"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/ivCallLocatorSelected"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_triangle_new"
+                app:layout_constraintEnd_toEndOf="@id/btCallLocator"
+                app:layout_constraintStart_toStartOf="@id/btCallLocator"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/btCallLocator"
+                android:layout_width="@dimen/dp_36"
+                android:layout_height="@dimen/dp_36"
+                android:padding="@dimen/dp_6"
+                android:src="@drawable/caller_locator_s"
+                app:layout_constraintEnd_toStartOf="@+id/btSettings"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivCallLocatorSelected"
+                app:layout_editor_absoluteX="@dimen/dp_50" />
+
+            <TextView
+                android:id="@+id/tvCallLocator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_4"
+                android:text="Call Locator"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/btCallLocator"
+                app:layout_constraintStart_toStartOf="@id/btCallLocator"
+                app:layout_constraintTop_toBottomOf="@id/btCallLocator" />
+
+            <ImageView
+                android:id="@+id/ivCallSettingsSelected"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_triangle_new"
+                app:layout_constraintEnd_toEndOf="@id/btSettings"
+                app:layout_constraintStart_toStartOf="@id/btSettings"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/btSettings"
+                android:layout_width="@dimen/dp_36"
+                android:layout_height="@dimen/dp_36"
+                android:padding="@dimen/dp_6"
+                android:src="@drawable/call_theme_us"
+                app:layout_constraintEnd_toStartOf="@+id/btCallThemes"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btCallLocator"
+                app:layout_constraintTop_toBottomOf="@id/ivCallSettingsSelected"
+                app:layout_editor_absoluteX="@dimen/dp_150" />
+
+            <TextView
+                android:id="@+id/tvSettings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_4"
+                android:text="Call Themes"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/btSettings"
+                app:layout_constraintStart_toStartOf="@id/btSettings"
+                app:layout_constraintTop_toBottomOf="@id/btSettings" />
+
+            <ImageView
+                android:id="@+id/ivCallThemesSelected"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_triangle_new"
+                app:layout_constraintEnd_toEndOf="@id/btCallThemes"
+                app:layout_constraintStart_toStartOf="@id/btCallThemes"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/btCallThemes"
+                android:layout_width="@dimen/dp_36"
+                android:layout_height="@dimen/dp_36"
+                android:padding="@dimen/dp_6"
+                android:src="@drawable/call_settings_us"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btSettings"
+                app:layout_constraintTop_toBottomOf="@id/ivCallSettingsSelected"
+                app:layout_editor_absoluteX="@dimen/dp_250" />
+
+            <TextView
+                android:id="@+id/tvCallThemes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_4"
+                android:text="Call Settings"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/btCallThemes"
+                app:layout_constraintStart_toStartOf="@id/btCallThemes"
+                app:layout_constraintTop_toBottomOf="@id/btSettings" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_color_1"
+        tools:context=".setThemeModule.SelectContactsActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/titleBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/btBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/dp_12"
+                android:src="@drawable/baseline_arrow_back_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <TextView
+                android:id="@+id/titleBar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingVertical="@dimen/dp_8"
+                android:text="Contacts"
+                android:textAlignment="center"
+                android:textColor="@color/bg_color_2"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ProgressBar
+            android:id="@+id/pb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:progressBackgroundTint="@color/bg_color_2"
+            android:progressTint="@color/bg_color_2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/searchBarLt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_12"
+            android:layout_marginTop="@dimen/dp_6"
+            android:background="@drawable/rect_four"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/dp_8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titleBarLayout">
+
+            <EditText
+                android:id="@+id/etSearch"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_48"
+                android:layout_marginStart="@dimen/dp_8"
+                android:layout_weight="1"
+                android:background="@null"
+                android:ellipsize="end"
+                android:hint="Search by Name"
+                android:imeOptions="actionSearch"
+                android:maxLength="10"
+                android:singleLine="true" />
+
+            <ImageView
+                android:id="@+id/btClear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_6"
+                android:src="@drawable/clear_search_24"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/btSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginVertical="@dimen/dp_6"
+                android:layout_marginEnd="@dimen/dp_6"
+                android:background="@drawable/rect_five"
+                android:gravity="center"
+                android:paddingHorizontal="@dimen/dp_15"
+                android:src="@drawable/iv_search"
+                android:text="Search"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/contentLt"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/dp_6"
+            app:layout_constraintBottom_toTopOf="@id/btSet"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/searchBarLt">
+
+            <LinearLayout
+                android:id="@+id/contentLL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_12"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/dp_12"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/btTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Selected Contact"
+                    android:textColor="@color/black" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvSelectedContacts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="Other Contact"
+                    android:textColor="@color/black" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvOtherContacts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false" />
+
+
+            </LinearLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+
+        <TextView
+            android:id="@+id/btSet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_two"
+            android:paddingVertical="@dimen/dp_12"
+            android:text="Apply For Selected"
+            android:layout_marginHorizontal="@dimen/dp_12"
+            android:layout_marginBottom="@dimen/dp_12"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_22"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

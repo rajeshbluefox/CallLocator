@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="CurvedDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/dialog_background</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="MyCheckBox" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="buttonTint">@color/bg_color_2</item>
+        <item name="colorControlNormal">@color/bg_color_2</item>   <!-- normal border color change as you wish -->
+        <item name="colorControlActivated">@color/bg_color_2</item> <!-- activated color change as you wish -->
+        <item name="android:textColor">#FFFF3F3C</item> <!-- checkbox text color -->
+    </style>
+
+    <style name="TitleToolbar">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginTop">30dp</item>
+        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="BannerAdsView">
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+    </style>
+
+    <style name="AppThemeCustom.AdAttribution">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">left</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:text">Ad</item>
+        <item name="android:background">#FFCC66</item>
+        <item name="android:gravity">center</item>
+        <item name="android:width">20dp</item>
+        <item name="android:height">15dp</item>
+    </style>
+
+    <style name="AppTheme" parent="Theme.AppCompat">
+
+    </style>
+
+    <style name="AppThemeCustom" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/rubik</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="colorControlNormal">@color/black</item>
+        <item name="overlapAnchor">false</item>
+        <item name="android:windowContentTransitions">true</item>
+    </style>
+
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/colorAccent1</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+    </style>
+
+    <style name="TitleBarText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="RelativeNativeAds">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:background">@drawable/bg_banner</item>
+        <item name="android:padding">1dp</item>
+    </style>
+
+
+
+    <!--    Background Location Strings-->
+    <string name="ok">OK</string>
+    <string name="got_it">Got it!</string>
+    <string name="settings">Settings</string>
+    <string name="no_thanks">No, thanks</string>
+    <string name="location_unknown">Don\'t know where you are, right now!</string>
+    <string name="error_unknown">Whoops, something is wrong!</string>
+    <string name="error_permissions_denied">To continue, please select \"Allow all the time\" for Location permissions</string>
+    <string name="location_rationale_title">Background location permissions</string>
+    <string name="location_rationale">We would like permission to your location even while the app is in the background so that we can provide you with a list of locations that you have been to. Please select \"Allow all the time\".</string>
+    <string name="location_background_permission_revoked">Location permissions revoked</string>
+    <string name="location_background_permission_denied">We may not be able to get your location all the time</string>
+    <string name="location_service_disabled">Location disabled</string>
+    <string name="enable_location_services_text">Please enable Location Services to receive location updates</string>
+    <string name="location_known">Your last known location is: %s</string>
+    <string name="your_locations">Your locations</string>
+
+    <!-- Shared preference keys -->
+    <string name="pref_key">location_tracking_prefs</string>
+
+    <!-- Main menu -->
+    <string name="location_history_menu_item">Location history menu item</string>
+    <string name="location_history">Your locations</string>
+    <string name="toggle_location_updates">Start or stop location updates</string>
+    <string name="stop_location_updates">Stop location updates</string>
+    <string name="start_location_updates">Start location updates</string>
+
+    <!-- Location rationale activity -->
+    <string name="location_rationale_long_title">Why location permissions</string>
+    <string name="location_rationale_long_description">The app requires the Location permissions so that it can continuously track your location and show you all the various locations you have been to. For the app to work in the background or when it is closed we ask that you \"Allow all the time\" in the Location permission setting.</string>
+
+    <string name="location_attribution_label">Access device location information</string>
+
+    <string name="channel_id">location_tracking_notification_channel</string>
+    <string name="channel_name">Location setting changes</string>
+    <string name="channel_description">Make sound and pop screen</string>
+
+
+</resources>

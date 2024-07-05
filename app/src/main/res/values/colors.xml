@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="red">#FF0000</color>
+    <color name="grey">#6C6C6C</color>
+
+    <color name="bt_one">#FFFFFFFF</color>
+    <color name="bt_two">#FFFFFFFF</color>
+
+    <color name="lightgrey">#E9E9E9</color>
+
+    <color name="colorPrimary">#418CEC</color>
+    <color name="colorPrimaryDark">#418CEC</color>
+    <color name="colorAccent">#418CEC</color>
+    <color name="colorAccent1">#C1C1C1</color>
+
+    <!--    #2F3C7E-->
+    <color name="primary_one">#0090d5</color>
+    <color name="primary_two">#FBEAEB</color>
+
+    <color name="button_bg_color">#f76b52</color>
+
+    <color name="white_to_black">#FFFFFF</color>
+    <color name="black_to_white">#000000</color>
+
+    <color name="grad1">#4196E3</color>
+
+    <color name="theme_color_one">#fe4101</color>
+
+    <color name="bg_button_color">#fe4101</color>
+
+
+
+    <color name="app_bar">#E3430E</color>
+
+    <color name="main">#3796cc</color>
+
+    <color name="text_color_1">#6766f2</color>
+
+    <color name="bg_color_1">#e7f1f8</color>
+
+
+    <color name="bg_color_2">#06286B</color>
+
+    <color name="bg_color_3">#13c984</color>
+
+    <color name="main_back_ground">#e7f1fa</color>
+
+
+    <color name="your_thumb_color">#13c984</color> <!-- Example color for thumb (circle) -->
+    <color name="your_track_color">#e7f1fa</color> <!-- Example color for track (background) -->
+
+    <color name="your_thumb_color_on">#13c984</color> <!-- Example color for thumb when "on" -->
+    <color name="your_thumb_color_off">#e7f1fa</color> <!-- Example color for thumb when "off" -->
+
+    <color name="your_progress_color">#FF0000</color> <!-- Example color for the progress bar -->
+
+    <color name="green_progress_color">#4CAF50</color>
+
+    <!-- Blue for downloading -->
+    <color name="blue_progress_color">#2196F3</color>
+
+    <!-- Red for failure -->
+    <color name="red_progress_color">#F44336</color>
+
+</resources>

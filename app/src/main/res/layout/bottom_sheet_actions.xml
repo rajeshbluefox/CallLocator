@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- bottom_sheet_actions.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <Button
+        android:id="@+id/btnSetAsWallpaper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Set as Wallpaper"
+        android:onClick="onSetAsWallpaperClicked"/>
+
+    <Button
+        android:id="@+id/btnSetAsLockScreen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Set as Lock Screen"
+        android:onClick="onSetAsLockScreenClicked"/>
+
+    <Button
+        android:id="@+id/btnSetAsBoth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Set as Both"
+        android:onClick="onSetAsBothClicked"/>
+</LinearLayout>

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_back_ground">
+
+    <LinearLayout
+        android:id="@+id/titleBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_color_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/btBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/dp_12"
+            android:src="@drawable/baseline_arrow_back_24_white" />
+
+        <TextView
+            android:id="@+id/titleBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingVertical="@dimen/dp_8"
+            android:text="System Usage"
+            android:textAlignment="center"
+            android:textColor="#FFF"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <TextView
+        android:visibility="gone"
+        android:layout_below="@id/titleBarLayout"
+        android:id="@+id/tv_title"
+        style="@style/TitleToolbar"
+        android:layout_marginBottom="0dp"
+        android:text="Device Information" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/check_balance_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_title"
+        android:layout_margin="16dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp">
+
+            <TextView
+                android:id="@+id/check_balance_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/dp_10"
+                android:text="Not Available"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/check_balance_number"
+                android:paddingStart="@dimen/dp_10"
+                android:text="Check your account balance"
+                android:textColor="@color/grey" />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/call_icon" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/customer_care_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/check_balance_card"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="20dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp">
+
+            <TextView
+                android:id="@+id/customer_care_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/dp_10"
+                android:text="Not Available"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/customer_care_number"
+                android:paddingStart="@dimen/dp_10"
+                android:text="Customercare Contact"
+                android:textColor="@color/grey" />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/call_icon" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <RelativeLayout
+        android:id="@+id/ad_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="4dp"
+        android:background="@drawable/border">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_margin="4dp"
+                android:background="@color/white"
+                android:gravity="center"
+                android:text="Advertisement"
+                android:textColor="@color/colorPrimaryDark" />
+
+            <RelativeLayout
+                android:id="@+id/adds"
+                android:layout_width="match_parent"
+                android:layout_height="255dp"
+
+                >
+
+                <LinearLayout
+                    android:id="@+id/trending_recyclerrr"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/trending_recyclerr"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/rl_adplaceholder"-->
+<!--        style="@style/RelativeNativeAds"-->
+<!--        android:layout_alignParentBottom="true" />-->
+
+    <RelativeLayout
+        android:id="@+id/rel_banner"
+        style="@style/BannerAdsView" />
+
+
+</RelativeLayout>

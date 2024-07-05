@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".setThemeModule.SetThemeActivity">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/selectedTheme"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true" />
+
+        <ImageView
+            android:id="@+id/themeThumbNail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitXY"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageView
+            android:id="@+id/btBack"
+            android:layout_width="@dimen/dp_36"
+            android:layout_height="@dimen/dp_36"
+            android:layout_marginStart="@dimen/dp_12"
+            android:layout_marginTop="@dimen/dp_12"
+            android:src="@drawable/ic_theme_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/btSelectContact"
+            android:layout_width="@dimen/dp_48"
+            android:layout_height="@dimen/dp_48"
+            android:layout_marginTop="@dimen/dp_12"
+            android:layout_marginEnd="@dimen/dp_12"
+            android:src="@drawable/ic_select_contact"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_12"
+            android:background="@drawable/button_one"
+            android:paddingVertical="@dimen/dp_6"
+            android:paddingStart="@dimen/dp_12"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Set Theme"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_22"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tvError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="error message"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/btSetTheme"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btSetTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_12"
+            android:layout_marginBottom="@dimen/dp_12"
+            app:cardCornerRadius="@dimen/dp_25"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/tvButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#60ff00"
+                android:paddingVertical="@dimen/dp_6"
+                android:text="Apply Theme"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_22"
+                android:textStyle="bold" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_12"
+            android:background="@drawable/search_background"
+            android:text="Select Contact"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_22"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/btSetTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

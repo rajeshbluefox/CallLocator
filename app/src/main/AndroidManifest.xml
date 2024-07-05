@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.familylocation.mobiletracker">
+
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+<!--    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />-->
+<!--    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />-->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+<!--    <uses-permission android:name="android.permission.READ_CALL_LOG" />-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+<!--        <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />-->
+    <uses-permission android:name="android.permission.ANSWER_PHONE_CALLS" />
+    <uses-permission android:name="android.permission.MODIFY_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_PHONE_CALL" />
+    <uses-permission android:name="android.permission.MANAGE_OWN_CALLS" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+<!--    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />-->
+
+    <!--    Location Updates-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- What happens if we don't request the following permission on Android 12? -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+
+    <uses-permission android:name="android.permission.SET_WALLPAPER" />
+
+
+    <attribution
+        android:label="@string/location_attribution_label"
+        android:tag="Background location manager" />
+    <!--  End Location Updates-->
+
+    <uses-feature
+        android:name="android.hardware.sensor.accelerometer"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission
+        android:name="android.permission.POST_NOTIFICATIONS"
+        tools:node="remove" />
+
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@drawable/main_app_icon"
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@drawable/main_app_icon"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Realapps"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="34">
+        <activity
+            android:name="com.familylocation.mobiletracker.nearByPlacesModule.TrafficActivity"
+            android:exported="false"
+            android:label="@string/title_activity_traffic"
+            android:theme="@style/Theme.Realapps" />
+        <activity
+            android:name="com.familylocation.mobiletracker.callThemesModule.CallSettingActivity"
+            android:exported="true"/>
+        <activity
+            android:name="com.familylocation.mobiletracker.callThemesModule.CallActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.DIAL" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.familylocation.mobiletracker.phoneToolsModule.PhoneToolActivity"
+            android:exported="true"/>
+        <activity
+            android:name="com.familylocation.mobiletracker.phoneToolsModule.PhoneInfomationActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.familylocation.mobiletracker.phoneToolsModule.AudioControlActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.familylocation.mobiletracker.phoneToolsModule.SystemUseActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.familylocation.mobiletracker.simInfoModule.SimInfomationActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.familylocation.mobiletracker.simInfoModule.NomInfomationActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.familylocation.mobiletracker.bankInformationModule.BankInfomationActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.familylocation.mobiletracker.bankInformationModule.BankViewActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.familylocation.mobiletracker.nearByPlacesModule.FindTraficActivity"
+            android:exported="false" />
+
+        <activity
+            android:name="com.familylocation.mobiletracker.nearByPlacesModule.CompassActivity"
+            android:exported="false" />
+
+        <activity
+            android:name="com.familylocation.mobiletracker.phoneToolsModule.ISDCodeActivity"
+            android:exported="false" />
+
+        <activity
+            android:name="com.familylocation.mobiletracker.nearByPlacesModule.LocationActivity"
+            android:exported="false" />
+
+        <activity
+            android:name="com.familylocation.mobiletracker.homeModule.ControllingActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.familylocation.mobiletracker.profileModule.PasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.familylocation.mobiletracker.callSettingsModule.BlockedNumbersActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.familylocation.mobiletracker.profileModule.ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.familylocation.mobiletracker.callLocatorModule.FriendRequestActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.familylocation.mobiletracker.callSettingsModule.CallAnnouncerActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.familylocation.mobiletracker.callSettingsModule.CallFlashActivity"
+            android:exported="true"/>
+        <activity
+            android:name="com.familylocation.mobiletracker.setThemeModule.SelectContactsActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Realapps" />
+        <activity
+            android:name="com.familylocation.mobiletracker.setThemeModule.SetThemeActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Realapps" /> <!-- android:launchMode="singleTask" -->
+        <!-- android:taskAffinity="" -->
+        <activity
+            android:name="com.familylocation.mobiletracker.callThemesModule.IncomingCallActivity"
+            android:enabled="true"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:theme="@style/Theme.Realapps" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@mipmap/ic_gunda_new" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_small_icon"
+            android:resource="@mipmap/ic_gunda_new" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_large_icon"
+            android:resource="@mipmap/ic_gunda_new" />
+        <meta-data
+            android:name="com.google.firebase.messaging"
+            android:resource="@mipmap/ic_gunda_new" />
+
+        <activity
+            android:name="com.familylocation.mobiletracker.homeModule.HomeActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Realapps">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name="com.familylocation.mobiletracker.loginModule.LoginActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Realapps">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name="com.familylocation.mobiletracker.MainActivity"
+            android:exported="true"
+            android:noHistory="true"
+            android:theme="@style/Theme.Realapps">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="portrait"
+            tools:replace="screenOrientation" />
+
+        <service
+            android:name="com.familylocation.mobiletracker.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyBbjh-tqqnt6bChHRv8ZI9wY0R9w5Z_MSI" />
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/admob_app_id" />
+
+        <service
+            android:name="com.familylocation.mobiletracker.callThemesModule.callAlertWindow.BackgroundCallService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="phoneCall"/>
+
+        <service android:name=".callThemesModule.callAlertWindow.CallService" />
+
+
+        <receiver
+            android:name=".callThemesModule.callAlertWindow.CallReceiverNew"
+            android:exported="true">
+            <intent-filter android:priority="999">
+                <action android:name="android.intent.action.PHONE_STATE" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".backgroundLocation.receiver.LocationUpdatesBroadcastReceiver"
+            android:exported="false" />
+
+
+<!--        <service-->
+<!--            android:name=".callThemesModule.callAlertWindow.ScreeningService"-->
+<!--            android:permission="android.permission.BIND_SCREENING_SERVICE"-->
+<!--            android:exported="true">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.telecom.CallScreeningService" />-->
+<!--            </intent-filter>-->
+<!--        </service>-->
+
+    </application>
+
+</manifest>

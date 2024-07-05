@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_12">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_profile_big"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/btCancel"
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="@dimen/dp_24"
+            android:layout_marginEnd="6dp"
+            android:src="@drawable/ic_purple_close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+        <TextView
+            android:id="@+id/title1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_16"
+            android:textAlignment="center"
+            android:text="The Phone number is not using our app."
+            android:textColor="#06286B"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageView" />
+
+        <TextView
+            android:id="@+id/title2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_4"
+            android:textAlignment="center"
+            android:text="Invite to use and share location in real time."
+            android:textColor="#06286B"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btSendInvitation"
+            android:layout_width="@dimen/dp_180"
+            android:layout_height="@dimen/dp_42"
+            android:layout_marginTop="22dp"
+            android:background="@drawable/button_purple"
+            android:text="Send Invitation"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title2" />
+
+<!--        <TextView-->
+<!--            android:id="@+id/btSendInvitation"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="@dimen/dp_18"-->
+<!--            android:background="@drawable/button_one"-->
+<!--            android:paddingHorizontal="@dimen/dp_12"-->
+<!--            android:paddingVertical="@dimen/dp_6"-->
+<!--            android:text="Send Invitation"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="18sp"-->
+<!--            android:textStyle="bold"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/title2" />-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

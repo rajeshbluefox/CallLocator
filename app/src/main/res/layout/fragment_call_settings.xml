@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".callSettingsModule.CallSettingsFragment"
+        android:background="@color/main_back_ground"
+        android:padding="@dimen/dp_16">
+
+
+        <ImageView
+            android:id="@+id/btHome"
+            android:layout_width="@dimen/dp_36"
+            android:layout_height="@dimen/dp_36"
+            android:src="@drawable/home_new"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvCallerSetting"
+            app:layout_constraintBottom_toBottomOf="@id/tvCallerSetting"/>
+
+
+        <TextView
+            android:id="@+id/tvCallerSetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Caller Setting"
+            android:textColor="#06286b"
+            android:textSize="@dimen/sp_24"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btCallFlashLight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_marginHorizontal="@dimen/dp_4"
+            app:cardCornerRadius="@dimen/dp_16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvCallerSetting">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/dp_8">
+
+                <ImageView
+                    android:id="@+id/ivCallFlashLight"
+                    android:layout_width="@dimen/dp_36"
+                    android:layout_height="@dimen/dp_36"
+                    android:src="@drawable/ic_flashlight"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvCallFlashLight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="Call FlashLight"
+                    android:textColor="#06286B"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/ivCallFlashLight"
+                    app:layout_constraintStart_toEndOf="@+id/ivCallFlashLight"
+                    app:layout_constraintTop_toTopOf="@+id/ivCallFlashLight" />
+
+                <ImageView
+                    android:id="@+id/ivArrow"
+                    android:layout_width="@dimen/dp_28"
+                    android:layout_height="@dimen/dp_28"
+                    android:src="@drawable/ic_arrow_right"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btCallAnnouncment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_4"
+            android:layout_marginTop="12dp"
+            app:cardCornerRadius="@dimen/dp_14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btCallFlashLight">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/dp_8">
+
+                <ImageView
+                    android:id="@+id/ivCallAnnouncment"
+                    android:layout_width="@dimen/dp_36"
+                    android:layout_height="@dimen/dp_36"
+                    android:src="@drawable/ic_announcer"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvCallAnnouncment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="Call Announcer"
+                    android:textColor="#06286B"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/ivCallAnnouncment"
+                    app:layout_constraintStart_toEndOf="@+id/ivCallAnnouncment"
+                    app:layout_constraintTop_toTopOf="@+id/ivCallAnnouncment" />
+
+                <ImageView
+                    android:id="@+id/ivArrow2"
+                    android:layout_width="@dimen/dp_28"
+                    android:layout_height="@dimen/dp_28"
+                    android:src="@drawable/ic_arrow_right"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btCallBlocking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_4"
+            android:layout_marginTop="12dp"
+            app:cardCornerRadius="@dimen/dp_14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btCallAnnouncment">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/dp_8">
+
+                <ImageView
+                    android:id="@+id/ivCallBlocking"
+                    android:layout_width="@dimen/dp_36"
+                    android:layout_height="@dimen/dp_36"
+                    android:src="@drawable/ic_blocked"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvCallBlocking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="Blocked Numbers"
+                    android:textColor="#06286B"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/ivCallBlocking"
+                    app:layout_constraintStart_toEndOf="@+id/ivCallBlocking"
+                    app:layout_constraintTop_toTopOf="@+id/ivCallBlocking" />
+
+                <ImageView
+                    android:id="@+id/ivArrow3"
+                    android:layout_width="@dimen/dp_28"
+                    android:layout_height="@dimen/dp_28"
+                    android:src="@drawable/ic_arrow_right"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_4"
+            android:layout_marginTop="12dp"
+            app:cardCornerRadius="@dimen/dp_14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btCallBlocking">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/dp_8">
+
+                <ImageView
+                    android:id="@+id/ivProfile"
+                    android:layout_width="@dimen/dp_36"
+                    android:layout_height="@dimen/dp_36"
+                    android:src="@drawable/ic_profile"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="Profile"
+                    android:textColor="#06286B"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/ivProfile"
+                    app:layout_constraintStart_toEndOf="@+id/ivProfile"
+                    app:layout_constraintTop_toTopOf="@+id/ivProfile" />
+
+                <ImageView
+                    android:id="@+id/ivArrow4"
+                    android:layout_width="@dimen/dp_28"
+                    android:layout_height="@dimen/dp_28"
+                    android:src="@drawable/ic_arrow_right"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <RelativeLayout
+            android:id="@+id/rl_adplaceholder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_12">
+
+
+
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/imageView"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_profile_big"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/selectedTheme"
+            android:layout_width="@dimen/dp_200"
+            android:layout_height="@dimen/dp_200"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/sendrequest"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageView
+            android:id="@+id/btCancel"
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="@dimen/dp_24"
+            android:layout_marginEnd="6dp"
+            android:src="@drawable/ic_green_close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+<!--        <TextView-->
+<!--            android:id="@+id/title1"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="@dimen/dp_12"-->
+<!--            android:text="Send Request"-->
+<!--            android:textSize="18sp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+        <TextView
+            android:id="@+id/title2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_16"
+            android:text="Send Friend Request to get the location"
+            android:textAlignment="center"
+            android:textColor="#06286B"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/selectedTheme" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btSendRequest"
+            android:layout_width="@dimen/dp_180"
+            android:layout_height="@dimen/dp_42"
+            android:layout_marginTop="22dp"
+            android:background="@drawable/button_two"
+            android:text="Send Invitation"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title2" />
+
+<!--        <TextView-->
+<!--            android:id="@+id/btCancel"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginHorizontal="@dimen/dp_18"-->
+<!--            android:layout_marginTop="@dimen/dp_18"-->
+<!--            android:layout_marginBottom="@dimen/dp_12"-->
+<!--            android:background="@drawable/button_one_outline"-->
+<!--            android:paddingHorizontal="@dimen/dp_12"-->
+<!--            android:paddingVertical="@dimen/dp_6"-->
+<!--            android:text="Cancel"-->
+<!--            android:textAlignment="center"-->
+<!--            android:textColor="@color/theme_color_one"-->
+<!--            android:textSize="14sp"-->
+<!--            android:textStyle="bold"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toStartOf="@id/btSendRequest"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/title2" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/btSendRequest"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginHorizontal="@dimen/dp_18"-->
+<!--            android:layout_marginTop="@dimen/dp_18"-->
+<!--            android:layout_marginBottom="@dimen/dp_12"-->
+<!--            android:background="@drawable/button_one"-->
+<!--            android:paddingHorizontal="@dimen/dp_12"-->
+<!--            android:paddingVertical="@dimen/dp_6"-->
+<!--            android:text="Send Request"-->
+<!--            android:textAlignment="center"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="14sp"-->
+<!--            android:textStyle="bold"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toEndOf="@id/btCancel"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/title2" />-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

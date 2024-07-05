@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    android:id="@+id/main_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/rel_banner"
+        android:background="@color/main_back_ground">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/titleBarLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/bg_color_2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/btBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/dp_12"
+                    android:src="@drawable/baseline_arrow_back_24_white" />
+
+                <TextView
+                    android:id="@+id/titleBar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingVertical="@dimen/dp_8"
+                    android:text="Mobile Tools"
+                    android:textAlignment="center"
+                    android:textColor="#FFF"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/btAudioManager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_12"
+                android:layout_marginHorizontal="@dimen/dp_12"
+                app:cardCornerRadius="@dimen/dp_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvCallerSetting">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/dp_8">
+
+                    <ImageView
+                        android:id="@+id/ivAudioManager"
+                        android:layout_width="@dimen/dp_36"
+                        android:layout_height="@dimen/dp_36"
+                        android:src="@drawable/audio_manager"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvAudioManager"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:text="Audio Manager"
+                        android:textColor="#06286B"
+                        android:textSize="@dimen/sp_18"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/ivAudioManager"
+                        app:layout_constraintStart_toEndOf="@+id/ivAudioManager"
+                        app:layout_constraintTop_toTopOf="@+id/ivAudioManager" />
+
+                    <ImageView
+                        android:id="@+id/ivArrow"
+                        android:layout_width="@dimen/dp_28"
+                        android:layout_height="@dimen/dp_28"
+                        android:src="@drawable/ic_arrow_right"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/btDeviceInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_12"
+                android:layout_marginHorizontal="@dimen/dp_12"
+                app:cardCornerRadius="@dimen/dp_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvCallerSetting">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/dp_8">
+
+                    <ImageView
+                        android:id="@+id/ivDeviceInfo"
+                        android:layout_width="@dimen/dp_36"
+                        android:layout_height="@dimen/dp_36"
+                        android:src="@drawable/device_info"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvDeviceInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:text="Device Info"
+                        android:textColor="#06286B"
+                        android:textSize="@dimen/sp_18"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/ivDeviceInfo"
+                        app:layout_constraintStart_toEndOf="@+id/ivDeviceInfo"
+                        app:layout_constraintTop_toTopOf="@+id/ivDeviceInfo" />
+
+                    <ImageView
+                        android:id="@+id/ivArrow2"
+                        android:layout_width="@dimen/dp_28"
+                        android:layout_height="@dimen/dp_28"
+                        android:src="@drawable/ic_arrow_right"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/btSystemUsage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_12"
+                android:layout_marginHorizontal="@dimen/dp_12"
+                app:cardCornerRadius="@dimen/dp_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvCallerSetting">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/dp_8">
+
+                    <ImageView
+                        android:id="@+id/ivSystemUsage"
+                        android:layout_width="@dimen/dp_36"
+                        android:layout_height="@dimen/dp_36"
+                        android:src="@drawable/system_usage"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvSystemUsage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:text="System Usage"
+                        android:textColor="#06286B"
+                        android:textSize="@dimen/sp_18"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/ivSystemUsage"
+                        app:layout_constraintStart_toEndOf="@+id/ivSystemUsage"
+                        app:layout_constraintTop_toTopOf="@+id/ivSystemUsage" />
+
+                    <ImageView
+                        android:id="@+id/ivArrow3"
+                        android:layout_width="@dimen/dp_28"
+                        android:layout_height="@dimen/dp_28"
+                        android:src="@drawable/ic_arrow_right"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginTop="10dp">-->
+
+<!--                <include layout="@layout/layout_main" />-->
+<!--            </RelativeLayout>-->
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/rl_adplaceholder"/>               android:id="@+id/btSystemUsage" " />
+
+    <RelativeLayout
+        android:id="@+id/rel_banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>
+
