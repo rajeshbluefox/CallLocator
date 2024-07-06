@@ -55,6 +55,9 @@ class BackgroundCallService : Service() {
                 notification,
                 ServiceInfo.FOREGROUND_SERVICE_TYPE_PHONE_CALL
             )
+
+
+
         } else {
             Log.e("Test", "63")
             startForeground(NOTIFICATION_ID, notification)

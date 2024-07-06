@@ -5,11 +5,12 @@ import android.content.Context
 import android.content.Intent
 import android.telephony.TelephonyManager
 import android.util.Log
+import com.familylocation.mobiletracker.zCommonFuntions.UtilFunctions
 
 class CallReceiverNew : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
 
-//        UtilFunctions.showToast(context!!, "Received")
+        UtilFunctions.showToast(context!!, "Received")
 //        newLogic1(context, intent)
 
         Log.e("Test","Call REceived")

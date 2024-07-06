@@ -236,10 +236,6 @@ class CallThemesFragment : Fragment() {
             requestPermissions(phoneStatePermissions, CALL_PERMISSION_REQUEST_CODE)
         } else {
             Log.e("Test", "Phone State Permission Already Granted 4")
-
-            // Permission already granted, proceed with your logic
-
-//            checkForeGroundServicePermission()
             startBackgroundService()
         }
     }
